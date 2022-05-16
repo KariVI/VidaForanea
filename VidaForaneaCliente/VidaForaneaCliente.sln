@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VidaForaneaCliente", "VidaForaneaCliente\VidaForaneaCliente.csproj", "{FFA6E1FE-2171-4EBE-A4E6-341D6B32C271}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FFA6E1FE-2171-4EBE-A4E6-341D6B32C271}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFA6E1FE-2171-4EBE-A4E6-341D6B32C271}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFA6E1FE-2171-4EBE-A4E6-341D6B32C271}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFA6E1FE-2171-4EBE-A4E6-341D6B32C271}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {356C153A-B883-4209-A898-2BB93B1221EC}
+	EndGlobalSection
+EndGlobal
