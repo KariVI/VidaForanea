@@ -15,15 +15,13 @@ using System.Windows.Shapes;
 namespace VidaForaneaCliente
 {
     /// <summary>
-    /// Lógica de interacción para AddPlace.xaml
+    /// Lógica de interacción para Login.xaml
     /// </summary>
-    public partial class AddPlace : Window
+    public partial class Login : Window
     {
-        public AddPlace()
+        public Login()
         {
             InitializeComponent();
         }
-
-       
     }
 }
