@@ -18,7 +18,7 @@ namespace VidaForaneaCliente
     /// <summary>
     /// Lógica de interacción para Menu.xaml
     /// </summary>
-    public partial class Menu : Page
+    public partial class Menu : Window
     {
         public Menu()
         {
