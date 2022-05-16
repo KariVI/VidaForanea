@@ -5,8 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VidaForaneaCliente"
         mc:Ignorable="d"
-        Title="AddPlace" Height="450" Width="800">
+        Title="AddPlace" Height="500" Width="600">
     <Grid>
-        
+        <Rectangle Fill="#E5AF50" HorizontalAlignment="Left" Height="36"  VerticalAlignment="Top" Width="792"/>
+        <Label Content="User" HorizontalAlignment="Left" Margin="500,0,0,0" Foreground="white" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20" Width="83"/>
+        <Label Content="Lugar" HorizontalAlignment="Left" Margin="40,50,0,0" Foreground="#E5AF50" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="30" Width="171"/>
+        <Label Content="Nombre" HorizontalAlignment="Left" Margin="70,98,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16"/>
+        <TextBox x:Name="tbName" HorizontalAlignment="Left" Height="35" Margin="75,127,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="457"/>
+        <Label Content="Ubicación" HorizontalAlignment="Left" Margin="70,170,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16"/>
+        <TextBox x:Name="tbLocation" HorizontalAlignment="Left" Height="35" Margin="75,199,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="457"/>
+        <Label Content="Horarios" HorizontalAlignment="Left" Margin="70,239,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16"/>
+        <Grid Name="gdSchedule" HorizontalAlignment="Left" Height="88" Margin="70,268,0,0" VerticalAlignment="Top" Width="462">
+            <CheckBox Content="Lunes" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
+            <CheckBox Content="Martes" HorizontalAlignment="Left" Margin="10,30,0,0" VerticalAlignment="Top" />
+            <CheckBox Content="Miércoles" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" />
+            <CheckBox Content="Jueves" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top" />
+            <CheckBox Content="Viernes" HorizontalAlignment="Left" Margin="100,10,0,0" VerticalAlignment="Top" />
+            <CheckBox Content="Sábado" HorizontalAlignment="Left" Margin="100,30,0,0" VerticalAlignment="Top" />
+            <CheckBox Content="Domingo" HorizontalAlignment="Left" Margin="100,50,0,0" VerticalAlignment="Top" />
+
+        </Grid>
+        <Button Name="btCancel" Content="Cancelar" HorizontalAlignment="Left" Margin="480,434,0,0" VerticalAlignment="Top" Width="79" Height="25" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="16"  Padding="0 0 0 0" />
+        <Button Name="btSend" Content="Enviar" HorizontalAlignment="Left" Margin="384,434,0,0" VerticalAlignment="Top" Width="79" Height="25" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="16"  Padding="0 0 0 0" />
+        <Button Content="Subir archivos" HorizontalAlignment="Left" Margin="75,382,0,0" VerticalAlignment="Top" Width="88"/>
     </Grid>
 </Window>
