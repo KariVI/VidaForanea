@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VidaForaneaCliente.Views"
         mc:Ignorable="d"
-        Title="PlaceView" Height="550" Width="700">
+        Title="PlaceView" Height="580" Width="700">
     <Grid>
         <Rectangle Fill="#E5AF50" HorizontalAlignment="Left" Height="36"  VerticalAlignment="Top" Width="792"/>
         <Label Content="User" HorizontalAlignment="Left" Margin="600,0,0,0" Foreground="white" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20" Width="83"/>
@@ -23,7 +23,7 @@
                 <Polygon Margin="15, 5, 0 ,0" Points="0,0 20,10, 0,20" Stroke="#828282" Fill="#828282" Height="28" RenderTransformOrigin="0.5,0.5" Width="35" />
 
             </Button>
-            <ScrollViewer x:Name="svCommentaries" HorizontalAlignment="Left" Height="190" Margin="0,190,0,0" VerticalAlignment="Top" Width="630"/>
+            <ScrollViewer x:Name="svCommentaries" HorizontalAlignment="Left" Height="195" Margin="0,190,0,0" VerticalAlignment="Top" Width="630"/>
 
 
         </Grid>
@@ -33,6 +33,8 @@
         <Label x:Name="lbLocate" Content="Ubicación" HorizontalAlignment="Left" Margin="217,100,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="14" FontWeight="Bold"/>
         <Label x:Name="lbScedule" Content="Horarios" HorizontalAlignment="Left" Margin="217,120,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="14" FontWeight="Bold"/>
         <Grid  x:Name="gdSchedule" HorizontalAlignment="Left" Height="86" Margin="234,146,0,0" VerticalAlignment="Top" Width="379"/>
+        <Button Name="btUpdate" Content="Modificar" HorizontalAlignment="Left" Margin="550,505,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" />
+        <Button Name="btReturn" Content="Regresar" HorizontalAlignment="Left" Margin="420,505,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" />
 
     </Grid>
 </Window>
