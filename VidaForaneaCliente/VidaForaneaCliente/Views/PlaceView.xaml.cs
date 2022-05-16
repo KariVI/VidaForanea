@@ -12,18 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace VidaForaneaCliente
+namespace VidaForaneaCliente.Views
 {
     /// <summary>
-    /// Lógica de interacción para AddPlace.xaml
+    /// Lógica de interacción para PlaceView.xaml
     /// </summary>
-    public partial class AddPlace : Window
+    public partial class PlaceView : Window
     {
-        public AddPlace()
+        public PlaceView()
         {
             InitializeComponent();
         }
-
-       
     }
 }
