@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace VidaForaneaCliente
+namespace VidaForaneaCliente.Views
 {
     /// <summary>
     /// Lógica de interacción para App.xaml
