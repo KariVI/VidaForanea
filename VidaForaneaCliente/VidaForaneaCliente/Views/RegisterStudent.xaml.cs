@@ -12,14 +12,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace VidaForaneaCliente
+namespace VidaForaneaCliente.Views
 {
     /// <summary>
     /// Lógica de interacción para PlaceList.xaml
     /// </summary>
-    public partial class PlaceList : Window
+    public partial class RegisterStudent : Window
     {
-        public PlaceList()
+        public RegisterStudent()
         {
             InitializeComponent();
         }

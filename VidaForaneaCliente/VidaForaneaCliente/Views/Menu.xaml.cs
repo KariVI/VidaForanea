@@ -12,17 +12,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VidaForaneaCliente.Models;
 
-namespace VidaForaneaCliente
+namespace VidaForaneaCliente.Views
 {
     /// <summary>
     /// Lógica de interacción para Menu.xaml
     /// </summary>
     public partial class Menu : Window
     {
-        public Menu()
+        Student loggedStudent;
+        public Menu(Student student)
         {
+            this.loggedStudent = student;
             InitializeComponent();
+            lblUser.Content = loggedStudent.nombre;
         }
     }
 }
