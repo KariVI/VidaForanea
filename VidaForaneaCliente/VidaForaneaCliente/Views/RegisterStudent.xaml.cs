@@ -11,17 +11,41 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using VidaForaneaCliente.Models;
+using VidaForaneaCliente.ServerConnection;
+using System.Net;
 
-namespace VidaForaneaCliente
+namespace VidaForaneaCliente.Views
+
 {
     /// <summary>
-    /// Lógica de interacción para PlaceList.xaml
+    /// Lógica de interacción para RegisterStudent.xaml
     /// </summary>
-    public partial class PlaceList : Window
+    public partial class RegisterStudent : Window
     {
-        public PlaceList()
+        public RegisterStudent()
         {
             InitializeComponent();
+            Connection.initializeConnection();
+        }
+
+        private async void btAdd_Click(object sender, RoutedEventArgs e)
+        {
+            Student student = new Student();
+            tbName.Text = student.nombre;
+            tbEnrollment.Text = student.matricula;
+            tbDegree.Text = student.licenciatura;
+            pbPassword.Password = student.contrasenia;
+            Connection.PostStudent(student);   
+            if (Connection.latestStatusCode == HttpStatusCode.OK)
+            {
+                MessageBox.Show("Yupi", "Estudiante registrado", MessageBoxButton.OK);
+            }
+            else if (Connection.latestStatusCode == HttpStatusCode.NotFound)
+            {
+                MessageBox.Show("No se ha encontrado el estudiante con la matrícula y contraseña ingresada", "Estudiante no encontrado", MessageBoxButton.OK);
+            }
+
         }
     }
 }
