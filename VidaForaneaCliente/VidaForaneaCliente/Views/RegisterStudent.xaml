@@ -6,6 +6,11 @@
         xmlns:local="clr-namespace:VidaForaneaCliente"
         mc:Ignorable="d"
         Title="PlaceList" Height="500" Width="700">
+    <Window.Resources>
+        <DataTemplate x:Key="ComboBoxItemTemplate1">
+            <Grid/>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
         <Rectangle Fill="#7f4ca5" HorizontalAlignment="Left" Height="36"  VerticalAlignment="Top" Width="792"/>
         <Label Content="Registrar estudiante" HorizontalAlignment="Left" Margin="40,50,0,0" Foreground="#7f4ca5" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="30" Width="281"/>
@@ -28,8 +33,13 @@
         <Label Content="Contraseña:"  HorizontalAlignment="Left" Height="27" Margin="63,302,0,0" VerticalAlignment="Top" Width="82"/>
         <TextBox Name="tbName" Background="LightGray" HorizontalAlignment="Center" Height="31" Margin="0,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="376"/>
         <TextBox Name="tbEnrollment" Background="LightGray" HorizontalAlignment="Center" Height="31" Margin="0,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="376"/>
-        <TextBox Name="tbDegree" Background="LightGray" HorizontalAlignment="Center" Height="31" Margin="0,240,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="376"/>
         <PasswordBox Background="LightGray" Name="pbPassword" HorizontalAlignment="Center" Height="27" Margin="0,302,0,0" VerticalAlignment="Top" Width="376"/>
+        <ComboBox Name="cbDegree" ItemTemplate="{DynamicResource ComboBoxItemTemplate1}" HorizontalAlignment="Center" Background="LightGray" Margin="0,246,0,0" VerticalAlignment="Top" Width="376" Height="26">
+            <ComboBoxItem Content="Lic. Estadística"/>
+            <ComboBoxItem Content="Lic. en Tecnologías Computacionales"/>
+            <ComboBoxItem Content="Lic. en Redes y Servicios de Cómputo"/>
+            <ComboBoxItem Content="Lic. en Ingeniería de Software"/>
+        </ComboBox>
 
     </Grid>
 </Window>
