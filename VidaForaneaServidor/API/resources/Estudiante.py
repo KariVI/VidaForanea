@@ -58,7 +58,7 @@ class Login(Resource):
         json_data = request.get_json()
         estudiante = Estudiante.get_by_matricula(matricula)
         contraseniaNoHasheada = json_data.get('contrasenia')
-        if check_password(contraseniaNoHasheada, estudiante.contrasenia) is False:
+        if estudiante is None or check_password(contraseniaNoHasheada, estudiante.contrasenia) is False:
             return {'message': 'Error en las credenciales'}, HTTPStatus.NOT_FOUND
         data = {
             'id': estudiante.id,
