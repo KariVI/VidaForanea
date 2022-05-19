@@ -30,17 +30,45 @@ namespace VidaForaneaCliente.Views
 
         private async void btLogin_Click(object sender, RoutedEventArgs e)
         {
-            Student student = await Connection.Login(txtMatricula.Text,txtPassword.Password);
-            if (Connection.latestStatusCode == HttpStatusCode.OK)
-            {
-                Menu menu = new Menu(student);
-                menu.Show();
-                this.Close();
-            } else if (Connection.latestStatusCode == HttpStatusCode.NotFound)
-            {
-                MessageBox.Show("No se ha encontrado el estudiante con la matrícula y contraseña ingresada", "Estudiante no encontrado",MessageBoxButton.OK);
+            String usuario = txtUsuario.Text;
+            Student student = new Student();
+            Admin admin =  new Admin();
+            
+            if(usuario.Substring(0,2).ToUpper() == "ZS"){
+                 student = await Connection.Login(txtUsuario.Text,txtPassword.Password);
+                if (Connection.latestStatusCode == HttpStatusCode.OK)
+                {
+                    MainWindow mainWindow = new MainWindow(student);
+                    mainWindow.Show();
+                    this.Close();
+                }
+                else if (Connection.latestStatusCode == HttpStatusCode.NotFound)
+                {
+                    MessageBox.Show("No se ha encontrado el estudiante con la matrícula y contraseña ingresada", "Estudiante no encontrado", MessageBoxButton.OK);
+                }
             }
+            else
+            {
+                admin = await Connection.LoginAdmin(txtUsuario.Text, txtPassword.Password);
+                if (Connection.latestStatusCode == HttpStatusCode.OK)
+                {
+                    MainWindow mainWindow = new MainWindow(admin);
+                    mainWindow.Show();
+                    this.Close();
+                }
+                else if (Connection.latestStatusCode == HttpStatusCode.NotFound)
+                {
+                    MessageBox.Show("No se ha encontrado el administrador con el usuario y contraseña ingresada", "Estudiante no encontrado", MessageBoxButton.OK);
+                }
+            }
+          
         }
+        private void btRegister_Click(object sender, RoutedEventArgs e)
+        {
+              RegisterStudent registerStudent = new RegisterStudent();
+              registerStudent.Show();
+              this.Close();
 
+        }
     }
 }

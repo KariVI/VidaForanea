@@ -40,7 +40,9 @@ namespace VidaForaneaCliente.Views
             if (Connection.latestStatusCode == HttpStatusCode.Created)
             {
                 MessageBox.Show("Se ha registrado el estudiante correctamente", "Estudiante registrado", MessageBoxButton.OK);
-                 this.Close();
+                MainWindow mainWindow =  new MainWindow(student);
+                mainWindow.Show();
+                this.Close();
             }
             else if (Connection.latestStatusCode == HttpStatusCode.BadRequest)
             {

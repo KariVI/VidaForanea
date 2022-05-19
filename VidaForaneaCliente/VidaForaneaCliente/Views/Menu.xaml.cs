@@ -22,11 +22,23 @@ namespace VidaForaneaCliente.Views
     public partial class Menu : Window
     {
         Student loggedStudent;
+        Admin loggedAdmin;
         public Menu(Student student)
         {
             this.loggedStudent = student;
             InitializeComponent();
             lblUser.Content = loggedStudent.nombre;
+            btRequest.Opacity = 0;
+            btRequest.IsEnabled = false;
         }
+
+        public Menu(Admin admin)
+        {
+            this.loggedAdmin = admin;
+            InitializeComponent();
+            lblUser.Content = loggedAdmin.nombre;
+
+        }
+
     }
 }

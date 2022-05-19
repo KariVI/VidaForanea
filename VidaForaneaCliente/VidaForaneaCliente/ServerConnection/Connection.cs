@@ -46,6 +46,29 @@ namespace VidaForaneaCliente.ServerConnection
             return student;
         }
 
+        
+        public static async Task<Admin> LoginAdmin(string usuario, string password)
+        {
+            Admin admin = new Admin() { contrasenia = password };
+            try
+            {
+                string url = "loginAdmin/" + usuario;
+                var json = Newtonsoft.Json.JsonConvert.SerializeObject(admin);
+                var data = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(url, data);
+                if (response.IsSuccessStatusCode)
+                {
+                    admin = await response.Content.ReadAsAsync<Admin>();
+                }
+                latestStatusCode = response.StatusCode;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return admin;
+        }
+
         public static async Task<Student> GetStudentByMatricula(string matricula)
         {
             Student student = null;

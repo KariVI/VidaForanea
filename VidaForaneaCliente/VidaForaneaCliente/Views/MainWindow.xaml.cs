@@ -12,21 +12,48 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VidaForaneaCliente.Models;
 
-namespace VidaForaneaCliente
+namespace VidaForaneaCliente.Views
 {
     /// <summary>
     /// Lógica de interacción para MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        Student loggedStudent;
+        Admin loggedAdmin;
+        bool isAdmin = false;
+        public MainWindow(Student student)
         {
+            this.loggedStudent = student;
             InitializeComponent();
+            lblUser.Content = loggedStudent.nombre;
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        public MainWindow(Admin admin)
         {
+            this.loggedAdmin = admin;
+            InitializeComponent();
+            lblUser.Content = loggedAdmin.nombre;
+            isAdmin = true;
+        }
+
+
+        private void btPlace_Click(object sender, RoutedEventArgs e)
+        {
+            if(isAdmin)
+            {
+                Menu menu =  new Menu(loggedAdmin);
+                menu.Show();
+                this.Close();
+            }
+            else
+            {
+                Menu menu = new Menu(loggedStudent);
+                menu.Show();
+                this.Close();
+            }
 
         }
     }

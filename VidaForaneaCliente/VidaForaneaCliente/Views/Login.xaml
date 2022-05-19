@@ -17,13 +17,13 @@
 
         <Image Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Source="/Images/Logo.png" Height="150" Width="150" Margin="0 0 0 -20"> </Image>
            
-        <Label Grid.Row="1" Content="Matrícula" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 250 300"></Label>
-        <TextBox Grid.Row="1" Name="txtMatricula" Background="LightGray" Width="300" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 250"></TextBox>
+        <Label Grid.Row="1" Content="Usuario" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 250 300"></Label>
+        <TextBox Grid.Row="1" Name="txtUsuario" Background="LightGray" Width="300" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 250"></TextBox>
         
         <Label Grid.Row="1" Content="Contrasenia" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 250 150"></Label>
         <PasswordBox Grid.Row="1" Name="txtPassword" Background="LightGray" Width="300" Height="25" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 0 0 100"></PasswordBox>
         
         <Button Grid.Row="1"  Name="btLogin" Content="Iniciar Sesión" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="100" Height="30" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="15" Margin="0 0 0 100" Click="btLogin_Click"/>
-        <Button Grid.Row="1"  Name="btRegister" Content="Registrarse" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="100" Height="30" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="15" Margin="0 0 0 50" />
+        <Button Grid.Row="1"  Name="btRegister" Content="Registrarse" HorizontalAlignment="Center"  VerticalAlignment="Bottom" Width="100" Height="30" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="15" Margin="0 0 0 50" Click="btRegister_Click"/>
     </Grid>
 </Window>
