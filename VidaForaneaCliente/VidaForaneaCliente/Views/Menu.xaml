@@ -8,14 +8,14 @@
       Title="Menu" Height="462.371" Width="620">
 
     <Grid>
-        <Rectangle Fill="#E5AF50" HorizontalAlignment="Left" Height="36" Stroke="Black" VerticalAlignment="Top" Width="792"/>
-        <Button Name="btFood" Content="Comida" HorizontalAlignment="Left" Margin="129,81,0,0" VerticalAlignment="Top" Width="132" Height="113" Background="#E5C550" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="30"  Padding="0 45 0 0" />
-        <Button Name="btLeisure" Content="Ocio" HorizontalAlignment="Left" Margin="348,81,0,0" VerticalAlignment="Top" Width="132" Height="113" Background="#E5C550" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="30"  Padding="0 45 0 0" />
-        <Button Name="btStationary" Content="Papeleria" HorizontalAlignment="Left" Margin="129,232,0,0" VerticalAlignment="Top" Width="132" Height="113" Background="#E5C550" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="30"  Padding="0 45 0 0" />
-        <Button Name="btForo" Content="Foro" HorizontalAlignment="Left" Margin="348,232,0,0" VerticalAlignment="Top" Width="132" Height="113" Background="#E5C550" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="30"  Padding="0 45 0 0" />
+        <Image Grid.Row="0" VerticalAlignment="Top" HorizontalAlignment="Center" Source="/Images/placeLogo.png" Height="106" Width="84" Margin="0,72,0,0"/>
+        <Rectangle Fill="#7f4ca5" HorizontalAlignment="Left" Height="36" Stroke="Black" VerticalAlignment="Top" Width="792"/>
+        <Button Name="btFood" Content="Comida" HorizontalAlignment="Center" VerticalAlignment="Top" Width="132" Height="113" Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="30"  Padding="0 45 0 0" Margin="0,192,0,0" />
+        <Button Name="btLeisure" Content="Ocio" HorizontalAlignment="Left" Margin="420,192,0,0" VerticalAlignment="Top" Width="132" Height="113" Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="30"  Padding="0 45 0 0" />
+        <Button Name="btStationary" Content="Papeleria" HorizontalAlignment="Left" Margin="76,192,0,0" VerticalAlignment="Top" Width="132" Height="113" Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="30"  Padding="0 45 0 0" />
         <Label Content="User" Name="lblUser" HorizontalAlignment="Left" Margin="482,0,0,0" Foreground="white" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20" Width="83"/>
-        <Button Name="btExit" Content="Salir" HorizontalAlignment="Left" Margin="26,376,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" />
-        <Button x:Name="btRequest" Content="Solicitudes" HorizontalAlignment="Left" Margin="502,41,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" />
+        <Button Name="btExit" Content="Salir" HorizontalAlignment="Left" Margin="26,376,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" />
+        <Button x:Name="btRequest" Content="Solicitudes" HorizontalAlignment="Left" Margin="502,41,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" />
 
     </Grid>
 </Window>

@@ -40,5 +40,9 @@ namespace VidaForaneaCliente.Views
 
         }
 
+        private void btExit_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
