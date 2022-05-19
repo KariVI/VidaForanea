@@ -23,6 +23,7 @@ namespace VidaForaneaCliente.Views
     {
         Student loggedStudent;
         Admin loggedAdmin;
+        bool isAdmin = false;
         public Menu(Student student)
         {
             this.loggedStudent = student;
@@ -37,11 +38,23 @@ namespace VidaForaneaCliente.Views
             this.loggedAdmin = admin;
             InitializeComponent();
             lblUser.Content = loggedAdmin.nombre;
-
+            isAdmin = true;
         }
 
         private void btExit_Click(object sender, RoutedEventArgs e)
         {
+            if (isAdmin)
+            {
+                MainWindow mainWindow= new MainWindow(loggedAdmin);
+                mainWindow.Show();
+                this.Close();
+            }
+            else
+            {
+                MainWindow mainWindow = new MainWindow(loggedStudent);
+                mainWindow.Show();
+                this.Close();
+            }
 
         }
     }

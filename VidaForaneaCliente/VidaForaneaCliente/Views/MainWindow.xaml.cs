@@ -56,5 +56,14 @@ namespace VidaForaneaCliente.Views
             }
 
         }
+
+        private void btExit_Click(object sender, RoutedEventArgs e)
+        {
+           
+                Login login = new Login();
+                login.Show();
+                this.Close();
+            
+        }
     }
 }

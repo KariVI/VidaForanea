@@ -26,7 +26,6 @@ namespace VidaForaneaCliente.Views
         public RegisterStudent()
         {
             InitializeComponent();
-            Connection.initializeConnection();
         }
 
         private async void btAdd_Click(object sender, RoutedEventArgs e)
@@ -49,6 +48,13 @@ namespace VidaForaneaCliente.Views
                 MessageBox.Show("El estudiante ya se encuentra registrado", "Estudiante ya existente", MessageBoxButton.OK);
             }
            
+        }
+
+        private void btReturn_Click(object sender, RoutedEventArgs e)
+        {
+            Login login = new Login();
+            login.Show();
+            this.Close();
         }
     }
 }

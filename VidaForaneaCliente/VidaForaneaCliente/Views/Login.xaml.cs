@@ -22,10 +22,12 @@ namespace VidaForaneaCliente.Views
     /// </summary>
     public partial class Login : Window
     {
+        bool connected = true;
         public Login()
         {
             InitializeComponent();
-            Connection.initializeConnection();
+               
+
         }
 
         private async void btLogin_Click(object sender, RoutedEventArgs e)
