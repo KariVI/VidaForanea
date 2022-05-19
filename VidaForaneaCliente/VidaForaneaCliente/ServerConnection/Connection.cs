@@ -65,10 +65,12 @@ namespace VidaForaneaCliente.ServerConnection
             return student;
         }
 
-        public static async void PostStudent(Student student)
+        public static async Task<bool> PostStudent(Student student)
         {
+            bool value = true;
             try
             {
+                 Console.WriteLine(student.nombre);
                 HttpResponseMessage response = await client.PostAsJsonAsync("/estudiantes",student);
                 Console.WriteLine("Post");
                 if (response.IsSuccessStatusCode)
@@ -80,11 +82,13 @@ namespace VidaForaneaCliente.ServerConnection
             }
             catch (Exception e)
             {
+                value = false;
                 Console.WriteLine(e.Message);
             }
+            return value;
         }
 
-
+        
 
     }
 }

@@ -32,20 +32,21 @@ namespace VidaForaneaCliente.Views
         private async void btAdd_Click(object sender, RoutedEventArgs e)
         {
             Student student = new Student();
-            tbName.Text = student.nombre;
-            tbEnrollment.Text = student.matricula;
-            tbDegree.Text = student.licenciatura;
-            pbPassword.Password = student.contrasenia;
-            Connection.PostStudent(student);   
-            if (Connection.latestStatusCode == HttpStatusCode.OK)
+            student.nombre = tbName.Text  ;
+            student.matricula = tbEnrollment.Text ;
+            student.licenciatura = tbDegree.Text;
+            student.contrasenia = pbPassword.Password ;
+            bool correcto = await Connection.PostStudent(student);   
+            if (Connection.latestStatusCode == HttpStatusCode.Created)
             {
-                MessageBox.Show("Yupi", "Estudiante registrado", MessageBoxButton.OK);
+                MessageBox.Show("Se ha registrado el estudiante correctamente", "Estudiante registrado", MessageBoxButton.OK);
+                 this.Close();
             }
-            else if (Connection.latestStatusCode == HttpStatusCode.NotFound)
+            else if (Connection.latestStatusCode == HttpStatusCode.BadRequest)
             {
-                MessageBox.Show("No se ha encontrado el estudiante con la matrícula y contraseña ingresada", "Estudiante no encontrado", MessageBoxButton.OK);
+                MessageBox.Show("El estudiante ya se encuentra registrado", "Estudiante ya existente", MessageBoxButton.OK);
             }
-
+           
         }
     }
 }
