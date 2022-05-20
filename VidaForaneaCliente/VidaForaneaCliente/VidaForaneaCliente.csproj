@@ -86,6 +86,10 @@
     <Compile Include="Views\RegisterStudent.xaml.cs">
       <DependentUpon>RegisterStudent.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AddPlace.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
