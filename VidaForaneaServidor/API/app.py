@@ -32,8 +32,8 @@ def register_resources(app):
     api.add_resource(Login, '/login/<string:matricula>'),
     api.add_resource(ListPlaces, '/lugares'),
     api.add_resource(ResourcePlace, '/lugares/<int:lugar_id>')
-    api.add_resource(ListOpinions, '/lugares/<int:id_lugar>/comentarios')
-    api.add_resource(ResourceOpinion, '/lugares/<int:id_lugar>/comentarios/<int:opinion_id>')
+    api.add_resource(ListOpinions, '/lugares/<int:id_lugar>/opiniones')
+    api.add_resource(ResourceOpinion, '/lugares/<int:id_lugar>/opiniones/<int:opinion_id>')
     #api.add_resource(RecipeListResource, '/recipes')
     #api.add_resource(RecipeResource, '/recipes/<int:recipe_id>')
     #api.add_resource(RecipePublishResource, '/recipes/<int:recipe_id>/publish')

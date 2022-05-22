@@ -6,7 +6,22 @@ using System.Threading.Tasks;
 
 namespace VidaForaneaCliente.Models
 {
-    class Place
+    public class Place
     {
+        public int Id { get; set; }
+        public string name { get; set; }
+        public string address { get; set; }
+        public string services { get; set; }
+        public string schedule { get; set; }
+
+        public string type_place { get; set; }
+
+        public StatusPlace status { get; set; }
+    }
+
+    public enum StatusPlace
+    {
+        pendiente,
+        aprobado
     }
 }
