@@ -32,10 +32,10 @@ namespace VidaForaneaCliente.Views
         private async void btAdd_Click(object sender, RoutedEventArgs e)
         {
             Student student = new Student();
-            student.nombre = tbName.Text  ;
-            student.matricula = tbEnrollment.Text ;
-            student.licenciatura = cbDegree.SelectedItem.ToString();
-            student.contrasenia = pbPassword.Password ;
+            student.name = tbName.Text  ;
+            student.enrollment = tbEnrollment.Text ;
+            student.degree = cbDegree.SelectedItem.ToString();
+            student.password = pbPassword.Password ;
             bool correcto = await Connection.PostStudent(student);   
             if (Connection.latestStatusCode == HttpStatusCode.Created)
             {
