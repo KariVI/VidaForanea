@@ -15,11 +15,11 @@ namespace VidaForaneaCliente.Models
     public class Student
     {
         public int Id { get; set; }
-        public string nombre { get; set; }
-        public string matricula { get; set; }
-        public string licenciatura { get; set; }
-        public string contrasenia { get; set; }
-        public Estado estado { get; set; }
+        public string name { get; set; }
+        public string enrollment { get; set; }
+        public string degree { get; set; }
+        public string password { get; set; }
+        public Estado status { get; set; }
 
     }
 }

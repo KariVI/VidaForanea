@@ -33,7 +33,7 @@ namespace VidaForaneaCliente.Views
             Student student = await Connection.GetStudentByMatricula(txtMatricula.Text);
             if (Connection.latestStatusCode == HttpStatusCode.OK)
             {
-                txtMatricula.Text = student.nombre;
+                txtMatricula.Text = student.name;
             } else if (Connection.latestStatusCode == HttpStatusCode.NotFound)
             {
                 MessageBox.Show("No se ha encontrado el estudiante con la matrícula y contraseña ingresada", "Estudiante no encontrado",MessageBoxButton.OK);
