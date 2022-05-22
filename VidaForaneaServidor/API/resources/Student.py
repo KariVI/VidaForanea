@@ -13,7 +13,7 @@ class ListStudents(Resource):
         data = []
         students = Student.get_all_students()
         for student in students:
-            if student.estado is True:
+            if student.status is True:
                 data.append({
                     'id': student.id,
                     'name': student.name,
@@ -29,7 +29,7 @@ class ListStudents(Resource):
         enrollment = json_data.get('enrollment')
         passwordNoHasheada = json_data.get('password')
         degree = json_data.get('degree')
-        estado = True
+        status = True
         if Student.get_by_enrollment(enrollment):
             return {'message': 'Estudiante ya registrado'}, HTTPStatus.BAD_REQUEST
 
@@ -40,7 +40,7 @@ class ListStudents(Resource):
             enrollment=enrollment,
             password=password,
             degree=degree,
-            estado=estado
+            status=status
         )
         lista_students.append(student.name)
         student.save()
@@ -70,8 +70,8 @@ class Login(Resource):
 
 class ResourceStudent(Resource):
 
-    def get(self, student_id):
-        student = Student.get_by_id(student_id)
+    def get(self, enrollment):
+        student = Student.get_by_enrollment(enrollment)
         if student is None:
             return {'message': 'Estudiante no encontrado'}, HTTPStatus.NOT_FOUND
         data = {
@@ -82,19 +82,19 @@ class ResourceStudent(Resource):
         }
         return data, HTTPStatus.OK
 
-    def patch(self, student_id):
-        student = Student.get_by_id(student_id)
+    def patch(self, enrollment):
+        student = Student.get_by_enrollment(enrollment)
         if student is None:
             return {'message': 'Estudiante no encontrado'}, HTTPStatus.NOT_FOUND
-        if student.estado is True:
-            student.estado = False
+        if student.status is True:
+            student.status = False
         else:
-            student.estado = True
+            student.status = True
         data = {
             'id': student.id,
             'name': student.name,
             'enrollment': student.enrollment,
-            'estado nuevo': student.estado
+            'new status': student.status
         }
         student.save()
         return data, HTTPStatus.OK

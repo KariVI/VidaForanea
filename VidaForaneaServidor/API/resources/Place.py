@@ -31,7 +31,7 @@ class ListPlaces(Resource):
         schedule = json_data.get('schedule')
         status="Pendiente"
         type_place=json_data.get('type_place')
-        if place.get_by_name(name):
+        if Place.get_by_name(name):
             return {'message': 'place ya registrada'}, HTTPStatus.BAD_REQUEST
 
         place = Place(
