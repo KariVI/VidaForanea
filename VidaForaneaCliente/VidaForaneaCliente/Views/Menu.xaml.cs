@@ -12,17 +12,50 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using VidaForaneaCliente.Models;
 
-namespace VidaForaneaCliente
+namespace VidaForaneaCliente.Views
 {
     /// <summary>
     /// Lógica de interacción para Menu.xaml
     /// </summary>
     public partial class Menu : Window
     {
-        public Menu()
+        Student loggedStudent;
+        Admin loggedAdmin;
+        bool isAdmin = false;
+        public Menu(Student student)
         {
+            this.loggedStudent = student;
             InitializeComponent();
+            lblUser.Content = loggedStudent.nombre;
+            btRequest.Opacity = 0;
+            btRequest.IsEnabled = false;
+        }
+
+        public Menu(Admin admin)
+        {
+            this.loggedAdmin = admin;
+            InitializeComponent();
+            lblUser.Content = loggedAdmin.nombre;
+            isAdmin = true;
+        }
+
+        private void btExit_Click(object sender, RoutedEventArgs e)
+        {
+            if (isAdmin)
+            {
+                MainWindow mainWindow= new MainWindow(loggedAdmin);
+                mainWindow.Show();
+                this.Close();
+            }
+            else
+            {
+                MainWindow mainWindow = new MainWindow(loggedStudent);
+                mainWindow.Show();
+                this.Close();
+            }
+
         }
     }
 }

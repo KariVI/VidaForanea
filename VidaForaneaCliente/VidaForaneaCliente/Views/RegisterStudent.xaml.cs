@@ -11,17 +11,51 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using VidaForaneaCliente.Models;
+using VidaForaneaCliente.ServerConnection;
+using System.Net;
 
-namespace VidaForaneaCliente
+namespace VidaForaneaCliente.Views
+
 {
     /// <summary>
-    /// Lógica de interacción para PlaceList.xaml
+    /// Lógica de interacción para RegisterStudent.xaml
     /// </summary>
-    public partial class PlaceList : Window
+    public partial class RegisterStudent : Window
     {
-        public PlaceList()
+        public RegisterStudent()
         {
             InitializeComponent();
+            cbDegree.SelectedIndex = 1;
+        }
+
+        private async void btAdd_Click(object sender, RoutedEventArgs e)
+        {
+            Student student = new Student();
+            student.nombre = tbName.Text  ;
+            student.matricula = tbEnrollment.Text ;
+            student.licenciatura = cbDegree.SelectedItem.ToString();
+            student.contrasenia = pbPassword.Password ;
+            bool correcto = await Connection.PostStudent(student);   
+            if (Connection.latestStatusCode == HttpStatusCode.Created)
+            {
+                MessageBox.Show("Se ha registrado el estudiante correctamente", "Estudiante registrado", MessageBoxButton.OK);
+                MainWindow mainWindow =  new MainWindow(student);
+                mainWindow.Show();
+                this.Close();
+            }
+            else if (Connection.latestStatusCode == HttpStatusCode.BadRequest)
+            {
+                MessageBox.Show("El estudiante ya se encuentra registrado", "Estudiante ya existente", MessageBoxButton.OK);
+            }
+           
+        }
+
+        private void btReturn_Click(object sender, RoutedEventArgs e)
+        {
+            Login login = new Login();
+            login.Show();
+            this.Close();
         }
     }
 }

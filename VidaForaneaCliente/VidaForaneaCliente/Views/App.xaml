@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:VidaForaneaCliente"
              StartupUri="Views/Login.xaml">
-    <Application.Resources>
          
+    <Application.Resources>
+      
     </Application.Resources>
 </Application>

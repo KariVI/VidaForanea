@@ -1,4 +1,4 @@
-﻿<Window x:Class="VidaForaneaCliente.RegisterStudent"
+﻿<Window x:Class="VidaForaneaCliente.Views.RegisterStudent"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,13 +6,40 @@
         xmlns:local="clr-namespace:VidaForaneaCliente"
         mc:Ignorable="d"
         Title="PlaceList" Height="500" Width="700">
+    <Window.Resources>
+        <DataTemplate x:Key="ComboBoxItemTemplate1">
+            <Grid/>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
-        <Rectangle Fill="#E5AF50" HorizontalAlignment="Left" Height="36"  VerticalAlignment="Top" Width="792"/>
-        <Label Content="User" HorizontalAlignment="Left" Margin="600,0,0,0" Foreground="white" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20" Width="83"/>
-        <Label Content="Categoria" HorizontalAlignment="Left" Margin="40,50,0,0" Foreground="#E5AF50" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="30" Width="171"/>
-        <Button Name="btReturn" Content="Regresar" HorizontalAlignment="Left" Margin="420,420,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" />
-        <Button Name="btAdd" Content="Agregar" HorizontalAlignment="Left" Margin="550,420,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" />
-        <ScrollViewer Name="svPlaces" HorizontalAlignment="Left" Height="300" VerticalAlignment="Top" Width="579" Margin="56,93,0,0"/>
+        <Rectangle Fill="#7f4ca5" HorizontalAlignment="Left" Height="36"  VerticalAlignment="Top" Width="792"/>
+        <Label Content="Registrar estudiante" HorizontalAlignment="Left" Margin="40,50,0,0" Foreground="#7f4ca5" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="30" Width="281"/>
+        <Button Name="btReturn" Content="Regresar" HorizontalAlignment="Left" Margin="420,420,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="15"  Padding="0 0 0 0" Click="btReturn_Click" />
+        <Button Name="btAdd" Content="Agregar" HorizontalAlignment="Left" Margin="550,420,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="15"  Padding="0 0 0 0" Click="btAdd_Click" />
+        <Label Content="Nombre:" HorizontalAlignment="Left" Height="27" Margin="63,137,0,0" VerticalAlignment="Top" Width="63"/>
+        <Label Content="Matricula:" HorizontalAlignment="Left" Height="27" Margin="63,187,0,0" VerticalAlignment="Top" Width="63"/>
+        <Label HorizontalAlignment="Left" Height="27" Margin="63,242,0,0" VerticalAlignment="Top" Width="79" RenderTransformOrigin="0.5,0.5">
+            <Label.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="1.158"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Label.RenderTransform>
+
+        </Label>
+        <Label Content="Licenciatura:"  HorizontalAlignment="Left" Height="27" Margin="63,244,0,0" VerticalAlignment="Top" Width="82"/>
+        <Label Content="Contraseña:"  HorizontalAlignment="Left" Height="27" Margin="63,302,0,0" VerticalAlignment="Top" Width="82"/>
+        <TextBox Name="tbName" Background="LightGray" HorizontalAlignment="Center" Height="31" Margin="0,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="376"/>
+        <TextBox Name="tbEnrollment" Background="LightGray" HorizontalAlignment="Center" Height="31" Margin="0,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="376"/>
+        <PasswordBox Background="LightGray" Name="pbPassword" HorizontalAlignment="Center" Height="27" Margin="0,302,0,0" VerticalAlignment="Top" Width="376"/>
+        <ComboBox Name="cbDegree" ItemTemplate="{DynamicResource ComboBoxItemTemplate1}" HorizontalAlignment="Center" Background="LightGray" Margin="0,246,0,0" VerticalAlignment="Top" Width="376" Height="26">
+            <ComboBoxItem Content="Lic. Estadística"/>
+            <ComboBoxItem Content="Lic. en Tecnologías Computacionales"/>
+            <ComboBoxItem Content="Lic. en Redes y Servicios de Cómputo"/>
+            <ComboBoxItem Content="Lic. en Ingeniería de Software"/>
+        </ComboBox>
 
     </Grid>
 </Window>
