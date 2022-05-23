@@ -78,6 +78,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\Opinion.cs" />
+    <Compile Include="Models\Place.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="ServerConnection\Connection.cs" />
     <Compile Include="Views\PlaceView.xaml.cs">

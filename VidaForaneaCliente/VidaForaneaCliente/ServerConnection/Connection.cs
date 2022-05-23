@@ -17,7 +17,7 @@ namespace VidaForaneaCliente.ServerConnection
 
         public static void initializeConnection()
         {
-            client.BaseAddress = new Uri("http://192.168.100.48:9090/");
+            client.BaseAddress = new Uri("http://10.50.14.4:9090/");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
@@ -26,7 +26,7 @@ namespace VidaForaneaCliente.ServerConnection
 
         public static async Task<Student> Login(string matricula, string password)
         {
-            Student student = new Student() { contrasenia = password };
+            Student student = new Student() { password = password };
             try
             {
                 string url = "login/" + matricula;
@@ -93,7 +93,7 @@ namespace VidaForaneaCliente.ServerConnection
             bool value = true;
             try
             {
-                 Console.WriteLine(student.nombre);
+                 Console.WriteLine(student.name);
                 HttpResponseMessage response = await client.PostAsJsonAsync("/estudiantes",student);
                 Console.WriteLine("Post");
                 if (response.IsSuccessStatusCode)

@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:VidaForaneaCliente"
         xmlns:wpfx="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="AddPlace" Height="800" Width="800">
@@ -51,7 +50,7 @@
                     <RowDefinition Height="20*"/>
                     <RowDefinition Height="11*"/>
                 </Grid.RowDefinitions>
-                <CheckBox Content="Miécoles" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,-0.3" Height="16" Grid.RowSpan="2" Checked="CheckBox_Checked" />
+                <CheckBox Content="Miécoles" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,-0.3" Height="16" Grid.RowSpan="2" />
 
                 <wpfx:TimePicker Margin="4,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
                 <wpfx:TimePicker Margin="95,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
@@ -62,7 +61,7 @@
                     <RowDefinition Height="20*"/>
                     <RowDefinition Height="11*"/>
                 </Grid.RowDefinitions>
-                <CheckBox Content="Jueves" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,-0.3" Height="16" Grid.RowSpan="2" Checked="CheckBox_Checked" />
+                <CheckBox Content="Jueves" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,-0.3" Height="16" Grid.RowSpan="2"/>
 
                 <wpfx:TimePicker Margin="4,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
                 <wpfx:TimePicker Margin="95,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
@@ -73,7 +72,7 @@
                     <RowDefinition Height="20*"/>
                     <RowDefinition Height="11*"/>
                 </Grid.RowDefinitions>
-                <CheckBox Content="Viernes" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,-0.3" Height="16" Grid.RowSpan="2" Checked="CheckBox_Checked" />
+                <CheckBox Content="Viernes" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,-0.3" Height="16" Grid.RowSpan="2"/>
 
                 <wpfx:TimePicker Margin="4,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
                 <wpfx:TimePicker Margin="95,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
@@ -84,7 +83,7 @@
                     <RowDefinition Height="20*"/>
                     <RowDefinition Height="11*"/>
                 </Grid.RowDefinitions>
-                <CheckBox Content="Sábado" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,-0.3" Height="16" Grid.RowSpan="2" Checked="CheckBox_Checked" />
+                <CheckBox Content="Sábado" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,-0.3" Height="16" Grid.RowSpan="2" />
                 <wpfx:TimePicker Margin="4,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
                 <wpfx:TimePicker Margin="95,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
             </Grid>
@@ -94,7 +93,7 @@
                     <RowDefinition Height="20*"/>
                     <RowDefinition Height="11*"/>
                 </Grid.RowDefinitions>
-                <CheckBox Content="Domingo" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,-0.3" Height="16" Grid.RowSpan="2" Checked="CheckBox_Checked" />
+                <CheckBox Content="Domingo" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,-0.3" Height="16" Grid.RowSpan="2" />
 
                 <wpfx:TimePicker Margin="4,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
                 <wpfx:TimePicker Margin="95,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>

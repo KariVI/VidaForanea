@@ -28,7 +28,7 @@ namespace VidaForaneaCliente.Views
         {
             this.loggedStudent = student;
             InitializeComponent();
-            lblUser.Content = loggedStudent.nombre;
+            lblUser.Content = loggedStudent.name;
         }
 
         public MainWindow(Admin admin)
