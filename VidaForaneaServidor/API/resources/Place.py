@@ -18,7 +18,8 @@ class ListPlaces(Resource):
                 'services': place.services,
                 'schedule': place.schedule,
                 'status': place.status,
-                'type_place': place.type_place
+                'type_place': place.type_place,
+                'image': place.image.decode("utf-8")
             })
         return {'data': data}, HTTPStatus.OK
 
@@ -29,8 +30,10 @@ class ListPlaces(Resource):
         address = json_data.get('address')
         services = json_data.get('services')
         schedule = json_data.get('schedule')
-        status="Pendiente"
+        status = "Pendiente"
         type_place=json_data.get('type_place')
+        imageNotEncodedToBytes = json_data.get('image')
+        image = bytes(imageNotEncodedToBytes, 'utf-8')
         if Place.get_by_name(name):
             return {'message': 'Lugar ya registrada'}, HTTPStatus.BAD_REQUEST
 
@@ -39,7 +42,8 @@ class ListPlaces(Resource):
             address=address,
             services=services,
             schedule=schedule,
-            type_place=type_place
+            type_place=type_place,
+            image = image
         )
         lista_places.append(place)
         place.save()
@@ -51,7 +55,8 @@ class ListPlaces(Resource):
             'services': place.services,
             'schedule': place.schedule,
             'status': place.status,
-            'type_place': place.type_place
+            'type_place': place.type_place,
+            'image': place.image.decode("utf-8")
         }
 
         return data, HTTPStatus.CREATED
@@ -70,7 +75,8 @@ class ResourcePlace(Resource):
             'services': place.services,
             'schedule': place.schedule,
             'status': place.status,
-            'type_place': place.type_place
+            'type_place': place.type_place,
+            'image': place.image.decode("utf-8")
         }
         return data, HTTPStatus.OK
 
@@ -95,9 +101,9 @@ class ResourcePlace(Resource):
         place.services = data['services']
         place.schedule = data['schedule']
         place.type_place = data['type_place']
-
-
+        place.image = data['image'].decode("utf-8")
         return data, HTTPStatus.OK
+
     def patch(self, place_id):
         place = next((place for place in lista_places if place.id == place_id ), None)
         if place is None:
@@ -112,7 +118,8 @@ class ResourcePlace(Resource):
             'services': place.services,
             'schedule': place.schedule,
             'new status': place.status,
-            'type_place': place.type_place
+            'type_place': place.type_place,
+            'image': place.image.decode("utf-8")
         }
         place.save()
         return data, HTTPStatus.OK
@@ -130,7 +137,8 @@ class ListPlacesStatus(Resource):
                 'services': place.services,
                 'schedule': place.schedule,
                 'status': place.status,
-                'type_place': place.type_place
+                'type_place': place.type_place,
+                'image': place.image.decode("utf-8")
             })
         return {'data': data}, HTTPStatus.OK
 
@@ -146,6 +154,7 @@ class ListPlacesType(Resource):
                 'services': place.services,
                 'schedule': place.schedule,
                 'status': place.status,
-                'type_place': place.type_place
+                'type_place': place.type_place,
+                'image': place.image.decode("utf-8")
             })
         return {'data': data}, HTTPStatus.OK

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -23,10 +24,12 @@ namespace VidaForaneaCliente.Views
     public partial class AddPlace : Window
     {
         Student student;
+        string imageSource;
         public AddPlace(Student student)
         {
             InitializeComponent();
             this.student = student;
+            imageSource = "";
             //lbUser.Content = student.name;
         }
 
@@ -40,7 +43,7 @@ namespace VidaForaneaCliente.Views
         private async void btSend_Click(object sender, RoutedEventArgs e)
         {
             string time = GenerateScheduleString();
-            if (String.IsNullOrWhiteSpace(cbType.Text) || String.IsNullOrWhiteSpace(tbName.Text) || String.IsNullOrWhiteSpace(tbLocation.Text) || String.IsNullOrWhiteSpace(time))
+            if (String.IsNullOrWhiteSpace(imageSource) || String.IsNullOrWhiteSpace(cbType.Text) || String.IsNullOrWhiteSpace(tbName.Text) || String.IsNullOrWhiteSpace(tbLocation.Text) || String.IsNullOrWhiteSpace(time))
             {
                 MessageBox.Show("Existen campos vacíos, por favor revise los campos", "Campos vacíos", MessageBoxButton.OK);
             } else
@@ -52,10 +55,11 @@ namespace VidaForaneaCliente.Views
                     services = tbServices.Text,
                     schedule = time,
                     status = StatusPlace.pendiente,
-                    type_place = cbType.Text
+                    type_place = cbType.Text,
+                    image = Convert.ToBase64String(Utils.ConvertImageToBytes(imageSource))
+                    //image.Source = Utils.ConvertBytesToImage(Convert.FromBase64String(String recibida del servidor)):
 
                 };
-                bool correcto = await Connection.PostPlace(place);
                 if (Connection.latestStatusCode == HttpStatusCode.Created)
                 {
                     MessageBox.Show("Se ha registrado la solicitud del lugar", "Solicitud registrada", MessageBoxButton.OK);
@@ -103,5 +107,26 @@ namespace VidaForaneaCliente.Views
             }
             return time;
         }
+
+        private void btSelectImage_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.DefaultExt = ".jpg";
+            dialog.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
+            Nullable<bool> result = dialog.ShowDialog();
+            if (result == true)
+            {
+                var bitmap = new BitmapImage();
+                imageSource = dialog.FileName;
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(dialog.FileName);
+                bitmap.DecodePixelHeight = 200;
+                bitmap.EndInit();
+                image.Source = bitmap;
+            }
+        }
+
+        
+
     }
 }

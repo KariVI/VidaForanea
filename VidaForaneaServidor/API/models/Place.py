@@ -13,7 +13,7 @@ class Place(db.Model):
     schedule = db.Column(db.String(500), nullable=False)
     status = db.Column(db.String(200), default="Pendiente")
     type_place = db.Column(db.String(200), nullable=False)
-
+    image = db.Column(db.BLOB, nullable = False)
 
     @classmethod
     def get_by_name(cls, name):

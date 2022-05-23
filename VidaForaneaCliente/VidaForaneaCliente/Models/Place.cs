@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace VidaForaneaCliente.Models
 {
@@ -16,6 +18,7 @@ namespace VidaForaneaCliente.Models
 
         public string type_place { get; set; }
 
+        public string image { get; set; }
         public StatusPlace status { get; set; }
     }
 
@@ -24,4 +27,6 @@ namespace VidaForaneaCliente.Models
         pendiente,
         aprobado
     }
+
+    
 }
