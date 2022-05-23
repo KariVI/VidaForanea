@@ -23,20 +23,23 @@ namespace VidaForaneaCliente.Views
     /// </summary>
     public partial class AddPlace : Window
     {
-        Student student;
+        Menu menu;
+        Student loggedStudent;
+        Admin loggedAdmin;
         string imageSource;
-        public AddPlace(Student student)
+        public AddPlace(Menu menu, Student loggedStudent, Admin loggedAdmin)
         {
             InitializeComponent();
-            this.student = student;
+            this.menu = menu;
             imageSource = "";
-            //lbUser.Content = student.name;
+            this.loggedStudent = loggedStudent;
+            this.loggedAdmin = loggedAdmin;
+            lbUser.Content = loggedStudent.name;
         }
 
         private void btCancel_Click(object sender, RoutedEventArgs e)
         {
-            PlaceList placeList = new PlaceList();
-            placeList.Show();
+            menu.Show();
             this.Close();
         }
 
@@ -60,11 +63,11 @@ namespace VidaForaneaCliente.Views
                     //image.Source = Utils.ConvertBytesToImage(Convert.FromBase64String(String recibida del servidor)):
 
                 };
+                bool respuesta = await Connection.PostPlace(place);
                 if (Connection.latestStatusCode == HttpStatusCode.Created)
                 {
                     MessageBox.Show("Se ha registrado la solicitud del lugar", "Solicitud registrada", MessageBoxButton.OK);
-                    MainWindow mainWindow = new MainWindow(student);
-                    mainWindow.Show();
+                    menu.Show();
                     this.Close();
                 }
                 else if (Connection.latestStatusCode == HttpStatusCode.BadRequest)

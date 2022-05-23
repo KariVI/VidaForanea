@@ -118,7 +118,7 @@ namespace VidaForaneaCliente.ServerConnection
             {
                 HttpResponseMessage response = await client.PostAsJsonAsync("/lugares", place);
                 latestStatusCode = response.StatusCode;
-                if (latestStatusCode != HttpStatusCode.OK)
+                if (latestStatusCode != HttpStatusCode.Created)
                 {
                     value = false;
                 }

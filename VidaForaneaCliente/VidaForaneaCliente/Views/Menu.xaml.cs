@@ -57,5 +57,12 @@ namespace VidaForaneaCliente.Views
             }
 
         }
+
+        private void btAddPlace_Click(object sender, RoutedEventArgs e)
+        {
+            AddPlace addPlace = new AddPlace(this, loggedStudent, loggedAdmin);
+            addPlace.Show();
+            this.Hide();
+        }
     }
 }
