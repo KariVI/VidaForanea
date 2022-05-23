@@ -3,12 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:VidaForaneaCliente"
+
         xmlns:wpfx="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="AddPlace" Height="800" Width="800">
 
-    <Grid ClipToBounds="True" Height="664" VerticalAlignment="Top">
+    <Grid ClipToBounds="True" Height="769" VerticalAlignment="Top">
         <Rectangle Fill="#FFE0AF58" HorizontalAlignment="Left" Height="36"  VerticalAlignment="Top" Width="792"/>
         <Label Content="User" HorizontalAlignment="Left" Margin="561,0,0,0" Foreground="white" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20" Width="83"/>
         <Label Content="Lugar" HorizontalAlignment="Left" Margin="40,50,0,0" Foreground="#E5AF50" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="30" Width="171"/>
@@ -16,8 +16,8 @@
         <TextBox x:Name="tbName" HorizontalAlignment="Left" Height="35" Margin="75,127,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="540"/>
         <Label Content="Ubicación" HorizontalAlignment="Left" Margin="70,170,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16"/>
         <TextBox x:Name="tbLocation" HorizontalAlignment="Left" Height="35" Margin="75,199,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="540"/>
-        <Label Content="Horarios" HorizontalAlignment="Left" Margin="70,328,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16"/>
-        <Grid Name="gdSchedule" HorizontalAlignment="Left" Height="203" Margin="70,357,0,0" VerticalAlignment="Top" Width="593">
+        <Label Content="Horarios" HorizontalAlignment="Left" Margin="70,388,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16"/>
+        <Grid Name="gdSchedule" HorizontalAlignment="Left" Height="203" Margin="70,417,0,0" VerticalAlignment="Top" Width="593">
 
             <Grid Name="gdScheduleMonday" HorizontalAlignment="Left" Height="44" Margin="10,8,0,0" VerticalAlignment="Top" Width="186">
                 <Grid.RowDefinitions>
@@ -100,10 +100,13 @@
                 <wpfx:TimePicker Margin="95,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
             </Grid>
         </Grid>
-        <Button Name="btCancel" Content="Cancelar" HorizontalAlignment="Left" Margin="662,629,0,0" VerticalAlignment="Top" Width="79" Height="25" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="16"  Padding="0 0 0 0" />
-        <Button Name="btSend" Content="Enviar" HorizontalAlignment="Left" Margin="561,629,0,0" VerticalAlignment="Top" Width="79" Height="25" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="16"  Padding="0 0 0 0" RenderTransformOrigin="1.38,0.52" />
-        <Button Content="Subir archivos" HorizontalAlignment="Left" Margin="75,576,0,0" VerticalAlignment="Top" Width="88"/>
-        <ComboBox HorizontalAlignment="Left" Margin="75,268,0,0" VerticalAlignment="Top" Width="178" Height="29" BorderThickness="0" ClipToBounds="True" OpacityMask="#FFB4B4B4">
+        <Button Name="btCancel" Content="Cancelar" HorizontalAlignment="Left" Margin="666,716,0,0" VerticalAlignment="Top" Width="79" Height="25" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="16"  Padding="0 0 0 0" />
+        <Button Name="btSend" Content="Enviar" HorizontalAlignment="Left" Margin="565,716,0,0" VerticalAlignment="Top" Width="79" Height="25" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="16"  Padding="0 0 0 0" RenderTransformOrigin="1.38,0.52" />
+        <Button Content="Subir archivos" HorizontalAlignment="Left" Margin="75,636,0,0" VerticalAlignment="Top" Width="88"/>
+        <ComboBox Name="cbTypePlace" HorizontalAlignment="Left" Margin="75,268,0,0" VerticalAlignment="Top" Width="178" Height="29" BorderThickness="0" ClipToBounds="True" OpacityMask="#FFB4B4B4">
+            <ComboBoxItem Content="Comida"/>
+            <ComboBoxItem Content="Ocio"/>
+            <ComboBoxItem Content="Herramientas"/>
             <ComboBox.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0"/>
@@ -118,6 +121,8 @@
             </ComboBox.Background>
         </ComboBox>
         <Label Content="Tipo" HorizontalAlignment="Left" Margin="75,239,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16"/>
+        <Label Content="Servicios" HorizontalAlignment="Left" Margin="75,302,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16" RenderTransformOrigin="0.366,3"/>
+        <TextBox Name="tbServices" HorizontalAlignment="Left" Height="37" Margin="75,336,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="540"/>
     </Grid>
 
 </Window>
