@@ -101,7 +101,7 @@ class ResourcePlace(Resource):
     def patch(self, place_id):
         place = next((place for place in lista_places if place.id == place_id ), None)
         if place is None:
-            return {'message': 'Estudiante no encontrado'}, HTTPStatus.NOT_FOUND
+            return {'message': 'Lugar no encontrado'}, HTTPStatus.NOT_FOUND
         if place.status =='Pendiente':
             place.status='Aprobado'
         
