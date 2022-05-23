@@ -26,6 +26,7 @@ namespace VidaForaneaCliente.Views
         public RegisterStudent()
         {
             InitializeComponent();
+            cbDegree.SelectedIndex = 1;
         }
 
         private async void btAdd_Click(object sender, RoutedEventArgs e)
@@ -33,7 +34,7 @@ namespace VidaForaneaCliente.Views
             Student student = new Student();
             student.nombre = tbName.Text  ;
             student.matricula = tbEnrollment.Text ;
-            student.licenciatura = tbDegree.Text;
+            student.licenciatura = cbDegree.SelectedItem.ToString();
             student.contrasenia = pbPassword.Password ;
             bool correcto = await Connection.PostStudent(student);   
             if (Connection.latestStatusCode == HttpStatusCode.Created)
