@@ -17,6 +17,7 @@ class ListOpinions(Resource):
                 'student': opinion.student,
                 'date': opinion.date,
                 'hour': opinion.hour,
+                'score': opinion.score,
                 'description': opinion.description,
                 'id_place': opinion.id_place
             })
@@ -28,6 +29,7 @@ class ListOpinions(Resource):
         student = json_data.get('student')
         date = json_data.get('date')
         hour = json_data.get('hour')
+        score = json_data.get('score')
         description = json_data.get('description')
         id_place = json_data.get('id_place')
 
@@ -39,6 +41,7 @@ class ListOpinions(Resource):
             student= student,
             date=date,
             hour=hour,
+            score=score,
             description=description,
             id_place=id_place
         )
@@ -50,6 +53,7 @@ class ListOpinions(Resource):
             'student': opinion.student,
             'date': opinion.date,
             'hour': opinion.hour,
+            'score': opinion.score,
             'description': opinion.description,
             'id_place': opinion.id_place
         }
@@ -69,6 +73,7 @@ class ResourceOpinion(Resource):
             'student': opinion.student,
             'date': opinion.date,
             'hour': opinion.hour,
+            'score': opinion.score,
             'description': opinion.description,
             'id_place': opinion.id_place
         }

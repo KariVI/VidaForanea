@@ -12,6 +12,7 @@ class Opinion(db.Model):
     date = db.Column(db.String(200), nullable=False)
     hour = db.Column(db.String(5), nullable=False)
     description = db.Column(db.String(200), nullable=False)
+    score=db.Column(db.Integer, nullable=False)
     id_place = db.Column(db.Integer, db.ForeignKey('Place.id'),
         nullable=False)
 
