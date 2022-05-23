@@ -7,7 +7,7 @@ from extensions import db
 from resources.Comment import ListComments, ResourceComments
 from resources.Forum import ListForums, ResourceForum
 from resources.Student import ListStudents, ResourceStudent, Login
-from resources.Place import ListPlaces, ResourcePlace
+from resources.Place import ListPlaces, ListPlacesStatus, ListPlacesType, ResourcePlace
 from resources.Opinion import ListOpinions, ResourceOpinion
 
 def create_app():
@@ -38,7 +38,9 @@ def register_resources(app):
     api.add_resource(ListForums, '/foros'),
     api.add_resource(ResourceForum, '/foros/<int:forum_id>')
     api.add_resource(ListComments, '/foros/<int:forum_id>/comentarios')
-    api.add_resource(ResourceComments, '/foros/<int:forum_id>/comentarios/<int:comment_id>')
+    api.add_resource(ResourceComments, '/foros/<int:forum_id>/comentarios/<int:comment_id>'),
+    api.add_resource(ListPlacesStatus, '/lugares/<string:status>'),
+    api.add_resource(ListPlacesType, '/lugares/<string:status>/<string:type_place>')
 
 if __name__ == '__main__':
     app = create_app()

@@ -32,7 +32,7 @@ class ListPlaces(Resource):
         status="Pendiente"
         type_place=json_data.get('type_place')
         if Place.get_by_name(name):
-            return {'message': 'place ya registrada'}, HTTPStatus.BAD_REQUEST
+            return {'message': 'Lugar ya registrada'}, HTTPStatus.BAD_REQUEST
 
         place = Place(
             name= name,
@@ -62,7 +62,7 @@ class ResourcePlace(Resource):
     def get(self, place_id):
         place = next((place for place in lista_places if place.id == place_id ), None)
         if place is None:
-            return {'message': 'place no encontrado'}, HTTPStatus.NOT_FOUND
+            return {'message': 'Lugar no encontrado'}, HTTPStatus.NOT_FOUND
         data = {
             'id': place.id,
             'name': place.name,
@@ -77,7 +77,7 @@ class ResourcePlace(Resource):
     def delete(self, place_id):
         place = Place.get_by_id(place_id)
         if place is None:
-            return {'message': 'place no encontrado'}, HTTPStatus.NOT_FOUND
+            return {'message': 'Lugar no encontrado'}, HTTPStatus.NOT_FOUND
         place.delete()
         return  HTTPStatus.NO_CONTENT
 
@@ -85,9 +85,9 @@ class ResourcePlace(Resource):
         data = request.get_json()
         place = next((place for place in lista_places if place.id == place_id ), None)
         if place is None:
-            return {'message': 'place no encontrado'}, HTTPStatus.NOT_FOUND
+            return {'message': 'Lugar no encontrado'}, HTTPStatus.NOT_FOUND
 
-        if place.status is 'Pendiente':
+        if place.status =="Pendiente":
             place.status= 'Aprobado'
         
         place.name = data['name']
@@ -98,3 +98,54 @@ class ResourcePlace(Resource):
 
 
         return data, HTTPStatus.OK
+    def patch(self, place_id):
+        place = next((place for place in lista_places if place.id == place_id ), None)
+        if place is None:
+            return {'message': 'Estudiante no encontrado'}, HTTPStatus.NOT_FOUND
+        if place.status =='Pendiente':
+            place.status='Aprobado'
+        
+        data = {
+            'id': place.id,
+            'name': place.name,
+            'address': place.address,
+            'services': place.services,
+            'schedule': place.schedule,
+            'new status': place.status,
+            'type_place': place.type_place
+        }
+        place.save()
+        return data, HTTPStatus.OK
+
+class ListPlacesStatus(Resource):
+
+    def get(self,status):
+        data = []
+        places = Place.get_by_status(status)
+        for place in places:
+            data.append({
+                'id': place.id,
+                'name': place.name,
+                'address': place.address,
+                'services': place.services,
+                'schedule': place.schedule,
+                'status': place.status,
+                'type_place': place.type_place
+            })
+        return {'data': data}, HTTPStatus.OK
+
+class ListPlacesType(Resource):
+    def get(self,status,type_place):
+        data = []
+        places = Place.get_by_type_place(status,type_place)
+        for place in places:
+            data.append({
+                'id': place.id,
+                'name': place.name,
+                'address': place.address,
+                'services': place.services,
+                'schedule': place.schedule,
+                'status': place.status,
+                'type_place': place.type_place
+            })
+        return {'data': data}, HTTPStatus.OK

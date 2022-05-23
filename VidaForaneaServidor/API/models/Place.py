@@ -22,7 +22,12 @@ class Place(db.Model):
     @classmethod
     def get_by_id(cls, id):
         return cls.query.filter_by(id=id).first()
-
+    @classmethod
+    def get_by_status(cls, status):
+        return cls.query.filter_by(status=status).all()
+    @classmethod
+    def get_by_type_place(cls, status, type_place):
+        return cls.query.filter_by(type_place=type_place, status=status).all()
     @classmethod
     def get_all_places(cls):
         return cls.query.all()
