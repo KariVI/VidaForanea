@@ -26,7 +26,9 @@ namespace VidaForaneaCliente.Views
         public Login()
         {
             InitializeComponent();
-               
+            AddPlace placeList = new AddPlace(new Student() { name = "NUll" });
+            placeList.Show();
+
 
         }
 
