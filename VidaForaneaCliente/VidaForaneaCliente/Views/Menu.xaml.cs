@@ -57,5 +57,53 @@ namespace VidaForaneaCliente.Views
             }
 
         }
+
+        private void btLeisure_Click(object sender, RoutedEventArgs e)
+        {
+            if (isAdmin)
+            {
+                PlaceList placeList = new PlaceList("Ocio",loggedAdmin);
+                placeList.Show();
+                this.Close();
+            }
+            else
+            {
+                PlaceList placeList = new PlaceList("Ocio", loggedStudent);
+                placeList.Show();
+                this.Close();
+            }
+        }
+
+        private void btFood_Click(object sender, RoutedEventArgs e)
+        {
+            if (isAdmin)
+            {
+                PlaceList placeList = new PlaceList("Comida", loggedAdmin);
+                placeList.Show();
+                this.Close();
+            }
+            else
+            {
+                PlaceList placeList = new PlaceList("Comida", loggedStudent);
+                placeList.Show();
+                this.Close();
+            }
+        }
+
+        private void btStationary_Click(object sender, RoutedEventArgs e)
+        {
+            if (isAdmin)
+            {
+                PlaceList placeList = new PlaceList("Papeleria", loggedAdmin);
+                placeList.Show();
+                this.Close();
+            }
+            else
+            {
+                PlaceList placeList = new PlaceList("Papeleria", loggedStudent);
+                placeList.Show();
+                this.Close();
+            }
+        }
     }
 }

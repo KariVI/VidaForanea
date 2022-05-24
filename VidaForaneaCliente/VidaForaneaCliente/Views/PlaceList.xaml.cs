@@ -11,6 +11,10 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using VidaForaneaCliente.Models;
+using VidaForaneaCliente.ServerConnection;
+using System.Net;
+using System.Collections.ObjectModel;
 
 namespace VidaForaneaCliente.Views
 {
@@ -19,9 +23,96 @@ namespace VidaForaneaCliente.Views
     /// </summary>
     public partial class PlaceList : Window
     {
-        public PlaceList()
+        Student loggedStudent;
+        Admin loggedAdmin;
+        bool isAdmin = false;
+        public ObservableCollection<String> PlacesCollection{ get; set; }
+        public ListBox listPlaces { get { return lstbCategory; } set { lstbCategory = value; } }
+        List<Place> places = new List<Place>();
+        public PlaceList(String category, Student loggedStudent)
         {
             InitializeComponent();
+            this.loggedStudent = loggedStudent;
+            lbCategory.Content = category;
+            InitializePlaces(category);
+
+        }
+        public async void InitializePlaces(String category)
+        {
+            if (category.Equals("Papeleria"))
+            {
+                category = "Herramientas";
+            }
+              places = await Connection.GetPlacesByCategory("Pendiente", category);
+               
+            PlacesCollection = new ObservableCollection<String>();
+           
+            if (places != null)
+            {
+                PlacesCollection.Clear();
+                foreach (var place in places)
+                {
+                    PlacesCollection.Add(place.name);
+                }
+            }
+            listPlaces.ItemsSource = PlacesCollection;
+        }
+    
+        public PlaceList(String category, Admin loggedAdmin)
+        {
+            InitializeComponent();
+            isAdmin = true;
+            this.loggedAdmin = loggedAdmin;
+            lbCategory.Content = category;
+            InitializePlaces(category);
+        }
+        private void btReturn_Click(object sender, RoutedEventArgs e)
+        {
+            if (isAdmin)
+            {
+                Menu menu = new Menu(loggedAdmin);
+                menu.Show();
+                this.Close();
+            }
+            else
+            {
+                Menu menu = new Menu(loggedStudent);
+                menu.Show();
+                this.Close();
+            }
+        }
+
+        private void lstbCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            String placeSelected= lstbCategory.SelectedValue.ToString();
+            Place place = searchPlace(placeSelected);
+
+            if (isAdmin)
+            {
+                PlaceView placeview = new PlaceView(place,loggedAdmin);
+                placeview.Show();
+                this.Close();
+            }
+            else
+            {
+                PlaceView placeview = new PlaceView(place, loggedStudent);
+                placeview.Show();
+                this.Close();
+            }
+            
+        }
+
+        private Place searchPlace(String name)
+        {
+            Place place = new Place();
+            foreach (Place p in places)
+            {
+                if (p.name.Equals(name))
+                {
+                    place = p;
+                }
+            }
+            return place;
         }
     }
 }

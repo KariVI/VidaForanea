@@ -7,7 +7,8 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using VidaForaneaCliente.Models;
-
+using System.Windows;
+using Newtonsoft.Json;
 namespace VidaForaneaCliente.ServerConnection
 {
     public class Connection
@@ -17,7 +18,7 @@ namespace VidaForaneaCliente.ServerConnection
 
         public static void initializeConnection()
         {
-            client.BaseAddress = new Uri("http://10.50.14.4:9090/");
+            client.BaseAddress = new Uri("http://192.168.0.25:9090");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
@@ -68,7 +69,27 @@ namespace VidaForaneaCliente.ServerConnection
             }
             return admin;
         }
+        public static async Task<List<Place>> GetPlacesByCategory(string estado, string category)
+        {
+            List <Place> places = new List<Place> ();
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("lugares/" + estado + "/" + category);
+                if (response.IsSuccessStatusCode)
+                {
 
+                    var stringData = response.Content.ReadAsStringAsync().Result;
+                   var places2 = JsonConvert.DeserializeObject<Root>(stringData);
+                    places = places2.makeAList();
+                }
+                latestStatusCode = response.StatusCode;
+            } 
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return places;
+        }
         public static async Task<Student> GetStudentByMatricula(string matricula)
         {
             Student student = null;
@@ -113,5 +134,33 @@ namespace VidaForaneaCliente.ServerConnection
 
         
 
+    }
+}
+class Root
+{
+    public List<Dictionary<string, object>> Data { get; set; }
+    public List<Place> makeAList()
+    {
+        List<Place> places = new List<Place>();
+        foreach (var dict in Data)
+        {
+            Place place = new Place(); 
+            StatusPlace status = new StatusPlace();
+            place.name = (string)dict["name"];
+            place.address = (string)dict["address"];
+            place.services = (string)dict["services"]; 
+            string statusRetrieved = (string)dict["status"];
+            if (statusRetrieved.Equals("aprobado")){
+                status = StatusPlace.aprobado;
+            }
+            else
+            {
+                status = StatusPlace.pendiente;
+            }
+            place.status = status;
+            place.type_place = (string)dict["type_place"];
+            places.Add(place);
+        }
+        return places;
     }
 }
