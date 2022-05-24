@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:wpfx="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="AddPlace" Height="710" Width="800">
+        Title="AddPlace" Height="710" Width="950">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -17,8 +17,8 @@
         </ResourceDictionary>
     </Window.Resources>
 
-    <Grid ClipToBounds="True" Height="700" VerticalAlignment="Top">
-        <Rectangle Fill="#7f4ca5" Height="36"  VerticalAlignment="Top" Width="800"/>
+    <Grid ClipToBounds="True" Height="700" Width ="950"  VerticalAlignment="Top">
+        <Rectangle Fill="#7f4ca5" Height="36"  VerticalAlignment="Top" Width="950"/>
         <Label Content="User" Name="lbUser" Foreground="white" HorizontalAlignment="Right" Margin="0 0 50 0" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20" Width="83"/>
         <Label Content="Lugar" HorizontalAlignment="Left" Margin="40,50,0,0" Foreground="#7f4ca5" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="30" Width="171"/>
         <Label Content="Nombre" HorizontalAlignment="Left" Margin="70,98,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16"/>
@@ -111,7 +111,8 @@
         </Grid>
         <Button Name="btCancel" Content="Cancelar" Style="{DynamicResource RoundCorner}" HorizontalAlignment="Left" Margin="586,649,0,0" VerticalAlignment="Top" Width="80" Height="25" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="16"  Padding="0 0 0 0" Click="btCancel_Click"/>
         <Button Name="btSend" Content="Enviar" Style="{DynamicResource RoundCorner}" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="78" Height="25" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="16"  Padding="0 0 0 0" RenderTransformOrigin="1.38,0.52" Click="btSend_Click" Margin="708,649,0,0"/>
-        <Button Content="Subir archivos" HorizontalAlignment="Left" Margin="75,652,0,0" VerticalAlignment="Top" Width="88"/>
+        <Button Name="btSelectImage" Content="Subir archivos" HorizontalAlignment="Left" Margin="770,319,0,0" VerticalAlignment="Top" Width="88" Click="btSelectImage_Click"/>
+        <Image Name="image" Width="200" Height="200" Source="/Images/placeLogo.png" Margin="714,85,36,415"></Image>
         <ComboBox HorizontalAlignment="Left" Name="cbType" Margin="75,268,0,0" VerticalAlignment="Top" Width="178" Height="29" BorderThickness="0" ClipToBounds="True" OpacityMask="#FFB4B4B4">
             <ComboBoxItem Content="Papelería"/>
             <ComboBoxItem Content="Comida"/>

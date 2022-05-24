@@ -81,6 +81,7 @@
     <Compile Include="Models\Opinion.cs" />
     <Compile Include="Models\Place.cs" />
     <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\Utils.cs" />
     <Compile Include="ServerConnection\Connection.cs" />
     <Compile Include="Views\PlaceView.xaml.cs">
       <DependentUpon>PlaceView.xaml</DependentUpon>

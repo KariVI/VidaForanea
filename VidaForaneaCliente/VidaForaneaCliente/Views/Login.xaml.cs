@@ -26,10 +26,6 @@ namespace VidaForaneaCliente.Views
         public Login()
         {
             InitializeComponent();
-            AddPlace placeList = new AddPlace(new Student() { name = "NUll" });
-            placeList.Show();
-
-
         }
 
         private async void btLogin_Click(object sender, RoutedEventArgs e)

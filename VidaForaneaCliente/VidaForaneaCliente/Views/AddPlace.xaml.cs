@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -22,25 +23,30 @@ namespace VidaForaneaCliente.Views
     /// </summary>
     public partial class AddPlace : Window
     {
-        Student student;
-        public AddPlace(Student student)
+        Menu menu;
+        Student loggedStudent;
+        Admin loggedAdmin;
+        string imageSource;
+        public AddPlace(Menu menu, Student loggedStudent, Admin loggedAdmin)
         {
             InitializeComponent();
-            this.student = student;
-            //lbUser.Content = student.name;
+            this.menu = menu;
+            imageSource = "";
+            this.loggedStudent = loggedStudent;
+            this.loggedAdmin = loggedAdmin;
+            lbUser.Content = loggedStudent.name;
         }
 
         private void btCancel_Click(object sender, RoutedEventArgs e)
         {
-            PlaceList placeList = new PlaceList();
-            placeList.Show();
+            menu.Show();
             this.Close();
         }
 
         private async void btSend_Click(object sender, RoutedEventArgs e)
         {
             string time = GenerateScheduleString();
-            if (String.IsNullOrWhiteSpace(cbType.Text) || String.IsNullOrWhiteSpace(tbName.Text) || String.IsNullOrWhiteSpace(tbLocation.Text) || String.IsNullOrWhiteSpace(time))
+            if (String.IsNullOrWhiteSpace(imageSource) || String.IsNullOrWhiteSpace(cbType.Text) || String.IsNullOrWhiteSpace(tbName.Text) || String.IsNullOrWhiteSpace(tbLocation.Text) || String.IsNullOrWhiteSpace(time))
             {
                 MessageBox.Show("Existen campos vacíos, por favor revise los campos", "Campos vacíos", MessageBoxButton.OK);
             } else
@@ -52,15 +58,16 @@ namespace VidaForaneaCliente.Views
                     services = tbServices.Text,
                     schedule = time,
                     status = StatusPlace.pendiente,
-                    type_place = cbType.Text
+                    type_place = cbType.Text,
+                    image = Convert.ToBase64String(Utils.ConvertImageToBytes(imageSource))
+                    //image.Source = Utils.ConvertBytesToImage(Convert.FromBase64String(String recibida del servidor)):
 
                 };
-                bool correcto = await Connection.PostPlace(place);
+                bool respuesta = await Connection.PostPlace(place);
                 if (Connection.latestStatusCode == HttpStatusCode.Created)
                 {
                     MessageBox.Show("Se ha registrado la solicitud del lugar", "Solicitud registrada", MessageBoxButton.OK);
-                    MainWindow mainWindow = new MainWindow(student);
-                    mainWindow.Show();
+                    menu.Show();
                     this.Close();
                 }
                 else if (Connection.latestStatusCode == HttpStatusCode.BadRequest)
@@ -103,5 +110,26 @@ namespace VidaForaneaCliente.Views
             }
             return time;
         }
+
+        private void btSelectImage_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.DefaultExt = ".jpg";
+            dialog.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
+            Nullable<bool> result = dialog.ShowDialog();
+            if (result == true)
+            {
+                var bitmap = new BitmapImage();
+                imageSource = dialog.FileName;
+                bitmap.BeginInit();
+                bitmap.UriSource = new Uri(dialog.FileName);
+                bitmap.DecodePixelHeight = 200;
+                bitmap.EndInit();
+                image.Source = bitmap;
+            }
+        }
+
+        
+
     }
 }

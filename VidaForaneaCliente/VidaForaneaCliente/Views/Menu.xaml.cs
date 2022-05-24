@@ -58,6 +58,7 @@ namespace VidaForaneaCliente.Views
 
         }
 
+<<<<<<< HEAD
         private void btLeisure_Click(object sender, RoutedEventArgs e)
         {
             if (isAdmin)
@@ -104,6 +105,13 @@ namespace VidaForaneaCliente.Views
                 placeList.Show();
                 this.Close();
             }
+=======
+        private void btAddPlace_Click(object sender, RoutedEventArgs e)
+        {
+            AddPlace addPlace = new AddPlace(this, loggedStudent, loggedAdmin);
+            addPlace.Show();
+            this.Hide();
+>>>>>>> Gustavo
         }
     }
 }

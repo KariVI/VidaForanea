@@ -19,10 +19,14 @@ namespace VidaForaneaCliente.ServerConnection
         public static void initializeConnection()
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             client.BaseAddress = new Uri("http://192.168.0.25:9090");
 =======
             client.BaseAddress = new Uri("http://10.50.14.14:9090/");
 >>>>>>> main
+=======
+            client.BaseAddress = new Uri("http://192.168.100.48:9090/");
+>>>>>>> Gustavo
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
@@ -143,7 +147,7 @@ namespace VidaForaneaCliente.ServerConnection
             {
                 HttpResponseMessage response = await client.PostAsJsonAsync("/lugares", place);
                 latestStatusCode = response.StatusCode;
-                if (latestStatusCode != HttpStatusCode.OK)
+                if (latestStatusCode != HttpStatusCode.Created)
                 {
                     value = false;
                 }

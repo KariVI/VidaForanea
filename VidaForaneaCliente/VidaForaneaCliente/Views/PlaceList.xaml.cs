@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -113,6 +114,20 @@ namespace VidaForaneaCliente.Views
                 }
             }
             return place;
+        }
+
+        public static BitmapImage ConvertirArrayAImagen(byte[] arrayDeImagen)
+        {
+            BitmapImage imagen = new BitmapImage();
+            using (MemoryStream memStream = new MemoryStream(arrayDeImagen))
+            {
+                imagen.BeginInit();
+                imagen.CacheOption = BitmapCacheOption.OnLoad;
+                imagen.StreamSource = memStream;
+                imagen.EndInit();
+                imagen.Freeze();
+            }
+            return imagen;
         }
     }
 }
