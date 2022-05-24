@@ -5,18 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:wpfx="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="AddPlace" Height="800" Width="800">
+        Title="AddPlace" Height="710" Width="800">
 
-    <Grid ClipToBounds="True" Height="664" VerticalAlignment="Top">
-        <Rectangle Fill="#FFE0AF58" HorizontalAlignment="Left" Height="36"  VerticalAlignment="Top" Width="792"/>
-        <Label Content="User" HorizontalAlignment="Left" Margin="561,0,0,0" Foreground="white" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20" Width="83"/>
-        <Label Content="Lugar" HorizontalAlignment="Left" Margin="40,50,0,0" Foreground="#E5AF50" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="30" Width="171"/>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml">
+
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+
+    <Grid ClipToBounds="True" Height="700" VerticalAlignment="Top">
+        <Rectangle Fill="#7f4ca5" Height="36"  VerticalAlignment="Top" Width="800"/>
+        <Label Content="User" Name="lbUser" Foreground="white" HorizontalAlignment="Right" Margin="0 0 50 0" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20" Width="83"/>
+        <Label Content="Lugar" HorizontalAlignment="Left" Margin="40,50,0,0" Foreground="#7f4ca5" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="30" Width="171"/>
         <Label Content="Nombre" HorizontalAlignment="Left" Margin="70,98,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16"/>
-        <TextBox x:Name="tbName" HorizontalAlignment="Left" Height="35" Margin="75,127,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="540"/>
+        <TextBox x:Name="tbName" HorizontalAlignment="Left" Height="35" Margin="75,127,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="540"/>
         <Label Content="Ubicación" HorizontalAlignment="Left" Margin="70,170,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16"/>
-        <TextBox x:Name="tbLocation" HorizontalAlignment="Left" Height="35" Margin="75,199,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="540"/>
-        <Label Content="Horarios" HorizontalAlignment="Left" Margin="70,328,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16"/>
-        <Grid Name="gdSchedule" HorizontalAlignment="Left" Height="203" Margin="70,357,0,0" VerticalAlignment="Top" Width="593">
+        <TextBox x:Name="tbLocation" HorizontalAlignment="Left" Height="35" Margin="75,199,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="540"/>
+        <Label Content="Horarios" HorizontalAlignment="Left" Margin="70,399,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16"/>
+        <Grid Name="gdSchedule" HorizontalAlignment="Left" Height="203" Margin="70,433,0,0" VerticalAlignment="Top" Width="593">
 
             <Grid Name="gdScheduleMonday" HorizontalAlignment="Left" Height="44" Margin="10,8,0,0" VerticalAlignment="Top" Width="186">
                 <Grid.RowDefinitions>
@@ -24,10 +34,10 @@
                     <RowDefinition Height="20*"/>
                     <RowDefinition Height="11*"/>
                 </Grid.RowDefinitions>
-                <CheckBox Content="Lunes" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,-0.3" Height="16" Grid.RowSpan="2" />
+                <CheckBox Content="Lunes" Name="cbMonday" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,-0.3" Height="16" Grid.RowSpan="2" />
 
-                <wpfx:TimePicker Margin="4,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
-                <wpfx:TimePicker Margin="95,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
+                <wpfx:TimePicker Name="tpMondayStart" Margin="4,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
+                <wpfx:TimePicker Name="tpMondayEnd" Margin="95,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
             </Grid>
             <Grid Name="gdScheduleTuesday" HorizontalAlignment="Left" Height="44" Margin="10,68,0,0" VerticalAlignment="Top" Width="186">
                 <Grid.RowDefinitions>
@@ -35,10 +45,10 @@
                     <RowDefinition Height="20*"/>
                     <RowDefinition Height="11*"/>
                 </Grid.RowDefinitions>
-                <CheckBox Content="Martes" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,-0.3" Height="16" Grid.RowSpan="2" />
+                <CheckBox Content="Martes" Name="cbTuesday" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,-0.3" Height="16" Grid.RowSpan="2" />
 
-                <wpfx:TimePicker Margin="4,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
-                <wpfx:TimePicker Margin="95,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
+                <wpfx:TimePicker Name="tpTuesdayStart" Margin="4,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
+                <wpfx:TimePicker Name="tpTuesdayEnd" Margin="95,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
             </Grid>
             <Grid x:Name="gdScheduleWednesday" HorizontalAlignment="Left" Height="44" Margin="196,12,0,0" VerticalAlignment="Top" Width="186">
                 <Grid.ColumnDefinitions>
@@ -50,10 +60,10 @@
                     <RowDefinition Height="20*"/>
                     <RowDefinition Height="11*"/>
                 </Grid.RowDefinitions>
-                <CheckBox Content="Miécoles" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,-0.3" Height="16" Grid.RowSpan="2" />
+                <CheckBox Content="Miécoles" Name="cbWednesday" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,-0.3" Height="16" Grid.RowSpan="2" />
 
-                <wpfx:TimePicker Margin="4,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
-                <wpfx:TimePicker Margin="95,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
+                <wpfx:TimePicker Name="tpWednesdayStart" Margin="4,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
+                <wpfx:TimePicker Name="tpWednesdayEnd" Margin="95,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2" Grid.ColumnSpan="2"/>
             </Grid>
             <Grid x:Name="gdScheduleThursday" HorizontalAlignment="Left" Height="44" Margin="196,68,0,0" VerticalAlignment="Top" Width="186">
                 <Grid.RowDefinitions>
@@ -61,10 +71,10 @@
                     <RowDefinition Height="20*"/>
                     <RowDefinition Height="11*"/>
                 </Grid.RowDefinitions>
-                <CheckBox Content="Jueves" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,-0.3" Height="16" Grid.RowSpan="2"/>
+                <CheckBox Content="Jueves" Name="cbThursday" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,-0.3" Height="16" Grid.RowSpan="2"/>
 
-                <wpfx:TimePicker Margin="4,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
-                <wpfx:TimePicker Margin="95,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
+                <wpfx:TimePicker Name="tpThursdayStart" Margin="4,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
+                <wpfx:TimePicker Name="tpThursdayEnd"  Margin="95,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
             </Grid>
             <Grid x:Name="gdScheduleFriday" HorizontalAlignment="Left" Height="44" Margin="387,8,0,0" VerticalAlignment="Top" Width="186">
                 <Grid.RowDefinitions>
@@ -72,10 +82,10 @@
                     <RowDefinition Height="20*"/>
                     <RowDefinition Height="11*"/>
                 </Grid.RowDefinitions>
-                <CheckBox Content="Viernes" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,-0.3" Height="16" Grid.RowSpan="2"/>
+                <CheckBox Content="Viernes" Name="cbFriday" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,-0.3" Height="16" Grid.RowSpan="2"/>
 
-                <wpfx:TimePicker Margin="4,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
-                <wpfx:TimePicker Margin="95,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
+                <wpfx:TimePicker Name="tpFridayStart"  Margin="4,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
+                <wpfx:TimePicker Name="tpFridayEnd" Margin="95,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
             </Grid>
             <Grid x:Name="gdScheduleSaturday" HorizontalAlignment="Left" Height="44" Margin="387,68,0,0" VerticalAlignment="Top" Width="186">
                 <Grid.RowDefinitions>
@@ -83,9 +93,9 @@
                     <RowDefinition Height="20*"/>
                     <RowDefinition Height="11*"/>
                 </Grid.RowDefinitions>
-                <CheckBox Content="Sábado" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,-0.3" Height="16" Grid.RowSpan="2" />
-                <wpfx:TimePicker Margin="4,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
-                <wpfx:TimePicker Margin="95,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
+                <CheckBox Content="Sábado" Name="cbSaturday" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,-0.3" Height="16" Grid.RowSpan="2" />
+                <wpfx:TimePicker Name="tpSaturdayStart" Margin="4,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
+                <wpfx:TimePicker Name="tpSaturdayEnd" Margin="95,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
             </Grid>
             <Grid x:Name="gdScheduleSunday" HorizontalAlignment="Left" Height="44" Margin="10,135,0,0" VerticalAlignment="Top" Width="186">
                 <Grid.RowDefinitions>
@@ -93,16 +103,19 @@
                     <RowDefinition Height="20*"/>
                     <RowDefinition Height="11*"/>
                 </Grid.RowDefinitions>
-                <CheckBox Content="Domingo" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,-0.3" Height="16" Grid.RowSpan="2" />
+                <CheckBox Content="Domingo" Name="cbSunday" HorizontalAlignment="Left" Margin="0,2,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.451,-0.3" Height="16" Grid.RowSpan="2" />
 
-                <wpfx:TimePicker Margin="4,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
-                <wpfx:TimePicker Margin="95,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
+                <wpfx:TimePicker Name="tpSundayStart" Margin="4,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
+                <wpfx:TimePicker Name="tpSundayEnd" Margin="95,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
             </Grid>
         </Grid>
-        <Button Name="btCancel" Content="Cancelar" HorizontalAlignment="Left" Margin="662,629,0,0" VerticalAlignment="Top" Width="79" Height="25" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="16"  Padding="0 0 0 0" />
-        <Button Name="btSend" Content="Enviar" HorizontalAlignment="Left" Margin="561,629,0,0" VerticalAlignment="Top" Width="79" Height="25" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="16"  Padding="0 0 0 0" RenderTransformOrigin="1.38,0.52" />
-        <Button Content="Subir archivos" HorizontalAlignment="Left" Margin="75,576,0,0" VerticalAlignment="Top" Width="88"/>
-        <ComboBox HorizontalAlignment="Left" Margin="75,268,0,0" VerticalAlignment="Top" Width="178" Height="29" BorderThickness="0" ClipToBounds="True" OpacityMask="#FFB4B4B4">
+        <Button Name="btCancel" Content="Cancelar" Style="{DynamicResource RoundCorner}" HorizontalAlignment="Left" Margin="586,649,0,0" VerticalAlignment="Top" Width="80" Height="25" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="16"  Padding="0 0 0 0" Click="btCancel_Click"/>
+        <Button Name="btSend" Content="Enviar" Style="{DynamicResource RoundCorner}" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="78" Height="25" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="16"  Padding="0 0 0 0" RenderTransformOrigin="1.38,0.52" Click="btSend_Click" Margin="708,649,0,0"/>
+        <Button Content="Subir archivos" HorizontalAlignment="Left" Margin="75,652,0,0" VerticalAlignment="Top" Width="88"/>
+        <ComboBox HorizontalAlignment="Left" Name="cbType" Margin="75,268,0,0" VerticalAlignment="Top" Width="178" Height="29" BorderThickness="0" ClipToBounds="True" OpacityMask="#FFB4B4B4">
+            <ComboBoxItem Content="Papelería"/>
+            <ComboBoxItem Content="Comida"/>
+            <ComboBoxItem Content="Ocio"/>
             <ComboBox.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black" Offset="0"/>
@@ -117,6 +130,8 @@
             </ComboBox.Background>
         </ComboBox>
         <Label Content="Tipo" HorizontalAlignment="Left" Margin="75,239,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16"/>
+        <Label Content="Servicios que ofrece" HorizontalAlignment="Left" Margin="70,310,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16"/>
+        <TextBox x:Name="tbServices" HorizontalAlignment="Left" Height="35" Margin="75,341,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="540"/>
     </Grid>
 
 </Window>

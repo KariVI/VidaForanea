@@ -18,7 +18,11 @@ namespace VidaForaneaCliente.ServerConnection
 
         public static void initializeConnection()
         {
+<<<<<<< HEAD
             client.BaseAddress = new Uri("http://192.168.0.25:9090");
+=======
+            client.BaseAddress = new Uri("http://10.50.14.14:9090/");
+>>>>>>> main
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
@@ -132,8 +136,25 @@ namespace VidaForaneaCliente.ServerConnection
             return value;
         }
 
-        
-
+        public static async Task<bool> PostPlace(Place place)
+        {
+            bool value = true;
+            try
+            {
+                HttpResponseMessage response = await client.PostAsJsonAsync("/lugares", place);
+                latestStatusCode = response.StatusCode;
+                if (latestStatusCode != HttpStatusCode.OK)
+                {
+                    value = false;
+                }
+            }
+            catch (Exception e)
+            {
+                value = false;
+                Console.WriteLine(e.Message);
+            }
+            return value;
+        }
     }
 }
 class Root
