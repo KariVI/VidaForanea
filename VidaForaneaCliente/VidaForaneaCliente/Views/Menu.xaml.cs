@@ -108,11 +108,27 @@ namespace VidaForaneaCliente.Views
         }
         private void btAddPlace_Click(object sender, RoutedEventArgs e)
         {
-            AddPlace addPlace = new AddPlace(this, loggedStudent, loggedAdmin);
-            addPlace.Show();
-            this.Hide();
+            if (isAdmin)
+            {
+                AddPlace addPlace = new AddPlace(this,  loggedAdmin);
+                addPlace.Show();
+                this.Hide();
+            }
+            else
+            {
+                AddPlace addPlace = new AddPlace(this, loggedStudent);
+                addPlace.Show();
+                this.Hide();
+
+            }
 
         }
 
+        private void btRequest_Click(object sender, RoutedEventArgs e)
+        {
+            PlaceList placeList = new PlaceList("", loggedAdmin);
+            placeList.Show();
+            this.Close();
+        }
     }
 }

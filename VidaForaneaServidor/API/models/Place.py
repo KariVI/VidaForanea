@@ -11,7 +11,7 @@ class Place(db.Model):
     address = db.Column(db.String(500), nullable=False)
     services = db.Column(db.String(500), nullable=False)
     schedule = db.Column(db.String(500), nullable=False)
-    status = db.Column(db.String(200), default="Pendiente")
+    status = db.Column(db.String(200), default="pendiente")
     type_place = db.Column(db.String(200), nullable=False)
     image = db.Column(db.BLOB, nullable = False)
 
@@ -31,11 +31,11 @@ class Place(db.Model):
     @classmethod
     def get_all_places(cls):
         return cls.query.all()
-        
+
     def save(self):
         db.session.add(self)
         db.session.commit()
-    
+
     def delete(self):
         db.session.delete(self)
         db.session.commit()

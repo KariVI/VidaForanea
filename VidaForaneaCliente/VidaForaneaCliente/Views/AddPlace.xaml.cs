@@ -25,16 +25,25 @@ namespace VidaForaneaCliente.Views
     {
         Menu menu;
         Student loggedStudent;
-        Admin loggedAdmin;
+        Admin loggedAdmin ;
         string imageSource;
-        public AddPlace(Menu menu, Student loggedStudent, Admin loggedAdmin)
+        bool isAdmin = false;
+        public AddPlace(Menu menu, Student loggedStudent)
         {
             InitializeComponent();
             this.menu = menu;
             imageSource = "";
             this.loggedStudent = loggedStudent;
-            this.loggedAdmin = loggedAdmin;
             lbUser.Content = loggedStudent.name;
+        }
+        public AddPlace(Menu menu,  Admin loggedAdmin)
+        {
+            InitializeComponent();
+            this.menu = menu;
+            imageSource = "";
+            this.loggedAdmin = loggedAdmin;
+            lbUser.Content = loggedAdmin.nombre;
+            isAdmin = true;
         }
 
         private void btCancel_Click(object sender, RoutedEventArgs e)
@@ -63,7 +72,7 @@ namespace VidaForaneaCliente.Views
                     //image.Source = Utils.ConvertBytesToImage(Convert.FromBase64String(String recibida del servidor)):
 
                 };
-                bool respuesta = await Connection.PostPlace(place);
+                bool respuesta = await Connection.PostPlace(place,isAdmin);
                 if (Connection.latestStatusCode == HttpStatusCode.Created)
                 {
                     MessageBox.Show("Se ha registrado la solicitud del lugar", "Solicitud registrada", MessageBoxButton.OK);

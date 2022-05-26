@@ -53,11 +53,16 @@ namespace VidaForaneaCliente.Views
             {
                 imgPlace.Source = new BitmapImage(new Uri(System.IO.Path.GetFullPath("..\\..\\Images\\leisure.png"), UriKind.Absolute));
             }
-            else
+            else if (category.Equals("Comida"))
             {
                 imgPlace.Source = new BitmapImage(new Uri(System.IO.Path.GetFullPath("..\\..\\Images\\food.png"), UriKind.Absolute));
             }
-            places = await Connection.GetPlacesByCategory("Pendiente", category);
+            string status = "aprobado";
+            if (category.Equals(""))
+            {
+                 status = "pendiente";
+            }
+            places = await Connection.GetPlacesByCategory(status, category);
                
             PlacesCollection = new ObservableCollection<String>();
            

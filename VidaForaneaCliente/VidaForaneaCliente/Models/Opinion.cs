@@ -14,7 +14,7 @@ namespace VidaForaneaCliente.Models
         public string description { get; set; }
 
         public int id_place { get; set; }
-        public int student { get; set; }
+        public string user { get; set; }
         public int score { get; set; }
 
     }

@@ -30,7 +30,11 @@ class ListPlaces(Resource):
         address = json_data.get('address')
         services = json_data.get('services')
         schedule = json_data.get('schedule')
-        status = "Pendiente"
+        if json_data.get('status') == 1:
+            status = "aprobado"
+        if json_data.get('status') == 0:
+            status = "pendiente"
+
         type_place=json_data.get('type_place')
         imageNotEncodedToBytes = json_data.get('image')
         image = bytes(imageNotEncodedToBytes, 'utf-8')
@@ -43,7 +47,8 @@ class ListPlaces(Resource):
             services=services,
             schedule=schedule,
             type_place=type_place,
-            image = image
+            image = image,
+            status = status
         )
         lista_places.append(place)
         place.save()
@@ -95,7 +100,7 @@ class ResourcePlace(Resource):
 
         if place.status =="Pendiente":
             place.status= 'Aprobado'
-        
+
         place.name = data['name']
         place.address = data['address']
         place.services = data['services']
@@ -110,7 +115,7 @@ class ResourcePlace(Resource):
             return {'message': 'Lugar no encontrado'}, HTTPStatus.NOT_FOUND
         if place.status =='Pendiente':
             place.status='Aprobado'
-        
+
         data = {
             'id': place.id,
             'name': place.name,

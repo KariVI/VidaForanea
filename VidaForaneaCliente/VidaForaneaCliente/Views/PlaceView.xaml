@@ -29,18 +29,16 @@
             <Image Name="imgPlace"  HorizontalAlignment="Left" Height="162" VerticalAlignment="Top" Width="202" Margin="57,102,0,0"/>
             <Label x:Name="lbName" Content="Nombre lugar" HorizontalAlignment="Left" Margin="274,83,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="25" FontWeight="Bold" Height="40" Width="431" Foreground="#FF7F4CA5" Grid.ColumnSpan="2"/>
             <Label Content="Ubicación:" HorizontalAlignment="Left" Margin="277,128,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16" FontWeight="Bold" Height="27" Width="106"/>
-            <Label x:Name="lbScedule" Content="Horarios:" HorizontalAlignment="Left" Margin="277,261,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16" FontWeight="Bold" Height="26" Width="74"/>
+            <Label x:Name="lbScedule" Content="Horarios:" HorizontalAlignment="Left" Margin="277,261,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16" FontWeight="Bold" Height="26" Width="100"/>
             <Grid x:Name="gdSchedule" HorizontalAlignment="Left" Height="86" Margin="300,310,0,0" VerticalAlignment="Top" Width="379" Grid.ColumnSpan="2"/>
-            <TextBlock x:Name="lbLocate" HorizontalAlignment="Left" Margin="382,136,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16" FontWeight="Normal" Width="370" Height="59" RenderTransformOrigin="0.5,0.5" FontStyle="Normal" Grid.ColumnSpan="2">
-
-            </TextBlock>
+            <TextBlock x:Name="lbLocate" HorizontalAlignment="Left" Margin="382,134,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16" FontWeight="Normal" Width="370" Height="59" RenderTransformOrigin="0.5,0.5" FontStyle="Normal"/>
             <Label Content="Servicios:" HorizontalAlignment="Left" Margin="279,194,0,0" VerticalAlignment="Top" FontFamily="TRoboto" FontSize="16" FontWeight="Bold" Height="27" Width="98"/>
 
 
 
             <Button Name="btUpdate" Content="Modificar" HorizontalAlignment="Left" Margin="540,1143,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#7f4ca5" BorderBrush="#7f4ca5" Style="{DynamicResource RoundCorner}" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" />
             <Button Name="btReturn" Content="Regresar" HorizontalAlignment="Left" Margin="652,1143,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#7f4ca5" BorderBrush="#7f4ca5" Style="{DynamicResource RoundCorner}" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" Click="btReturn_Click" />
-            <TextBlock x:Name="lbServices" HorizontalAlignment="Left" Margin="382,203,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16" FontWeight="Normal" Width="370" Height="63" Grid.ColumnSpan="2"/>
+            <TextBlock x:Name="lbServices" HorizontalAlignment="Left" Margin="382,199,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16" FontWeight="Normal" Width="370" Height="63"/>
             <ScrollViewer Name="ScrollerContenido" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Background="#FFFDFDFD" Margin="0,434,0,908">
 
                 <ItemsControl Name="PlantillaMensaje" >
@@ -109,6 +107,7 @@
                     <ComboBoxItem Content="5"/>
                 </ComboBox>
             </Grid>
+            <TextBlock x:Name="lbSchedule" HorizontalAlignment="Left" Margin="382,267,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16" FontWeight="Normal" Width="370" Height="59" RenderTransformOrigin="0.5,0.5" FontStyle="Normal"/>
         </Grid>
     </ScrollViewer>
 

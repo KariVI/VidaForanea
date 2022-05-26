@@ -9,6 +9,7 @@ from resources.Forum import ListForums, ResourceForum
 from resources.Student import ListStudents, ResourceStudent, Login
 from resources.Place import ListPlaces, ListPlacesStatus, ListPlacesType, ResourcePlace
 from resources.Opinion import ListOpinions, ResourceOpinion
+from resources.Administrador import ListaAdministradores, RecursoAdministrador, LoginAdmin
 
 def create_app():
     app = Flask(__name__)
@@ -41,6 +42,9 @@ def register_resources(app):
     api.add_resource(ResourceComments, '/foros/<int:forum_id>/comentarios/<int:comment_id>'),
     api.add_resource(ListPlacesStatus, '/lugares/<string:status>'),
     api.add_resource(ListPlacesType, '/lugares/<string:status>/<string:type_place>')
+    api.add_resource(ListaAdministradores, '/administradores')
+    api.add_resource(RecursoAdministrador, '/administradores/<string:usuario>')
+    api.add_resource(LoginAdmin, '/loginAdmin/<string:usuario>')
 
 if __name__ == '__main__':
     app = create_app()

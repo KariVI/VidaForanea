@@ -76,7 +76,16 @@ namespace VidaForaneaCliente.ServerConnection
             List <Place> places = new List<Place> ();
             try
             {
-                HttpResponseMessage response = await client.GetAsync("lugares/" + estado + "/" + category);
+                string route;
+                if (category.Equals(""))
+                {
+                    route = "lugares/" + estado ;
+                }
+                else
+                {
+                    route = "lugares/" + estado + "/" + category;
+                }
+                HttpResponseMessage response = await client.GetAsync(route);
                 if (response.IsSuccessStatusCode)
                 {
 
@@ -155,11 +164,19 @@ namespace VidaForaneaCliente.ServerConnection
             return value;
         }
 
-        public static async Task<bool> PostPlace(Place place)
+        public static async Task<bool> PostPlace(Place place,bool isAdmin)
         {
             bool value = true;
             try
             {
+                if (isAdmin)
+                {
+                    place.status = StatusPlace.aprobado;
+                }
+                else
+                {
+                    place.status = StatusPlace.pendiente;
+                }
                 HttpResponseMessage response = await client.PostAsJsonAsync("/lugares", place);
                 latestStatusCode = response.StatusCode;
                 if (latestStatusCode != HttpStatusCode.Created)
@@ -248,9 +265,9 @@ class Root
                 opinion.score = Convert.ToInt32(dict["score"]);
                 opinion.id_place = Convert.ToInt32(dict["score"]);
                 opinion.hour = (string)dict["hour"];
+                opinion.user = (string)dict["user"];
 
-
-                opinions.Add(opinion);
+            opinions.Add(opinion);
             }
             return opinions;
         }

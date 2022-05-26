@@ -40,6 +40,7 @@ namespace VidaForaneaCliente.Views
             lbUser.Content = loggedAdmin.nombre;
             this.category = category;
             this.place = place;
+            isAdmin = true;
             intializePlace();
             
         }
@@ -57,9 +58,21 @@ namespace VidaForaneaCliente.Views
         
         private async void intializePlace( )
         {
+            lbSchedule.Text = place.schedule;
             List<Opinion> opinions = await Connection.GetOpinionsByPlace(place);
             foreach(var opinion in opinions){
-                PlantillaMensaje.Items.Add(new { Posicion = "Right", FondoElemento = "White", FondoCabecera = "#7f4ca5", Nombre = opinion.student, TiempoDeEnvio = opinion.date, MensajeEnviado = opinion.description, Puntuacion = "Puntuacion: " + opinion.score });
+                string name;
+                if (((opinion.user).Substring(0, 2).ToUpper() == "ZS"))
+                {
+                    Student student = await Connection.GetStudentByMatricula(opinion.user);
+                    name = student.name;
+                }
+                else
+                {
+                    name = "Administrador";
+                }
+
+                PlantillaMensaje.Items.Add(new { Posicion = "Right", FondoElemento = "White", FondoCabecera = "#7f4ca5", Nombre = name, TiempoDeEnvio = opinion.date, MensajeEnviado = opinion.description, Puntuacion = "Puntuacion: " + opinion.score });
                 ContenidoDelMensaje.Clear();
             }
             cbStar.SelectedIndex = 0;
@@ -113,7 +126,15 @@ namespace VidaForaneaCliente.Views
                     string puntuacion = comboItem.Content.ToString();
                     Opinion opinion = new Opinion();
                     opinion.id_place = place.id; 
-                    opinion.student = loggedStudent.Id;
+                    if (isAdmin)
+                    {
+                        opinion.user = loggedAdmin.usuario;
+                    }
+                    else
+                    {
+                        opinion.user = loggedStudent.enrollment;
+                    }
+                        
                     opinion.date = DateTime.Now.Date.ToString();
                     opinion.hour = DateTime.Now.Hour.ToString();
                     opinion.description = mensajeFinal;
@@ -121,7 +142,7 @@ namespace VidaForaneaCliente.Views
                     bool correcto = await Connection.PostOpinion(place,opinion);
                     if (Connection.latestStatusCode == HttpStatusCode.Created)
                     {
-                         PlantillaMensaje.Items.Add(new { Posicion = "Right", FondoElemento = "White", FondoCabecera = "#7f4ca5", Nombre = loggedStudent.name, TiempoDeEnvio = DateTime.Now, MensajeEnviado = mensaje, Puntuacion = "Puntuacion: " + puntuacion });
+                         PlantillaMensaje.Items.Add(new { Posicion = "Right", FondoElemento = "White", FondoCabecera = "#7f4ca5", Nombre = opinion.user, TiempoDeEnvio = DateTime.Now, MensajeEnviado = mensaje, Puntuacion = "Puntuacion: " + puntuacion });
                         ContenidoDelMensaje.Clear();
                     }
                     else if (Connection.latestStatusCode == HttpStatusCode.BadRequest)

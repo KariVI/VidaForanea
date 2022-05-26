@@ -7,7 +7,7 @@ class Opinion(db.Model):
     __tablename__ = 'Opinion'
 
     id = db.Column(db.Integer, primary_key=True)
-    student=db.Column(db.Integer, db.ForeignKey('Student.id'),
+    user=db.Column(db.String(200),
         nullable=False)
     date = db.Column(db.String(200), nullable=False)
     hour = db.Column(db.String(5), nullable=False)
@@ -17,7 +17,7 @@ class Opinion(db.Model):
         nullable=False)
 
 
-    
+
     @classmethod
     def get_by_id(cls, id):
         return cls.query.filter_by(id=id).first()
@@ -25,14 +25,14 @@ class Opinion(db.Model):
     @classmethod
     def get_by_id_place(cls, id_place):
         return cls.query.filter_by(id_place=id_place).all()
-    
+
     @classmethod
-    def get_by_id_place_student(cls, id_place, id_student):
-        return cls.query.filter_by(id_place=id_place, student=id_student).all()
+    def get_by_id_place_user(cls, id_place, id_user):
+        return cls.query.filter_by(id_place=id_place, user=id_user).all()
     @classmethod
     def get_all_opinions(cls):
         return cls.query.all()
-    
+
     def delete(self):
         db.session.delete(self)
         db.session.commit()
