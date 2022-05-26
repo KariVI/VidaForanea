@@ -45,7 +45,7 @@ namespace VidaForaneaCliente.Views
 
         private async void btSend_Click(object sender, RoutedEventArgs e)
         {
-            string time = GenerateScheduleString();
+            string time = "ok";
             if (String.IsNullOrWhiteSpace(imageSource) || String.IsNullOrWhiteSpace(cbType.Text) || String.IsNullOrWhiteSpace(tbName.Text) || String.IsNullOrWhiteSpace(tbLocation.Text) || String.IsNullOrWhiteSpace(time))
             {
                 MessageBox.Show("Existen campos vacíos, por favor revise los campos", "Campos vacíos", MessageBoxButton.OK);

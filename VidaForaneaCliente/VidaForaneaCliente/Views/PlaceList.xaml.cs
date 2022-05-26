@@ -27,6 +27,7 @@ namespace VidaForaneaCliente.Views
         Student loggedStudent;
         Admin loggedAdmin;
         bool isAdmin = false;
+        string category;
         public ObservableCollection<String> PlacesCollection{ get; set; }
         public ListBox listPlaces { get { return lstbCategory; } set { lstbCategory = value; } }
         List<Place> places = new List<Place>();
@@ -35,6 +36,8 @@ namespace VidaForaneaCliente.Views
             InitializeComponent();
             this.loggedStudent = loggedStudent;
             lbCategory.Content = category;
+            lbUser.Content = loggedStudent.name;
+            this.category = category;
             InitializePlaces(category);
 
         }
@@ -43,8 +46,18 @@ namespace VidaForaneaCliente.Views
             if (category.Equals("Papeleria"))
             {
                 category = "Herramientas";
+                imgPlace.Source = new BitmapImage(new Uri(System.IO.Path.GetFullPath("..\\..\\Images\\stationary.png"), UriKind.Absolute));
+
             }
-              places = await Connection.GetPlacesByCategory("Pendiente", category);
+            else if (category.Equals("Ocio"))
+            {
+                imgPlace.Source = new BitmapImage(new Uri(System.IO.Path.GetFullPath("..\\..\\Images\\leisure.png"), UriKind.Absolute));
+            }
+            else
+            {
+                imgPlace.Source = new BitmapImage(new Uri(System.IO.Path.GetFullPath("..\\..\\Images\\food.png"), UriKind.Absolute));
+            }
+            places = await Connection.GetPlacesByCategory("Pendiente", category);
                
             PlacesCollection = new ObservableCollection<String>();
            
@@ -56,7 +69,9 @@ namespace VidaForaneaCliente.Views
                     PlacesCollection.Add(place.name);
                 }
             }
+            
             listPlaces.ItemsSource = PlacesCollection;
+           
         }
     
         public PlaceList(String category, Admin loggedAdmin)
@@ -65,6 +80,8 @@ namespace VidaForaneaCliente.Views
             isAdmin = true;
             this.loggedAdmin = loggedAdmin;
             lbCategory.Content = category;
+            this.category = category;
+            lbUser.Content = loggedAdmin.nombre;
             InitializePlaces(category);
         }
         private void btReturn_Click(object sender, RoutedEventArgs e)
@@ -90,13 +107,13 @@ namespace VidaForaneaCliente.Views
 
             if (isAdmin)
             {
-                PlaceView placeview = new PlaceView(place,loggedAdmin);
+                PlaceView placeview = new PlaceView(place,loggedAdmin, category);
                 placeview.Show();
                 this.Close();
             }
             else
             {
-                PlaceView placeview = new PlaceView(place, loggedStudent);
+                PlaceView placeview = new PlaceView(place, loggedStudent,category);
                 placeview.Show();
                 this.Close();
             }

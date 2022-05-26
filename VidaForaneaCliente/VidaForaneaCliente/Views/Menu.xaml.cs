@@ -45,7 +45,7 @@ namespace VidaForaneaCliente.Views
         {
             if (isAdmin)
             {
-                MainWindow mainWindow= new MainWindow(loggedAdmin);
+                MainWindow mainWindow = new MainWindow(loggedAdmin);
                 mainWindow.Show();
                 this.Close();
             }
@@ -58,12 +58,12 @@ namespace VidaForaneaCliente.Views
 
         }
 
-<<<<<<< HEAD
+
         private void btLeisure_Click(object sender, RoutedEventArgs e)
         {
             if (isAdmin)
             {
-                PlaceList placeList = new PlaceList("Ocio",loggedAdmin);
+                PlaceList placeList = new PlaceList("Ocio", loggedAdmin);
                 placeList.Show();
                 this.Close();
             }
@@ -105,13 +105,14 @@ namespace VidaForaneaCliente.Views
                 placeList.Show();
                 this.Close();
             }
-=======
+        }
         private void btAddPlace_Click(object sender, RoutedEventArgs e)
         {
             AddPlace addPlace = new AddPlace(this, loggedStudent, loggedAdmin);
             addPlace.Show();
             this.Hide();
->>>>>>> Gustavo
+
         }
+
     }
 }

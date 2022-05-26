@@ -4,19 +4,16 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-<<<<<<< HEAD
-using Newtonsoft.Json;
 
-=======
 using System.Windows.Media.Imaging;
 
->>>>>>> Gustavo
 namespace VidaForaneaCliente.Models
 {
    
     public class Place
     {
-   
+
+        public int id { get; set; }
         public string name { get; set; }
        
         public string address { get; set; }
@@ -26,12 +23,11 @@ namespace VidaForaneaCliente.Models
         public string schedule { get; set; }
 
 
-<<<<<<< HEAD
         public string type_place { get; set; }
    
-=======
+
         public string image { get; set; }
->>>>>>> Gustavo
+
         public StatusPlace status { get; set; }
     }
 

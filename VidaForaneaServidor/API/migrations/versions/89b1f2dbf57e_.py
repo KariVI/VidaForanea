@@ -1,14 +1,8 @@
 """empty message
 
-<<<<<<<< HEAD:VidaForaneaServidor/API/migrations/versions/c1abaae2771f_.py
-Revision ID: c1abaae2771f
+Revision ID: 89b1f2dbf57e
 Revises: 
-Create Date: 2022-05-23 11:02:59.112595
-========
-Revision ID: 446f4116eb4f
-Revises: 
-Create Date: 2022-05-23 11:05:17.343034
->>>>>>>> main:VidaForaneaServidor/API/migrations/versions/446f4116eb4f_.py
+Create Date: 2022-05-24 12:43:27.694030
 
 """
 from alembic import op
@@ -16,11 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-<<<<<<<< HEAD:VidaForaneaServidor/API/migrations/versions/c1abaae2771f_.py
-revision = 'c1abaae2771f'
-========
-revision = '446f4116eb4f'
->>>>>>>> main:VidaForaneaServidor/API/migrations/versions/446f4116eb4f_.py
+revision = '89b1f2dbf57e'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -41,6 +31,7 @@ def upgrade():
     sa.Column('schedule', sa.String(length=500), nullable=False),
     sa.Column('status', sa.String(length=200), nullable=True),
     sa.Column('type_place', sa.String(length=200), nullable=False),
+    sa.Column('image', sa.BLOB(), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('name')
     )

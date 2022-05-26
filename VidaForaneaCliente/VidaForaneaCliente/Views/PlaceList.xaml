@@ -3,10 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-<<<<<<< HEAD
-       
-=======
->>>>>>> Gustavo
+
         mc:Ignorable="d"
         Title="PlaceList" Height="500" Width="700"
         WindowStartupLocation="CenterScreen"
@@ -22,8 +19,9 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
+        <Image Name="imgPlace"  HorizontalAlignment="Left" Height="126" VerticalAlignment="Top" Width="146" Margin="532,154,0,0"/>
         <Rectangle Fill="#7f4ca5" HorizontalAlignment="Left" Height="36"  VerticalAlignment="Top" Width="792"/>
-        <Label Content="User" HorizontalAlignment="Left" Margin="600,0,0,0" Foreground="white" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20" Width="83"/>
+        <Label Name="lbUser" Content="User" HorizontalAlignment="Left" Margin="600,0,0,0" Foreground="white" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20" Width="83"/>
         <Label Name="lbCategory" Content="Categoria" HorizontalAlignment="Left" Margin="40,50,0,0" Foreground="#7f4ca5" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="30" Width="171"/>
         <Button Name="btReturn" Content="Regresar" HorizontalAlignment="Left" Style="{DynamicResource RoundCorner}" Margin="542,420,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" Click="btReturn_Click" />
         <ListBox Name="lstbCategory" Margin="61,121,187,121" SelectionChanged="lstbCategory_SelectionChanged"/>

@@ -18,15 +18,9 @@ namespace VidaForaneaCliente.ServerConnection
 
         public static void initializeConnection()
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
+
             client.BaseAddress = new Uri("http://192.168.0.25:9090");
-=======
-            client.BaseAddress = new Uri("http://10.50.14.14:9090/");
->>>>>>> main
-=======
-            client.BaseAddress = new Uri("http://192.168.100.48:9090/");
->>>>>>> Gustavo
+
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
@@ -98,6 +92,27 @@ namespace VidaForaneaCliente.ServerConnection
             }
             return places;
         }
+        public static async Task<List<Opinion>> GetOpinionsByPlace(Place place)
+        {
+            List<Opinion> opinions = new List<Opinion>();
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("lugares/" + place.id + "/opiniones" );
+                if (response.IsSuccessStatusCode)
+                {
+
+                    var stringData = response.Content.ReadAsStringAsync().Result;
+                    var opinions2 = JsonConvert.DeserializeObject<RootOpinion>(stringData);
+                    opinions = opinions2.makeAList();
+                }
+                latestStatusCode = response.StatusCode;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return opinions;
+        }
         public static async Task<Student> GetStudentByMatricula(string matricula)
         {
             Student student = null;
@@ -159,7 +174,32 @@ namespace VidaForaneaCliente.ServerConnection
             }
             return value;
         }
+
+        public static async Task<bool> PostOpinion(Place place, Opinion opinion)
+        {
+            bool value = true;
+            try
+            {
+
+                String idPlace = place.id.ToString();
+                String rute = "/lugares/" + idPlace + "/opiniones";
+                HttpResponseMessage response = await client.PostAsJsonAsync(rute, opinion);
+                latestStatusCode = response.StatusCode;
+                if (latestStatusCode != HttpStatusCode.Created)
+                {
+                    value = false;
+                }
+            }
+            catch (Exception e)
+            {
+                value = false;
+                Console.WriteLine(e.Message);
+            }
+            return value;
+        }
     }
+
+  
 }
 class Root
 {
@@ -169,13 +209,17 @@ class Root
         List<Place> places = new List<Place>();
         foreach (var dict in Data)
         {
-            Place place = new Place(); 
+            Place place = new Place();
             StatusPlace status = new StatusPlace();
+            place.id = Convert.ToInt32(dict["id"]);
             place.name = (string)dict["name"];
             place.address = (string)dict["address"];
-            place.services = (string)dict["services"]; 
+            place.services = (string)dict["services"];
+
+            place.image = dict["image"].ToString();
+
             string statusRetrieved = (string)dict["status"];
-            if (statusRetrieved.Equals("aprobado")){
+            if (statusRetrieved.Equals("aprobado")) {
                 status = StatusPlace.aprobado;
             }
             else
@@ -189,3 +233,26 @@ class Root
         return places;
     }
 }
+     class RootOpinion
+    {
+        public List<Dictionary<string, object>> Data { get; set; }
+        public List<Opinion> makeAList()
+        {
+            List<Opinion> opinions = new List<Opinion>();
+            foreach (var dict in Data)
+            {
+                Opinion opinion = new Opinion();
+                opinion.Id = Convert.ToInt32(dict["id"]);
+                opinion.description = (string)dict["description"];
+                opinion.date = (string)dict["date"];
+                opinion.score = Convert.ToInt32(dict["score"]);
+                opinion.id_place = Convert.ToInt32(dict["score"]);
+                opinion.hour = (string)dict["hour"];
+
+
+                opinions.Add(opinion);
+            }
+            return opinions;
+        }
+    }
+

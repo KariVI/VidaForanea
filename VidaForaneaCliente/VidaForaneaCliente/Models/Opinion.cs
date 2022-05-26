@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VidaForaneaCliente.Models
 {
-    class Opinion
+    public class Opinion
     {
         public int Id { get; set; }
         public string date { get; set; }
@@ -14,7 +14,8 @@ namespace VidaForaneaCliente.Models
         public string description { get; set; }
 
         public int id_place { get; set; }
-        public int id_student { get; set; }
+        public int student { get; set; }
+        public int score { get; set; }
 
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VidaForaneaCliente.Views"
         mc:Ignorable="d"
-        Title="PlaceView" Height="700" Width="700"
+        Title="PlaceView" Height="800" Width="805"
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
@@ -17,39 +17,99 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
-        <Rectangle Fill="#7f4ca5" HorizontalAlignment="Left" Height="36"  VerticalAlignment="Top" Width="792"/>
-        <Label Name="lbUser" Content="User" HorizontalAlignment="Left" Margin="600,0,0,0" Foreground="white" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20" Width="83"/>
-        <Grid  Name="gdPlace" HorizontalAlignment="Left" Height="423" Margin="33,65,0,0" VerticalAlignment="Top" Width="630" RenderTransformOrigin="0.482,0.536">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="611*"/>
-                <ColumnDefinition Width="19*"/>
-            </Grid.ColumnDefinitions>
-            <TextBox x:Name="tbAddCommentary" HorizontalAlignment="Left"   Height="38" Margin="0,492,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="482" Background="#FFDEDDDD" FontFamily="Roboto" FontSize="14" TextAlignment="Justify"/>
-            <ComboBox HorizontalAlignment="Left" Margin="482,495,0,0" VerticalAlignment="Top" Width="99" Height="38" FontFamily="Roboto" FontSize="14" BorderBrush="#FFE5E5E5">
-                <ComboBox.Background>
-                    <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                        <GradientStop Color="LightGray" Offset="0"/>
-                        <GradientStop Color="LightGray" Offset="1"/>
-                    </LinearGradientBrush>
-                </ComboBox.Background>
-            </ComboBox>
-            <Button x:Name="btAddCommentary" HorizontalAlignment="Left" Margin="581,385,0,0" VerticalAlignment="Top" Width="49" Height="38" BorderBrush="#FFDDDDDD" Grid.ColumnSpan="2">
-                <Polygon Margin="15, 5, 0 ,0" Points="0,0 20,10, 0,20" Stroke="#828282" Fill="#828282" Height="28" RenderTransformOrigin="0.5,0.5" Width="35" />
+    <ScrollViewer Name="ScrollerContenido2" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Background="White" Height="1217" VerticalAlignment="Top">
 
-            </Button>
-            <ScrollViewer x:Name="svCommentaries" HorizontalAlignment="Left" Height="199" Margin="0,181,0,0" VerticalAlignment="Top" Width="620" Background="#FFFFFEFE" BorderBrush="#FFB4B0B0" Grid.ColumnSpan="2"/>
+        <Grid Margin="0,0,0,0" Height="1919">
 
 
+            <Rectangle Fill="#7f4ca5" HorizontalAlignment="Left" Height="34"  VerticalAlignment="Top" Width="838" Grid.ColumnSpan="2" Margin="-38,0,0,0"/>
+            <Label Name="lbUser" Content="User" HorizontalAlignment="Left" Margin="690,0,0,0" Foreground="white" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20" Width="83"/>
+
+            <Rectangle Fill="LightGray" HorizontalAlignment="Left" Height="330" VerticalAlignment="Top" Width="743" Margin="30,66,0,0" Grid.ColumnSpan="2" />
+            <Image Name="imgPlace"  HorizontalAlignment="Left" Height="162" VerticalAlignment="Top" Width="202" Margin="57,102,0,0"/>
+            <Label x:Name="lbName" Content="Nombre lugar" HorizontalAlignment="Left" Margin="274,83,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="25" FontWeight="Bold" Height="40" Width="431" Foreground="#FF7F4CA5" Grid.ColumnSpan="2"/>
+            <Label Content="Ubicación:" HorizontalAlignment="Left" Margin="277,128,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16" FontWeight="Bold" Height="27" Width="106"/>
+            <Label x:Name="lbScedule" Content="Horarios:" HorizontalAlignment="Left" Margin="277,261,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16" FontWeight="Bold" Height="26" Width="74"/>
+            <Grid x:Name="gdSchedule" HorizontalAlignment="Left" Height="86" Margin="300,310,0,0" VerticalAlignment="Top" Width="379" Grid.ColumnSpan="2"/>
+            <TextBlock x:Name="lbLocate" HorizontalAlignment="Left" Margin="382,136,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16" FontWeight="Normal" Width="370" Height="59" RenderTransformOrigin="0.5,0.5" FontStyle="Normal" Grid.ColumnSpan="2">
+
+            </TextBlock>
+            <Label Content="Servicios:" HorizontalAlignment="Left" Margin="279,194,0,0" VerticalAlignment="Top" FontFamily="TRoboto" FontSize="16" FontWeight="Bold" Height="27" Width="98"/>
+
+
+
+            <Button Name="btUpdate" Content="Modificar" HorizontalAlignment="Left" Margin="540,1143,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#7f4ca5" BorderBrush="#7f4ca5" Style="{DynamicResource RoundCorner}" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" />
+            <Button Name="btReturn" Content="Regresar" HorizontalAlignment="Left" Margin="652,1143,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#7f4ca5" BorderBrush="#7f4ca5" Style="{DynamicResource RoundCorner}" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" Click="btReturn_Click" />
+            <TextBlock x:Name="lbServices" HorizontalAlignment="Left" Margin="382,203,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16" FontWeight="Normal" Width="370" Height="63" Grid.ColumnSpan="2"/>
+            <ScrollViewer Name="ScrollerContenido" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Background="#FFFDFDFD" Margin="0,434,0,908">
+
+                <ItemsControl Name="PlantillaMensaje" >
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <DataTemplate.Resources>
+                                <Storyboard x:Key="ItemAnimation" AutoReverse="False">
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MyGrid" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                        <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                                        <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1" />
+                                    </DoubleAnimationUsingKeyFrames>
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MyGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)">
+                                        <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                                        <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1" />
+                                    </DoubleAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </DataTemplate.Resources>
+                            <DataTemplate.Triggers>
+                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                    <BeginStoryboard Storyboard="{StaticResource ItemAnimation}" />
+                                </EventTrigger>
+                            </DataTemplate.Triggers>
+                            <Grid x:Name="MyGrid" RenderTransformOrigin="0.5,1" HorizontalAlignment="{Binding Posicion}"  Margin="5" Background="{Binding FondoElemento}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="32"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <Grid.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                    </TransformGroup>
+                                </Grid.RenderTransform>
+                                <Grid Grid.Row="0">
+
+                                    <StackPanel Orientation="Horizontal" Background="{Binding FondoCabecera}">
+                                        <Label Content="{Binding Nombre}" HorizontalAlignment="Left"></Label>
+                                        <Label Content="{Binding TiempoDeEnvio}" HorizontalAlignment="Center"></Label>
+                                        <Label Content="{Binding Puntuacion}" HorizontalAlignment="Right"></Label>
+                                    </StackPanel>
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <StackPanel Orientation="Horizontal" Background="#DCEFFF">
+                                        <Label HorizontalContentAlignment="Right" HorizontalAlignment="Right" Content="{Binding MensajeEnviado}" ></Label>
+                                    </StackPanel>
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+            <Grid Background="White" Margin="0,1011,0,824">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="700">
+                    </ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBox MaxLength="100" Name ="ContenidoDelMensaje" HorizontalAlignment="Right" Background="WhiteSmoke" Width="546" TextWrapping="Wrap" Margin="0,10,0,0" />
+                <Button Grid.Column="1" x:Name="BotonEnviar"  Content ="Enviar"  Width="70" Height="40" Click="BotonEnviar_Click" Style="{DynamicResource RoundCorner}" Foreground="White">
+
+                </Button>
+                <ComboBox Name="cbStar" HorizontalAlignment="Left" Margin="43,0,0,0" VerticalAlignment="Center" Width="82" Height="40">
+                    <ComboBoxItem Content="1"/>
+                    <ComboBoxItem Content="2"/>
+                    <ComboBoxItem Content="3"/>
+                    <ComboBoxItem Content="4"/>
+                    <ComboBoxItem Content="5"/>
+                </ComboBox>
+            </Grid>
         </Grid>
-        <Rectangle Fill="#EEEEEE" HorizontalAlignment="Left" Height="188" Margin="33,65,0,0" VerticalAlignment="Top" Width="630"/>
-        <Image  Name="imgPlace"  HorizontalAlignment="Left" Height="133" Margin="54,113,0,0" VerticalAlignment="Top" Width="158"/>
-        <Label x:Name="lbName" Content="Nombre lugar" HorizontalAlignment="Left" Margin="217,72,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="25" FontWeight="Bold" Height="34" Width="232"/>
-        <Label x:Name="lbLocate" Content="Ubicación" HorizontalAlignment="Left" Margin="217,100,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="14" FontWeight="Bold"/>
-        <Label x:Name="lbScedule" Content="Horarios" HorizontalAlignment="Left" Margin="217,120,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="14" FontWeight="Bold"/>
-        <Grid  x:Name="gdSchedule" HorizontalAlignment="Left" Height="86" Margin="234,146,0,0" VerticalAlignment="Top" Width="379"/>
-        <Button Name="btUpdate" Content="Modificar" HorizontalAlignment="Left" Margin="424,619,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#7f4ca5" BorderBrush="#7f4ca5" Style="{DynamicResource RoundCorner}" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" />
-        <Button Name="btReturn" Content="Regresar" HorizontalAlignment="Left" Margin="542,619,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#7f4ca5" BorderBrush="#7f4ca5" Style="{DynamicResource RoundCorner}" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" />
+    </ScrollViewer>
 
-    </Grid>
 </Window>
