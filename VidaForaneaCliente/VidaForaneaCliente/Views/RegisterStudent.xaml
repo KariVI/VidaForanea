@@ -3,19 +3,28 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:VidaForaneaCliente"
         mc:Ignorable="d"
-        Title="PlaceList" Height="500" Width="700">
+        Title="PlaceList" Height="500" Width="700"
+        WindowStartupLocation="CenterScreen">
+
     <Window.Resources>
-        <DataTemplate x:Key="ComboBoxItemTemplate1">
-            <Grid/>
-        </DataTemplate>
+        <ResourceDictionary>
+            <DataTemplate x:Key="ComboBoxItemTemplate1">
+                <Grid/>
+            </DataTemplate>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml">
+
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+        
     </Window.Resources>
     <Grid>
         <Rectangle Fill="#7f4ca5" HorizontalAlignment="Left" Height="36"  VerticalAlignment="Top" Width="792"/>
         <Label Content="Registrar estudiante" HorizontalAlignment="Left" Margin="40,50,0,0" Foreground="#7f4ca5" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="30" Width="281"/>
-        <Button Name="btReturn" Content="Regresar" HorizontalAlignment="Left" Margin="420,420,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="15"  Padding="0 0 0 0" Click="btReturn_Click" />
-        <Button Name="btAdd" Content="Agregar" HorizontalAlignment="Left" Margin="550,420,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="15"  Padding="0 0 0 0" Click="btAdd_Click" />
+        <Button Name="btReturn" Style="{DynamicResource RoundCorner}" Content="Regresar" HorizontalAlignment="Left" Margin="420,420,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="15"  Padding="0 0 0 0" Click="btReturn_Click" />
+        <Button Name="btAdd"  Style="{DynamicResource RoundCorner}" Content="Agregar" HorizontalAlignment="Left" Margin="550,420,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="15"  Padding="0 0 0 0" Click="btAdd_Click" />
         <Label Content="Nombre:" HorizontalAlignment="Left" Height="27" Margin="63,137,0,0" VerticalAlignment="Top" Width="63"/>
         <Label Content="Matricula:" HorizontalAlignment="Left" Height="27" Margin="63,187,0,0" VerticalAlignment="Top" Width="63"/>
         <Label HorizontalAlignment="Left" Height="27" Margin="63,242,0,0" VerticalAlignment="Top" Width="79" RenderTransformOrigin="0.5,0.5">

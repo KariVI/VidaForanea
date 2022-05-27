@@ -14,9 +14,10 @@ class ListOpinions(Resource):
         for opinion in opinions:
             data.append({
                 'id': opinion.id,
-                'student': opinion.student,
+                'user': opinion.user,
                 'date': opinion.date,
                 'hour': opinion.hour,
+                'score': opinion.score,
                 'description': opinion.description,
                 'id_place': opinion.id_place
             })
@@ -25,20 +26,22 @@ class ListOpinions(Resource):
     def post(self, id_place):
         json_data = request.get_json()
 
-        student = json_data.get('student')
+        user = json_data.get('user')
         date = json_data.get('date')
         hour = json_data.get('hour')
+        score = json_data.get('score')
         description = json_data.get('description')
         id_place = json_data.get('id_place')
 
-        if Opinion.get_by_id_place_student(id_place,student):
+        if Opinion.get_by_id_place_user(id_place,user):
             return {'message': 'Opinion ya registrada'}, HTTPStatus.BAD_REQUEST
 
 
         opinion = Opinion(
-            student= student,
+            user= user,
             date=date,
             hour=hour,
+            score=score,
             description=description,
             id_place=id_place
         )
@@ -47,9 +50,10 @@ class ListOpinions(Resource):
 
         data = {
             'id': opinion.id,
-            'student': opinion.student,
+            'user': opinion.user,
             'date': opinion.date,
             'hour': opinion.hour,
+            'score': opinion.score,
             'description': opinion.description,
             'id_place': opinion.id_place
         }
@@ -66,15 +70,16 @@ class ResourceOpinion(Resource):
             return {'message': 'Opinion no encontrado'}, HTTPStatus.NOT_FOUND
         data = {
             'id': opinion.id,
-            'student': opinion.student,
+            'user': opinion.user,
             'date': opinion.date,
             'hour': opinion.hour,
+            'score': opinion.score,
             'description': opinion.description,
             'id_place': opinion.id_place
         }
         return data, HTTPStatus.OK
 
-    def delete(self, opinion_id, id_place):       
+    def delete(self, opinion_id, id_place):
         opinion = Opinion.get_by_id(opinion_id)
 
         if opinion is None:

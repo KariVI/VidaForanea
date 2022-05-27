@@ -31,22 +31,30 @@ namespace VidaForaneaCliente.Views
 
         private async void btAdd_Click(object sender, RoutedEventArgs e)
         {
-            Student student = new Student();
-            student.name = tbName.Text  ;
-            student.enrollment = tbEnrollment.Text ;
-            student.degree = cbDegree.SelectedItem.ToString();
-            student.password = pbPassword.Password ;
-            bool correcto = await Connection.PostStudent(student);   
-            if (Connection.latestStatusCode == HttpStatusCode.Created)
+            if (String.IsNullOrWhiteSpace(tbName.Text) || String.IsNullOrWhiteSpace(tbEnrollment.Text)
+               || String.IsNullOrWhiteSpace(pbPassword.Password))
             {
-                MessageBox.Show("Se ha registrado el estudiante correctamente", "Estudiante registrado", MessageBoxButton.OK);
-                MainWindow mainWindow =  new MainWindow(student);
-                mainWindow.Show();
-                this.Close();
+                MessageBox.Show("Existen campos vacíos, por favor revise los campos", "Campos vacíos", MessageBoxButton.OK);
             }
-            else if (Connection.latestStatusCode == HttpStatusCode.BadRequest)
+            else
             {
-                MessageBox.Show("El estudiante ya se encuentra registrado", "Estudiante ya existente", MessageBoxButton.OK);
+                Student student = new Student();
+                student.name = tbName.Text;
+                student.enrollment = tbEnrollment.Text;
+                student.degree = cbDegree.SelectedItem.ToString();
+                student.password = pbPassword.Password;
+                bool correcto = await Connection.PostStudent(student);
+                if (Connection.latestStatusCode == HttpStatusCode.Created)
+                {
+                    MessageBox.Show("Se ha registrado el estudiante correctamente", "Estudiante registrado", MessageBoxButton.OK);
+                    MainWindow mainWindow = new MainWindow(student);
+                    mainWindow.Show();
+                    this.Close();
+                }
+                else if (Connection.latestStatusCode == HttpStatusCode.BadRequest)
+                {
+                    MessageBox.Show("El estudiante ya se encuentra registrado", "Estudiante ya existente", MessageBoxButton.OK);
+                }
             }
            
         }

@@ -3,16 +3,28 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:VidaForaneaCliente"
+
         mc:Ignorable="d"
-        Title="PlaceList" Height="500" Width="700">
+        Title="PlaceList" Height="500" Width="700"
+        WindowStartupLocation="CenterScreen"
+        >
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml">
+
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
-        <Rectangle Fill="#E5AF50" HorizontalAlignment="Left" Height="36"  VerticalAlignment="Top" Width="792"/>
-        <Label Content="User" HorizontalAlignment="Left" Margin="600,0,0,0" Foreground="white" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20" Width="83"/>
-        <Label Content="Categoria" HorizontalAlignment="Left" Margin="40,50,0,0" Foreground="#E5AF50" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="30" Width="171"/>
-        <Button Name="btReturn" Content="Regresar" HorizontalAlignment="Left" Margin="420,420,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" />
-        <Button Name="btAdd" Content="Agregar" HorizontalAlignment="Left" Margin="550,420,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" />
-        <ScrollViewer Name="svPlaces" HorizontalAlignment="Left" Height="300" VerticalAlignment="Top" Width="579" Margin="56,93,0,0"/>
+        <Image Name="imgPlace"  HorizontalAlignment="Left" Height="126" VerticalAlignment="Top" Width="146" Margin="532,154,0,0"/>
+        <Rectangle Fill="#7f4ca5" HorizontalAlignment="Left" Height="36"  VerticalAlignment="Top" Width="792"/>
+        <Label Name="lbUser" Content="User" HorizontalAlignment="Left" Margin="600,0,0,0" Foreground="white" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20" Width="83"/>
+        <Label Name="lbCategory" Content="Categoria" HorizontalAlignment="Left" Margin="40,50,0,0" Foreground="#7f4ca5" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="30" Width="171"/>
+        <Button Name="btReturn" Content="Regresar" HorizontalAlignment="Left" Style="{DynamicResource RoundCorner}" Margin="542,420,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" Click="btReturn_Click" />
+        <ListBox Name="lstbCategory" Margin="61,121,187,121" SelectionChanged="lstbCategory_SelectionChanged"/>
 
     </Grid>
 </Window>

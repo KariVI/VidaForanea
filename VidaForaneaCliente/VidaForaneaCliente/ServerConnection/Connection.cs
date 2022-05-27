@@ -7,7 +7,8 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using VidaForaneaCliente.Models;
-
+using System.Windows;
+using Newtonsoft.Json;
 namespace VidaForaneaCliente.ServerConnection
 {
     public class Connection
@@ -17,7 +18,9 @@ namespace VidaForaneaCliente.ServerConnection
 
         public static void initializeConnection()
         {
-            client.BaseAddress = new Uri("http://192.168.100.48:9090/");
+
+            client.BaseAddress = new Uri("http://192.168.0.25:9090");
+
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
@@ -26,7 +29,7 @@ namespace VidaForaneaCliente.ServerConnection
 
         public static async Task<Student> Login(string matricula, string password)
         {
-            Student student = new Student() { contrasenia = password };
+            Student student = new Student() { password = password };
             try
             {
                 string url = "login/" + matricula;
@@ -68,7 +71,57 @@ namespace VidaForaneaCliente.ServerConnection
             }
             return admin;
         }
+        public static async Task<List<Place>> GetPlacesByCategory(string estado, string category)
+        {
+            List <Place> places = new List<Place> ();
+            try
+            {
+                string route;
+                if (category.Equals(""))
+                {
+                    route = "lugares/" + estado ;
+                }
+                else
+                {
+                    route = "lugares/" + estado + "/" + category;
+                }
+                HttpResponseMessage response = await client.GetAsync(route);
+                if (response.IsSuccessStatusCode)
+                {
 
+                    var stringData = response.Content.ReadAsStringAsync().Result;
+                   var places2 = JsonConvert.DeserializeObject<Root>(stringData);
+                    places = places2.makeAList();
+                }
+                latestStatusCode = response.StatusCode;
+            } 
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return places;
+        }
+        public static async Task<List<Opinion>> GetOpinionsByPlace(Place place)
+        {
+            List<Opinion> opinions = new List<Opinion>();
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("lugares/" + place.id + "/opiniones" );
+                if (response.IsSuccessStatusCode)
+                {
+
+                    var stringData = response.Content.ReadAsStringAsync().Result;
+                    var opinions2 = JsonConvert.DeserializeObject<RootOpinion>(stringData);
+                    opinions = opinions2.makeAList();
+                }
+                latestStatusCode = response.StatusCode;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return opinions;
+        }
         public static async Task<Student> GetStudentByMatricula(string matricula)
         {
             Student student = null;
@@ -93,7 +146,7 @@ namespace VidaForaneaCliente.ServerConnection
             bool value = true;
             try
             {
-                 Console.WriteLine(student.nombre);
+                 Console.WriteLine(student.name);
                 HttpResponseMessage response = await client.PostAsJsonAsync("/estudiantes",student);
                 Console.WriteLine("Post");
                 if (response.IsSuccessStatusCode)
@@ -111,7 +164,112 @@ namespace VidaForaneaCliente.ServerConnection
             return value;
         }
 
-        
+        public static async Task<bool> PostPlace(Place place,bool isAdmin)
+        {
+            bool value = true;
+            try
+            {
+                if (isAdmin)
+                {
+                    place.status = StatusPlace.aprobado;
+                }
+                else
+                {
+                    place.status = StatusPlace.pendiente;
+                }
+                HttpResponseMessage response = await client.PostAsJsonAsync("/lugares", place);
+                latestStatusCode = response.StatusCode;
+                if (latestStatusCode != HttpStatusCode.Created)
+                {
+                    value = false;
+                }
+            }
+            catch (Exception e)
+            {
+                value = false;
+                Console.WriteLine(e.Message);
+            }
+            return value;
+        }
 
+        public static async Task<bool> PostOpinion(Place place, Opinion opinion)
+        {
+            bool value = true;
+            try
+            {
+
+                String idPlace = place.id.ToString();
+                String rute = "/lugares/" + idPlace + "/opiniones";
+                HttpResponseMessage response = await client.PostAsJsonAsync(rute, opinion);
+                latestStatusCode = response.StatusCode;
+                if (latestStatusCode != HttpStatusCode.Created)
+                {
+                    value = false;
+                }
+            }
+            catch (Exception e)
+            {
+                value = false;
+                Console.WriteLine(e.Message);
+            }
+            return value;
+        }
+    }
+
+  
+}
+class Root
+{
+    public List<Dictionary<string, object>> Data { get; set; }
+    public List<Place> makeAList()
+    {
+        List<Place> places = new List<Place>();
+        foreach (var dict in Data)
+        {
+            Place place = new Place();
+            StatusPlace status = new StatusPlace();
+            place.id = Convert.ToInt32(dict["id"]);
+            place.name = (string)dict["name"];
+            place.address = (string)dict["address"];
+            place.services = (string)dict["services"];
+
+            place.image = dict["image"].ToString();
+
+            string statusRetrieved = (string)dict["status"];
+            if (statusRetrieved.Equals("aprobado")) {
+                status = StatusPlace.aprobado;
+            }
+            else
+            {
+                status = StatusPlace.pendiente;
+            }
+            place.status = status;
+            place.type_place = (string)dict["type_place"];
+            places.Add(place);
+        }
+        return places;
     }
 }
+     class RootOpinion
+    {
+        public List<Dictionary<string, object>> Data { get; set; }
+        public List<Opinion> makeAList()
+        {
+            List<Opinion> opinions = new List<Opinion>();
+            foreach (var dict in Data)
+            {
+                Opinion opinion = new Opinion();
+                opinion.Id = Convert.ToInt32(dict["id"]);
+                opinion.description = (string)dict["description"];
+                opinion.date = (string)dict["date"];
+                opinion.score = Convert.ToInt32(dict["score"]);
+                opinion.id_place = Convert.ToInt32(dict["score"]);
+                opinion.hour = (string)dict["hour"];
+                opinion.user = (string)dict["user"];
+
+            opinions.Add(opinion);
+            }
+            return opinions;
+        }
+    }
+
