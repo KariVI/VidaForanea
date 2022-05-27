@@ -18,7 +18,8 @@ class ListStudents(Resource):
                     'id': student.id,
                     'name': student.name,
                     'enrollment': student.enrollment,
-                    'password': student.password
+                    'password': student.password,
+                    'degree': student.degree
                 })
         return {'data': data}, HTTPStatus.OK
 

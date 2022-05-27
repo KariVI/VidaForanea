@@ -31,8 +31,8 @@ class ListComments(Resource):
         description = json_data.get('description')
         id_forum = json_data.get('id_forum')
 
-        if Comment.get_by_id_forum_student(forum_id,student):
-            return {'message': 'Comentario ya registrado'}, HTTPStatus.BAD_REQUEST
+        #if Comment.get_by_enrollement_forum_student(forum_id,student):
+        #    return {'message': 'Comentario ya registrado'}, HTTPStatus.BAD_REQUEST
 
 
         comment = Comment(

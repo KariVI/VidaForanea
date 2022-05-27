@@ -65,5 +65,20 @@ namespace VidaForaneaCliente.Views
                 this.Close();
             
         }
+
+        private void btForo_Click(object sender, RoutedEventArgs e)
+        {
+            if (!isAdmin)
+            {
+                ForumView forum = new ForumView(loggedStudent, this);
+                forum.Show();
+                this.Hide();
+            } else
+            {
+                ForumAdmin forumAdmin = new ForumAdmin(loggedAdmin, this);
+                forumAdmin.Show();
+                this.Hide();
+            }
+        }
     }
 }

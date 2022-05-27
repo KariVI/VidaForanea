@@ -19,8 +19,7 @@ namespace VidaForaneaCliente.ServerConnection
         public static void initializeConnection()
         {
 
-            client.BaseAddress = new Uri("http://192.168.0.25:9090");
-
+            client.BaseAddress = new Uri("http://192.168.100.68:9090");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
@@ -122,6 +121,29 @@ namespace VidaForaneaCliente.ServerConnection
             }
             return opinions;
         }
+
+        public static async Task<List<Comment>> GetCommentsByForum(Forum forum)
+        {
+            List<Comment> comments = new List<Comment>();
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("foros/" + forum.Id + "/comentarios");
+                if (response.IsSuccessStatusCode)
+                {
+
+                    var stringData = response.Content.ReadAsStringAsync().Result;
+                    var comments2 = JsonConvert.DeserializeObject<RootComment>(stringData);
+                    comments = comments2.makeAList();
+                }
+                latestStatusCode = response.StatusCode;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return comments;
+        }
+
         public static async Task<Student> GetStudentByMatricula(string matricula)
         {
             Student student = null;
@@ -214,7 +236,54 @@ namespace VidaForaneaCliente.ServerConnection
             }
             return value;
         }
+        public static async Task<bool> PostComment(Forum forum, Comment comment)
+        {
+            bool value = true;
+            try
+            {
+
+                String idForum = forum.Id.ToString();
+                String rute = "/foros/" + idForum + "/comentarios";
+                HttpResponseMessage response = await client.PostAsJsonAsync(rute, comment);
+                latestStatusCode = response.StatusCode;
+                if (latestStatusCode != HttpStatusCode.Created)
+                {
+                    value = false;
+                }
+            }
+            catch (Exception e)
+            {
+                value = false;
+                Console.WriteLine(e.Message);
+            }
+            return value;
+        }
+
+        public static async Task<bool> DeleteComment(Forum forum, Comment comment)
+        {
+            bool value = true;
+            try
+            {
+                String idForum = forum.Id.ToString();
+                String rute = "/foros/" + idForum + "/comentarios/" + comment.Id;
+                HttpResponseMessage response = await client.DeleteAsync(rute);
+                latestStatusCode = response.StatusCode;
+                Console.WriteLine(latestStatusCode);
+                if (latestStatusCode != HttpStatusCode.OK)
+                {
+                    value = false;
+                }
+            }
+            catch (Exception e)
+            {
+                value = false;
+                Console.WriteLine(e.Message);
+            }
+            return value;
+        }
     }
+
+    
 
   
 }
@@ -272,4 +341,24 @@ class Root
             return opinions;
         }
     }
+
+class RootComment
+{
+    public List<Dictionary<string, object>> Data { get; set; }
+    public List<Comment> makeAList()
+    {
+        List<Comment> comments = new List<Comment>();
+        foreach (var dict in Data)
+        {
+            Comment comment = new Comment();
+            comment.Id = Convert.ToInt32(dict["id"]);
+            comment.description = (string)dict["description"];
+            comment.date = (string)dict["date"];
+            comment.student = (string)dict["student"];
+            comments.Add(comment);
+        }
+        return comments;
+    }
+}
+
 

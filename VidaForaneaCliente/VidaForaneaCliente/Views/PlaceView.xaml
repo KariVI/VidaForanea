@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VidaForaneaCliente.Views"
         mc:Ignorable="d"
-        Title="PlaceView" Height="800" Width="805"
+        Title="PlaceView" Height="600" Width="805"
         WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
@@ -17,7 +17,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <ScrollViewer Name="ScrollerContenido2" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Background="White" Height="1217" VerticalAlignment="Top">
+    <ScrollViewer Name="ScrollerContenido2" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible" Background="White" Height="600" VerticalAlignment="Top">
 
         <Grid Margin="0,0,0,0" Height="1919">
 
@@ -36,12 +36,11 @@
 
 
 
-            <Button Name="btUpdate" Content="Modificar" HorizontalAlignment="Left" Margin="540,1143,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#7f4ca5" BorderBrush="#7f4ca5" Style="{DynamicResource RoundCorner}" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" />
-            <Button Name="btReturn" Content="Regresar" HorizontalAlignment="Left" Margin="652,1143,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#7f4ca5" BorderBrush="#7f4ca5" Style="{DynamicResource RoundCorner}" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" Click="btReturn_Click" />
+            <Button Name="btUpdate" Content="Modificar" HorizontalAlignment="Left" Margin="540,1000,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#7f4ca5" BorderBrush="#7f4ca5" Style="{DynamicResource RoundCorner}" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" />
+            <Button Name="btReturn" Content="Regresar" HorizontalAlignment="Left" Margin="652,1000,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#7f4ca5" BorderBrush="#7f4ca5" Style="{DynamicResource RoundCorner}" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" Click="btReturn_Click" />
             <TextBlock x:Name="lbServices" HorizontalAlignment="Left" Margin="382,199,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16" FontWeight="Normal" Width="370" Height="63"/>
-            <ScrollViewer Name="ScrollerContenido" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Background="#FFFDFDFD" Margin="0,434,0,908">
-
-                <ItemsControl Name="PlantillaMensaje" >
+            <ScrollViewer Name="ScrollerContenido" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Background="#FFFDFDFD" Height="250" Margin="0,50,0,908">
+                <ItemsControl Name="PlantillaMensaje" VerticalAlignment="Top">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <DataTemplate.Resources>
@@ -89,17 +88,21 @@
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
             </ScrollViewer>
-            <Grid Background="White" Margin="0,1011,0,824">
+            <Grid Background="White" Margin="0,800,0,1000">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="150"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="700">
                     </ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBox MaxLength="100" Name ="ContenidoDelMensaje" HorizontalAlignment="Right" Background="WhiteSmoke" Width="546" TextWrapping="Wrap" Margin="0,10,0,0" />
-                <Button Grid.Column="1" x:Name="BotonEnviar"  Content ="Enviar"  Width="70" Height="40" Click="BotonEnviar_Click" Style="{DynamicResource RoundCorner}" Foreground="White">
+                <TextBox Grid.Row="0"  MaxLength="100" Name ="ContenidoDelMensaje" HorizontalAlignment="Right" Background="WhiteSmoke" Width="546" TextWrapping="Wrap" Height="60" Margin="0,10,0,0" />
+                <Button Grid.Row="0" Grid.Column="1" x:Name="BotonEnviar"  Content ="Enviar"  Width="70" Height="40" Click="BotonEnviar_Click" Style="{DynamicResource RoundCorner}" Foreground="White">
 
                 </Button>
-                <ComboBox Name="cbStar" HorizontalAlignment="Left" Margin="43,0,0,0" VerticalAlignment="Center" Width="82" Height="40">
+                <ComboBox Grid.Row="0" Name="cbStar" HorizontalAlignment="Left" Margin="43,0,0,0" VerticalAlignment="Center" Width="82" Height="40">
                     <ComboBoxItem Content="1"/>
                     <ComboBoxItem Content="2"/>
                     <ComboBoxItem Content="3"/>

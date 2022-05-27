@@ -7,7 +7,7 @@ class Comment(db.Model):
     __tablename__ = 'Comment'
 
     id = db.Column(db.Integer, primary_key=True)
-    student=db.Column(db.Integer, db.ForeignKey('Student.id'),
+    student=db.Column(db.String(20), db.ForeignKey('Student.enrollment'),
         nullable=False)
     date = db.Column(db.String(200), nullable=False)
     hour = db.Column(db.String(5), nullable=False)
@@ -26,8 +26,8 @@ class Comment(db.Model):
         return cls.query.filter_by(id_forum=id_forum).all()
     
     @classmethod
-    def get_by_id_forum_student(cls, id_forum, id_student):
-        return cls.query.filter_by(id_forum=id_forum, student=id_student).all()
+    def get_by_enrollement_forum_student(cls, id_forum, student):
+        return cls.query.filter_by(id_forum=id_forum, student=student).all()
     @classmethod
     def get_all_comments(cls):
         return cls.query.all()
