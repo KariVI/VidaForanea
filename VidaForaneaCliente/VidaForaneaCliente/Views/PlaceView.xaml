@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:VidaForaneaCliente.Views"
         mc:Ignorable="d"
         Title="PlaceView" Height="600" Width="805"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        
+        >
 
     <Window.Resources>
         <ResourceDictionary>

@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VidaForaneaCliente.Views"
         mc:Ignorable="d"
-        Title="ForumAdmin" Height="450" Width="800">
+        Title="ForumAdmin" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen"
+        >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -21,12 +23,12 @@
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
-        <Image Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Source="/Images/placeLogo.png" Height="106" Width="84" Margin="0 10 0 0"/>
+        <Image Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Source="/Images/forumLogo.png" Height="106" Width="84" Margin="0,20,0,0"/>
         <Rectangle Fill="#7f4ca5" HorizontalAlignment="Left" Height="36" Stroke="Black" VerticalAlignment="Top" Width="800"/>
-        <Button Grid.Row="1" Name="btTec" Content="Tec. Comp." Style="{DynamicResource RoundCorner}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="132" Height="113" Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="22"  Padding="0 45 0 0" Click="btTec_Click" Margin="240,0,0,0" />
-        <Button Grid.Row="1" Name="btNetwork" Content="Redes" Style="{DynamicResource RoundCorner}" HorizontalAlignment="Right"  VerticalAlignment="Center" Margin="0 0 75 0" Width="132" Height="113" Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="22"  Padding="0 45 0 0" Click="btNetwork_Click" />
-        <Button Grid.Row="1" Name="btStatistics" Style="{DynamicResource RoundCorner}" Content="Estadística" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="75 0 0 0" Width="132" Height="113" Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="22"  Padding="0 45 0 0" Click="btStatistics_Click" />
-        <Button Grid.Row="1" Name="btSoftware" Style="{DynamicResource RoundCorner}" Content="Software" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="420,0,0,0" Width="132" Height="113" Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="22"  Padding="0 45 0 0" Click="btSoftware_Click" />
+        <Button Grid.Row="1" Name="btTec" Content="Tec. Comp." Style="{DynamicResource RoundCorner}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="132" Height="113" Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="22"  Padding="0 45 0 0" Click="btTec_Click" Margin="240,136,0,0" />
+        <Button Grid.Row="1" Name="btNetwork" Content="Redes" Style="{DynamicResource RoundCorner}" HorizontalAlignment="Right"  VerticalAlignment="Top" Margin="0,136,75,0" Width="132" Height="113" Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="22"  Padding="0 45 0 0" Click="btNetwork_Click" />
+        <Button Grid.Row="1" Name="btStatistics" Style="{DynamicResource RoundCorner}" Content="Estadística" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="75,136,0,0" Width="132" Height="113" Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="22"  Padding="0 45 0 0" Click="btStatistics_Click" />
+        <Button Grid.Row="1" Name="btSoftware" Style="{DynamicResource RoundCorner}" Content="Software" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="426,136,0,0" Width="132" Height="113" Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="22"  Padding="0 45 0 0" Click="btSoftware_Click" />
 
         <Label Grid.Row="0" Content="User" Name="lblUser" HorizontalAlignment="Right" Foreground="white" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20" Width="83"/>
         <Button Grid.Row="2" Name="btExit" Style="{DynamicResource RoundCorner}" Content="Regresar" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0 0 20 5" Width="100" Height="30" Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="15"  Padding="0 0 0 0" Click="btExit_Click" />

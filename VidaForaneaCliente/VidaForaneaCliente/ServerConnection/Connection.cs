@@ -19,11 +19,16 @@ namespace VidaForaneaCliente.ServerConnection
         public static void initializeConnection()
         {
 
-            client.BaseAddress = new Uri("http://192.168.100.68:9090");
+            client.BaseAddress = new Uri("http://10.81.188.100:9090");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
    
+        }
+
+        private static void showConnectionError()
+        {
+            MessageBox.Show("Error en la conexión con el servidor", "Error de conexión", MessageBoxButton.OK);
         }
 
         public static async Task<Student> Login(string matricula, string password)
@@ -43,6 +48,7 @@ namespace VidaForaneaCliente.ServerConnection
             }
             catch (Exception e)
             {
+                showConnectionError();
                 Console.WriteLine(e.Message);
             }
             return student;
@@ -66,6 +72,7 @@ namespace VidaForaneaCliente.ServerConnection
             }
             catch (Exception e)
             {
+                showConnectionError();
                 Console.WriteLine(e.Message);
             }
             return admin;
@@ -96,10 +103,36 @@ namespace VidaForaneaCliente.ServerConnection
             } 
             catch (Exception e)
             {
+                showConnectionError();
                 Console.WriteLine(e.Message);
             }
             return places;
         }
+
+        public async static Task<bool> PutPlace(Place place, int id)
+        {
+            bool value = true;
+            try
+            {
+                string url = "/lugares/" + id;
+                var json = Newtonsoft.Json.JsonConvert.SerializeObject(place);
+                var data = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PutAsync(url,data);
+                latestStatusCode = response.StatusCode;
+                if (latestStatusCode != HttpStatusCode.OK)
+                {
+                    value = false;
+                }
+            }
+            catch (Exception e)
+            {
+                showConnectionError();
+                value = false;
+                Console.WriteLine(e.Message);
+            }
+            return value;
+    }
+
         public static async Task<List<Opinion>> GetOpinionsByPlace(Place place)
         {
             List<Opinion> opinions = new List<Opinion>();
@@ -117,6 +150,7 @@ namespace VidaForaneaCliente.ServerConnection
             }
             catch (Exception e)
             {
+                showConnectionError();
                 Console.WriteLine(e.Message);
             }
             return opinions;
@@ -139,6 +173,7 @@ namespace VidaForaneaCliente.ServerConnection
             }
             catch (Exception e)
             {
+                showConnectionError();
                 Console.WriteLine(e.Message);
             }
             return comments;
@@ -158,6 +193,7 @@ namespace VidaForaneaCliente.ServerConnection
             }
             catch (Exception e)
             {
+                showConnectionError();
                 Console.WriteLine(e.Message);
             }
             return student;
@@ -181,6 +217,7 @@ namespace VidaForaneaCliente.ServerConnection
             catch (Exception e)
             {
                 value = false;
+                showConnectionError();
                 Console.WriteLine(e.Message);
             }
             return value;
@@ -208,6 +245,7 @@ namespace VidaForaneaCliente.ServerConnection
             }
             catch (Exception e)
             {
+                showConnectionError();
                 value = false;
                 Console.WriteLine(e.Message);
             }
@@ -231,6 +269,7 @@ namespace VidaForaneaCliente.ServerConnection
             }
             catch (Exception e)
             {
+                showConnectionError();
                 value = false;
                 Console.WriteLine(e.Message);
             }
@@ -253,6 +292,7 @@ namespace VidaForaneaCliente.ServerConnection
             }
             catch (Exception e)
             {
+                showConnectionError();
                 value = false;
                 Console.WriteLine(e.Message);
             }
@@ -276,6 +316,7 @@ namespace VidaForaneaCliente.ServerConnection
             }
             catch (Exception e)
             {
+                showConnectionError();
                 value = false;
                 Console.WriteLine(e.Message);
             }

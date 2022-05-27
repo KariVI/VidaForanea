@@ -109,6 +109,9 @@
     <Compile Include="Views\ForumAdmin.xaml.cs">
       <DependentUpon>ForumAdmin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ModifyPlace.xaml.cs">
+      <DependentUpon>ModifyPlace.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PlaceView.xaml.cs">
       <DependentUpon>PlaceView.xaml</DependentUpon>
     </Compile>
@@ -120,6 +123,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ForumAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ModifyPlace.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -213,6 +220,9 @@
     <Resource Include="Images\food.png" />
     <Resource Include="Images\leisure.png" />
     <Resource Include="Images\stationary.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\forumLogo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
