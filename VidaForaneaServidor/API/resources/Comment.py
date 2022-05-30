@@ -2,8 +2,9 @@ from tabnanny import check
 from flask import request
 from flask_restful import Resource
 from http import HTTPStatus
-
+from flask_jwt_extended import get_jwt_identity, jwt_required
 from models.Comment import Comment, lista_comments
+from models.Student import Student
 
 
 class ListComments(Resource):
@@ -22,6 +23,7 @@ class ListComments(Resource):
             })
         return {'data': data}, HTTPStatus.OK
 
+    @jwt_required
     def post(self, forum_id):
         json_data = request.get_json()
 
@@ -74,10 +76,14 @@ class ResourceComments(Resource):
         }
         return data, HTTPStatus.OK
 
+    @jwt_required
     def delete(self, comment_id, forum_id):       
         comment = Comment.get_by_id(comment_id)
-
         if comment is None:
             return {'message': 'Comentario no encontrado'}, HTTPStatus.NOT_FOUND
+        current_user = get_jwt_identity()
+        current_student = Student.get_by_enrollment(current_user)
+        if current_student.rol == 'estudiante'  :
+            return {'message': 'Access is not allowed'}, HTTPStatus.FORBIDDEN
         comment.delete()
         return  HTTPStatus.NO_CONTENT

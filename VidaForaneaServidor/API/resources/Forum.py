@@ -2,8 +2,9 @@ from tabnanny import check
 from flask import request
 from flask_restful import Resource
 from http import HTTPStatus
-
+from flask_jwt_extended import get_jwt_identity, jwt_required
 from models.Forum import Forum, lista_forums
+from models.Student import Student
 
 
 class ListForums(Resource):
@@ -18,7 +19,8 @@ class ListForums(Resource):
 
             })
         return {'data': data}, HTTPStatus.OK
-
+    
+    @jwt_required
     def post(self):
         json_data = request.get_json()
 
@@ -32,6 +34,10 @@ class ListForums(Resource):
         forum = Forum(
             degree=degree
         )
+        current_user = get_jwt_identity()
+        current_student = Student.get_by_enrollment(current_user)
+        if current_student.rol == 'estudiante'  :
+            return {'message': 'Access is not allowed'}, HTTPStatus.FORBIDDEN
         lista_forums.append(forum)
         forum.save()
 

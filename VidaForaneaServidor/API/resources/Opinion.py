@@ -2,8 +2,10 @@ from tabnanny import check
 from flask import request
 from flask_restful import Resource
 from http import HTTPStatus
+from flask_jwt_extended import get_jwt_identity, jwt_required
 
 from models.Opinion import Opinion, lista_opinions
+from models.Student import Student
 
 
 class ListOpinions(Resource):
@@ -23,6 +25,7 @@ class ListOpinions(Resource):
             })
         return {'data': data}, HTTPStatus.OK
 
+    @jwt_required
     def post(self, id_place):
         json_data = request.get_json()
 
@@ -78,11 +81,16 @@ class ResourceOpinion(Resource):
             'id_place': opinion.id_place
         }
         return data, HTTPStatus.OK
-
-    def delete(self, opinion_id, id_place):
+        
+    @jwt_required
+    def delete(self, opinion_id, id_place):       
         opinion = Opinion.get_by_id(opinion_id)
 
         if opinion is None:
             return {'message': 'Opinion no encontrado'}, HTTPStatus.NOT_FOUND
+        current_user = get_jwt_identity()
+        current_student = Student.get_by_enrollment(current_user)
+        if current_student.rol == 'estudiante'  :
+            return {'message': 'Access is not allowed'}, HTTPStatus.FORBIDDEN
         opinion.delete()
         return  HTTPStatus.NO_CONTENT
