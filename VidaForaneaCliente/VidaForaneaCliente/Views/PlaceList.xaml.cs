@@ -45,7 +45,7 @@ namespace VidaForaneaCliente.Views
         {
             if (category.Equals("Papeleria"))
             {
-                category = "Herramientas";
+                category = "Papelería";
                 imgPlace.Source = new BitmapImage(new Uri(System.IO.Path.GetFullPath("..\\..\\Images\\stationary.png"), UriKind.Absolute));
 
             }

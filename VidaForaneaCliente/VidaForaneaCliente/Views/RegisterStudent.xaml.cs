@@ -41,7 +41,9 @@ namespace VidaForaneaCliente.Views
                 Student student = new Student();
                 student.name = tbName.Text;
                 student.enrollment = tbEnrollment.Text;
-                student.degree = cbDegree.SelectedItem.ToString();
+                ComboBoxItem comboItem = (ComboBoxItem)cbDegree.SelectedItem;
+                string degreeString = comboItem.Content.ToString();
+                student.degree = degreeString;
                 student.password = pbPassword.Password;
                 bool correcto = await Connection.PostStudent(student);
                 if (Connection.latestStatusCode == HttpStatusCode.Created)

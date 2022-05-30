@@ -23,7 +23,7 @@ namespace VidaForaneaCliente.Views
 
     public partial class ForumView : Window
     {
-        Student student;
+        Student loggedStudent;
         Admin admin;
         MainWindow menu;
         int idDegree;
@@ -39,8 +39,8 @@ namespace VidaForaneaCliente.Views
         public ForumView(Student student, MainWindow menu)
         {
             InitializeComponent();
-            this.student = student;
-            lblForum.Content = this.student.degree;
+            this.loggedStudent = student;
+            lblForum.Content = this.loggedStudent.degree;
             this.menu = menu;
             lblUser.Content = student.name;
             isAdmin = false;
@@ -66,15 +66,15 @@ namespace VidaForaneaCliente.Views
             PlantillaMensaje.Items.Clear();
             if (!isAdmin)
             {
-                if (student.degree == "Lic. Estadística")
+                if (loggedStudent.degree == "Lic. Estadística")
                 {
                     idDegree = (int)degreeId.estadistica + 1;
                 }
-                else if (student.degree == "Lic. en Tecnologías Computacionales")
+                else if (loggedStudent.degree == "Lic. en Tecnologías Computacionales")
                 {
                     idDegree = (int)degreeId.tecnologiasComputacionales + 1;
                 }
-                else if (student.degree == "Lic. en Redes y Servicios de Cómputo")
+                else if (loggedStudent.degree == "Lic. en Redes y Servicios de Cómputo")
                 {
                     idDegree = (int)degreeId.redes + 1;
                 }
@@ -90,12 +90,15 @@ namespace VidaForaneaCliente.Views
                 string name;
                 Student student = await Connection.GetStudentByMatricula(comment.student);
                 name = student.name;
-                if (!isAdmin)
+               
+                if (isAdmin || loggedStudent.enrollment == comment.student)
                 {
-                    PlantillaMensaje.Items.Add(new { Posicion = "Center", FondoElemento = "White", FondoCabecera = "#e6dded", Nombre = name, TiempoDeEnvio = comment.date, MensajeEnviado = comment.description });
+                    PlantillaMensaje.Items.Add(new { Posicion = "Center", FondoElemento = "White", FondoCabecera = "#e6dded", Nombre = name, idComentario = comment.Id, TiempoDeEnvio = comment.date, MensajeEnviado = comment.description });
+
                 } else
                 {
-                    PlantillaMensaje.Items.Add(new { Posicion = "Center", FondoElemento = "White", FondoCabecera = "#e6dded", Nombre = name, idComentario = comment.Id,TiempoDeEnvio = comment.date, MensajeEnviado = comment.description });
+                    PlantillaMensaje.Items.Add(new { Posicion = "Center", FondoElemento = "White", FondoCabecera = "#e6dded", Nombre = name, TiempoDeEnvio = comment.date, MensajeEnviado = comment.description });
+                   
 
                 }
                 ContenidoDelMensaje.Clear();
@@ -125,14 +128,14 @@ namespace VidaForaneaCliente.Views
                     string mensaje = mensajeFinal;
                     Comment comment = new Comment();
                     comment.id_forum = idDegree;
-                    comment.student = student.enrollment;
+                    comment.student = loggedStudent.enrollment;
                     comment.date = DateTime.Now.Date.ToString();
                     comment.hour = DateTime.Now.Hour.ToString();
                     comment.description = mensajeFinal;
                     bool correcto = await Connection.PostComment(new Forum() { Id = idDegree }, comment); ;
                     if (Connection.latestStatusCode == HttpStatusCode.Created)
                     {
-                        PlantillaMensaje.Items.Add(new { Posicion = "Center", FondoElemento = "White", FondoCabecera = "#e6dded", Nombre = student.name, TiempoDeEnvio = comment.date, MensajeEnviado = mensaje });
+                        PlantillaMensaje.Items.Add(new { Posicion = "Center", FondoElemento = "White", FondoCabecera = "#e6dded", Nombre = loggedStudent.name, TiempoDeEnvio = comment.date, MensajeEnviado = mensaje });
                         ContenidoDelMensaje.Clear();
                     }
                 }
@@ -159,7 +162,9 @@ namespace VidaForaneaCliente.Views
         private async void Label_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Label label = (Label)sender;
-            try
+            if (label.Content != null)
+            {
+                try
             {
                 Comment comment = new Comment();
                 comment.id_forum = idDegree;
@@ -176,6 +181,7 @@ namespace VidaForaneaCliente.Views
             {
 
                 this.Close();
+            }
             }
         }
     }

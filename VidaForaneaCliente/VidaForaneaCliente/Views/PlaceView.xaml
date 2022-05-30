@@ -5,10 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:VidaForaneaCliente.Views"
         mc:Ignorable="d"
-        Title="PlaceView" Height="600" Width="805"
-        WindowStartupLocation="CenterScreen"
-        
-        >
+        Title="PlaceView" Height="800" Width="805"
+        WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <ResourceDictionary>
@@ -19,9 +17,9 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
-    <ScrollViewer Name="ScrollerContenido2" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible" Background="White" Height="600" VerticalAlignment="Top">
+    <ScrollViewer Name="ScrollerContenido2" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible" Background="White" Height="790" VerticalAlignment="Top">
 
-        <Grid Margin="0,0,0,0" Height="1919">
+        <Grid Margin="0,0,0,0" Height="1150">
 
 
             <Rectangle Fill="#7f4ca5" HorizontalAlignment="Left" Height="34"  VerticalAlignment="Top" Width="838" Grid.ColumnSpan="2" Margin="-38,0,0,0"/>
@@ -35,84 +33,87 @@
             <Grid x:Name="gdSchedule" HorizontalAlignment="Left" Height="86" Margin="300,310,0,0" VerticalAlignment="Top" Width="379" Grid.ColumnSpan="2"/>
             <TextBlock x:Name="lbLocate" HorizontalAlignment="Left" Margin="382,134,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16" FontWeight="Normal" Width="370" Height="59" RenderTransformOrigin="0.5,0.5" FontStyle="Normal"/>
             <Label Content="Servicios:" HorizontalAlignment="Left" Margin="279,194,0,0" VerticalAlignment="Top" FontFamily="TRoboto" FontSize="16" FontWeight="Bold" Height="27" Width="98"/>
-
-
-
-            <Button Name="btUpdate" Content="Modificar" HorizontalAlignment="Left" Margin="540,1000,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#7f4ca5" BorderBrush="#7f4ca5" Style="{DynamicResource RoundCorner}" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" />
-            <Button Name="btReturn" Content="Regresar" HorizontalAlignment="Left" Margin="652,1000,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#7f4ca5" BorderBrush="#7f4ca5" Style="{DynamicResource RoundCorner}" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" Click="btReturn_Click" />
-            <TextBlock x:Name="lbServices" HorizontalAlignment="Left" Margin="382,199,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16" FontWeight="Normal" Width="370" Height="63"/>
-            <ScrollViewer Name="ScrollerContenido" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Background="#FFFDFDFD" Height="250" Margin="0,50,0,908">
-                <ItemsControl Name="PlantillaMensaje" VerticalAlignment="Top">
-                    <ItemsControl.ItemTemplate>
-                        <DataTemplate>
-                            <DataTemplate.Resources>
-                                <Storyboard x:Key="ItemAnimation" AutoReverse="False">
-                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MyGrid" Storyboard.TargetProperty="(UIElement.Opacity)">
-                                        <EasingDoubleKeyFrame KeyTime="0" Value="0" />
-                                        <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1" />
-                                    </DoubleAnimationUsingKeyFrames>
-                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MyGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)">
-                                        <EasingDoubleKeyFrame KeyTime="0" Value="0" />
-                                        <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1" />
-                                    </DoubleAnimationUsingKeyFrames>
-                                </Storyboard>
-                            </DataTemplate.Resources>
-                            <DataTemplate.Triggers>
-                                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
-                                    <BeginStoryboard Storyboard="{StaticResource ItemAnimation}" />
-                                </EventTrigger>
-                            </DataTemplate.Triggers>
-                            <Grid x:Name="MyGrid" RenderTransformOrigin="0.5,1" HorizontalAlignment="{Binding Posicion}"  Margin="5" Background="{Binding FondoElemento}">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="32"></RowDefinition>
-                                    <RowDefinition Height="*"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Grid.RenderTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                    </TransformGroup>
-                                </Grid.RenderTransform>
-                                <Grid Grid.Row="0">
-
-                                    <StackPanel Orientation="Horizontal" Background="{Binding FondoCabecera}">
-                                        <Label Content="{Binding Nombre}" HorizontalAlignment="Left"></Label>
-                                        <Label Content="{Binding TiempoDeEnvio}" HorizontalAlignment="Center"></Label>
-                                        <Label Content="{Binding Puntuacion}" HorizontalAlignment="Right"></Label>
-                                    </StackPanel>
-                                </Grid>
-                                <Grid Grid.Row="1">
-                                    <StackPanel Orientation="Horizontal" Background="#DCEFFF">
-                                        <Label HorizontalContentAlignment="Right" HorizontalAlignment="Right" Content="{Binding MensajeEnviado}" ></Label>
-                                    </StackPanel>
-                                </Grid>
-                            </Grid>
-                        </DataTemplate>
-                    </ItemsControl.ItemTemplate>
-                </ItemsControl>
-            </ScrollViewer>
-            <Grid Background="White" Margin="0,800,0,1000">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="150"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="700">
-                    </ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBox Grid.Row="0"  MaxLength="100" Name ="ContenidoDelMensaje" HorizontalAlignment="Right" Background="WhiteSmoke" Width="546" TextWrapping="Wrap" Height="60" Margin="0,10,0,0" />
-                <Button Grid.Row="0" Grid.Column="1" x:Name="BotonEnviar"  Content ="Enviar"  Width="70" Height="40" Click="BotonEnviar_Click" Style="{DynamicResource RoundCorner}" Foreground="White">
-
-                </Button>
-                <ComboBox Grid.Row="0" Name="cbStar" HorizontalAlignment="Left" Margin="43,0,0,0" VerticalAlignment="Center" Width="82" Height="40">
-                    <ComboBoxItem Content="1"/>
-                    <ComboBoxItem Content="2"/>
-                    <ComboBoxItem Content="3"/>
-                    <ComboBoxItem Content="4"/>
-                    <ComboBoxItem Content="5"/>
-                </ComboBox>
-            </Grid>
             <TextBlock x:Name="lbSchedule" HorizontalAlignment="Left" Margin="382,267,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16" FontWeight="Normal" Width="370" Height="59" RenderTransformOrigin="0.5,0.5" FontStyle="Normal"/>
+            <TextBlock x:Name="lbServices" HorizontalAlignment="Left" Margin="381,201,0,0" VerticalAlignment="Top" FontFamily="Roboto" FontSize="16" FontWeight="Normal" Width="370" Height="59" RenderTransformOrigin="0.5,0.5" FontStyle="Normal"/>
+
+
+            <Grid Margin="0,410,0,0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45"></RowDefinition>
+                    <RowDefinition Height="500"></RowDefinition>
+                    <RowDefinition Height="100"></RowDefinition>
+                    <RowDefinition Height="100"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <ScrollViewer Name="ScrollerContenido" Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Background="#F2F5FF" Grid.ColumnSpan="4">
+
+                    <ItemsControl Name="PlantillaMensaje" >
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <DataTemplate.Resources>
+                                    <Storyboard x:Key="ItemAnimation" AutoReverse="False">
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MyGrid" Storyboard.TargetProperty="(UIElement.Opacity)">
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="MyGrid" Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.X)">
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="0" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </DataTemplate.Resources>
+                                <DataTemplate.Triggers>
+                                    <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                        <BeginStoryboard Storyboard="{StaticResource ItemAnimation}" />
+                                    </EventTrigger>
+                                </DataTemplate.Triggers>
+                                <Grid x:Name="MyGrid" RenderTransformOrigin="0.5,1" HorizontalAlignment="{Binding Posicion}"  Margin="5" Background="{Binding FondoElemento}">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="32"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Grid.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                        </TransformGroup>
+                                    </Grid.RenderTransform>
+                                    <Grid Grid.Row="0">
+
+                                        <StackPanel Orientation="Horizontal" Background="{Binding FondoCabecera}">
+                                            <Label Content="{Binding idOpinion}" HorizontalAlignment="Center" MouseDoubleClick="Label_MouseDoubleClick"  Foreground="#FF7F4CA5"></Label>
+                                            <Label Content="{Binding Nombre}" HorizontalAlignment="Left" ></Label>
+                                            <Label Content="{Binding TiempoDeEnvio}" HorizontalAlignment="Right"></Label>
+                                            <Label Content="{Binding Puntuacion}" HorizontalAlignment="Right"></Label>
+                                        </StackPanel>
+                                    </Grid>
+                                    <Grid Grid.Row="1">
+                                        <StackPanel Orientation="Horizontal" Background="#DCEFFF">
+                                            <Label HorizontalContentAlignment="Right" HorizontalAlignment="Right" Content="{Binding MensajeEnviado}" ></Label>
+                                        </StackPanel>
+                                    </Grid>
+                                </Grid>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </ScrollViewer>
+
+                <TextBox Grid.Row="2" MaxLength="100" Name ="ContenidoDelMensaje" HorizontalAlignment="Left" Background="WhiteSmoke" Width="482" TextWrapping="Wrap" Margin ="15,7,0,13" ></TextBox>
+                <Button Grid.Row="2" Name="btSend" Style="{DynamicResource RoundCorner}" Content="Enviar"  VerticalAlignment="Center" Margin="647,0,23,0" Height="30"  Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="15"  Padding="0 0 0 0"  Click="BotonEnviar_Click" />
+                <Rectangle Fill="#FFE5DDEC" HorizontalAlignment="Left" Height="36"  VerticalAlignment="Top" Width="800"/>
+                <Label Grid.Row="0" Content="Opiniones"  HorizontalAlignment="Center" Foreground="black" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20" Width="126"/>
+                <Button Grid.Row="3" Name="btBack" Style="{DynamicResource RoundCorner}" Content="Regresar"  VerticalAlignment="Center" HorizontalAlignment="Right" Width="100" Margin="0 0 10 0" Height="30"  Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="15"  Padding="0 0 0 0" Click="btReturn_Click"/>
+                <Button Grid.Row="3" Name="btUpdate" Style="{DynamicResource RoundCorner}" Content="Modificar"  VerticalAlignment="Top" HorizontalAlignment="Left" Width="100" Margin="548,32,0,0" Height="30"  Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="15"  Padding="0 0 0 0" />
+                <ComboBox Name="cbStar" Grid.Row="2" HorizontalAlignment="Left" Margin="512,0,0,0"  VerticalAlignment="Center" Width="120" Height="30">
+                    <ComboBoxItem Content="✪✪✪✪✪"/>
+                    <ComboBoxItem Content="✪✪✪✪"/>
+                    <ComboBoxItem Content="✪✪✪"/>
+                    <ComboBoxItem Content="✪✪"/>
+                    <ComboBoxItem Content="✪"/>
+                </ComboBox>
+
+            </Grid>
+
+
         </Grid>
     </ScrollViewer>
 
