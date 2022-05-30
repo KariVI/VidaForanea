@@ -112,8 +112,8 @@ namespace VidaForaneaCliente.Views
 
             if (isAdmin)
             {
-                PlaceView placeview = new PlaceView(place,loggedAdmin, category);
-                placeview.Show();
+                ModifyPlace modifyPlace = new ModifyPlace(loggedAdmin, place,category);
+                modifyPlace.Show();
                 this.Close();
             }
             else

@@ -1,78 +1,124 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
 using VidaForaneaCliente.Models;
 using VidaForaneaCliente.ServerConnection;
 
 namespace VidaForaneaCliente.Views
 {
     /// <summary>
-    /// Lógica de interacción para AddPlace.xaml
+    /// Lógica de interacción para ModifyPlace.xaml
     /// </summary>
-    public partial class AddPlace : Window
+    public partial class ModifyPlace : Window
     {
-        Menu menu;
-        Student loggedStudent;
-        Admin loggedAdmin ;
-        string imageSource;
-        bool isAdmin = false;
-        public AddPlace(Menu menu, Student loggedStudent)
+        Admin loggedAdmin;
+        Place place;
+        string category;
+        string imageSource = "NO";
+        public ModifyPlace(Admin loggedAdmin, Place place, string category)
         {
             InitializeComponent();
-            this.menu = menu;
-            imageSource = "";
-            this.loggedStudent = loggedStudent;
-            lbUser.Content = loggedStudent.name;
-        }
-        public AddPlace(Menu menu,  Admin loggedAdmin)
-        {
-            InitializeComponent();
-            this.menu = menu;
-            imageSource = "";
             this.loggedAdmin = loggedAdmin;
-            lbUser.Content = loggedAdmin.nombre;
-            isAdmin = true;
+            this.place = place;
+            this.category = category;
+            InitializePlace();
         }
 
-        private void btCancel_Click(object sender, RoutedEventArgs e)
+        private void InitializePlace()
         {
-            menu.Show();
+            tbName.Text = place.name;
+            tbLocation.Text = place.address;
+            tbServices.Text = place.services;
+            image.Source = Utils.ConvertBytesToImage(Convert.FromBase64String(place.image));
+            if (place.type_place == "Papelería")
+            {
+                cbType.SelectedIndex = 0;
+            } else if (place.type_place == "Comida")
+            {
+                cbType.SelectedIndex = 1;
+            } else
+            {
+                cbType.SelectedIndex = 2;
+            }
+            if (place.status == StatusPlace.aprobado)
+            {
+                cbStatus.SelectedIndex = 0;
+            }
+            else
+            {
+                cbStatus.SelectedIndex = 1;
+            } 
+        }
+
+        private void btBack_Click(object sender, RoutedEventArgs e)
+        {
+            PlaceList placeList = new PlaceList(category, loggedAdmin);
+            placeList.Show();
             this.Close();
         }
 
-        private async void btSend_Click(object sender, RoutedEventArgs e)
+        private async void btSave_Click(object sender, RoutedEventArgs e)
         {
-            string time = "";
-            if (String.IsNullOrWhiteSpace(imageSource) || String.IsNullOrWhiteSpace(cbType.Text) || String.IsNullOrWhiteSpace(tbName.Text) || String.IsNullOrWhiteSpace(tbLocation.Text) || String.IsNullOrWhiteSpace(time))
+            string time = "ok";
+            if (String.IsNullOrWhiteSpace(cbType.Text) || String.IsNullOrWhiteSpace(tbName.Text) || String.IsNullOrWhiteSpace(tbLocation.Text) || String.IsNullOrWhiteSpace(time))
             {
                 MessageBox.Show("Existen campos vacíos, por favor revise los campos", "Campos vacíos", MessageBoxButton.OK);
-            } else
+            }
+            else
             {
-                Place place = new Place()
+                string imagePlace;
+                if (imageSource == "NO")
+                {
+                    imagePlace = place.image;
+                } else
+                {
+                    imagePlace = Convert.ToBase64String(Utils.ConvertImageToBytes(imageSource));
+                }
+                StatusPlace newStatus;
+                if (cbStatus.SelectedIndex == 0)
+                {
+                    newStatus = StatusPlace.aprobado;
+                } else
+                {
+                    newStatus = StatusPlace.pendiente;
+
+                }
+                Place placeModified = new Place()
                 {
                     name = tbName.Text,
                     address = tbLocation.Text,
                     services = tbServices.Text,
                     schedule = time,
-                    status = StatusPlace.pendiente,
+                    status = newStatus,
                     type_place = cbType.Text,
-                    image = Convert.ToBase64String(Utils.ConvertImageToBytes(imageSource))
+                    image = imagePlace
                     //image.Source = Utils.ConvertBytesToImage(Convert.FromBase64String(String recibida del servidor)):
 
                 };
-                bool respuesta = await Connection.PostPlace(place,isAdmin);
-                if (Connection.latestStatusCode == HttpStatusCode.Created)
+                bool respuesta = await Connection.PutPlace(placeModified,place.id);
+                if (Connection.latestStatusCode == HttpStatusCode.OK)
                 {
-                    MessageBox.Show("Se ha registrado la solicitud del lugar", "Solicitud registrada", MessageBoxButton.OK);
-                    menu.Show();
-                    this.Close();
+                    MessageBox.Show("Se ha modificado la solicitud del lugar", "Solicitud regismodificadatrada", MessageBoxButton.OK);
+                    btBack_Click(new object(), new RoutedEventArgs());
                 }
                 else if (Connection.latestStatusCode == HttpStatusCode.BadRequest)
                 {
                     MessageBox.Show("Error en el registro de la solicitud", "Solciitud no registrada", MessageBoxButton.OK);
                 }
+                Console.WriteLine(Connection.latestStatusCode);
             }
+
         }
 
         private string GenerateScheduleString()
@@ -80,7 +126,7 @@ namespace VidaForaneaCliente.Views
             string time = "";
             if (cbMonday.IsChecked == true && !String.IsNullOrWhiteSpace(tpMondayStart.Value.ToString()) && !String.IsNullOrWhiteSpace(tpMondayEnd.Value.ToString()))
             {
-                time += "Lunes: " + tpMondayStart.Value.ToString().Substring(11,14) + " - " + tpMondayEnd.Value.ToString().Substring(11, 14) + Environment.NewLine;
+                time += "Lunes: " + tpMondayStart.Value.ToString().Substring(11, 14) + " - " + tpMondayEnd.Value.ToString().Substring(11, 14) + Environment.NewLine;
             }
             if (cbTuesday.IsChecked == true && !String.IsNullOrWhiteSpace(tpTuesdayStart.Value.ToString()) && !String.IsNullOrWhiteSpace(tpTuesdayEnd.Value.ToString()))
             {
@@ -125,9 +171,7 @@ namespace VidaForaneaCliente.Views
                 bitmap.EndInit();
                 image.Source = bitmap;
             }
+
         }
-
-        
-
     }
 }
