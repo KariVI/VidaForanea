@@ -19,7 +19,7 @@ namespace VidaForaneaCliente.ServerConnection
         public static void initializeConnection()
         {
 
-            client.BaseAddress = new Uri("http://10.81.188.100:9090");
+            client.BaseAddress = new Uri("http://10.50.14.13:9090");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
@@ -109,6 +109,29 @@ namespace VidaForaneaCliente.ServerConnection
             return places;
         }
 
+        internal static async Task<bool> DeleteOpinion(Place place, Opinion opinion)
+        {
+            bool value = true;
+            try
+            {
+                String idPlace = place.id.ToString();
+                String rute = "/lugares/" + idPlace + "/opiniones/" + opinion.Id;
+                HttpResponseMessage response = await client.DeleteAsync(rute);
+                latestStatusCode = response.StatusCode;
+                Console.WriteLine(latestStatusCode);
+                if (latestStatusCode != HttpStatusCode.OK)
+                {
+                    value = false;
+                }
+            }
+            catch (Exception e)
+            {
+                value = false;
+                Console.WriteLine(e.Message);
+            }
+            return value;
+
+        }
         public async static Task<bool> PutPlace(Place place, int id)
         {
             bool value = true;
