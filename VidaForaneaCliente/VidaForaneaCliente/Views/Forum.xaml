@@ -59,7 +59,7 @@
                             <Grid Grid.Row="0">
 
                                 <StackPanel Orientation="Horizontal" Background="{Binding FondoCabecera}">
-                                    <Label Content="{Binding idComentario}" HorizontalAlignment="Center" MouseDoubleClick="Label_MouseDoubleClick"></Label>
+                                    <Label Content="{Binding idComentario}" HorizontalAlignment="Center" MouseDoubleClick="Label_MouseDoubleClick" Foreground="#7f4ca5"></Label>
                                     <Label Content="{Binding Nombre}" HorizontalAlignment="Left" ></Label>
                                     <Label Content="{Binding TiempoDeEnvio}" HorizontalAlignment="Right"></Label>
                                 </StackPanel>
