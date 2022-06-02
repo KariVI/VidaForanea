@@ -11,5 +11,5 @@ class Config:
     SECRET_KEY = 'O3a@EV#Gj#J3!1'
     JWT_ERROR_MESSAGE_KEY = 'message'
 
-    JWT_BLOCKLIST_ENABLED = True
-    JWT_BOCKLIST_TOKEN_CHECKS = ['access', 'refresh']
+    JWT_BLACKLIST_ENABLED = True
+    JWT_BLACKLIST_TOKEN_CHECKS = ['access', 'refresh']

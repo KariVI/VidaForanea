@@ -3,57 +3,34 @@ from flask import request
 from flask_restful import Resource
 from http import HTTPStatus
 from flask_jwt_extended import get_jwt_identity
+from marshmallow import ValidationError
+
 from utils import check_password, hash_password
 from models.Student import Student, lista_students
+from schemas.Student import StudentSchema
 
-
+student_schema = StudentSchema()
+students_list_schema = StudentSchema(many=True)
 class ListStudents(Resource):
 
     def get(self):
         data = []
         students = Student.get_all_students()
-        for student in students:
-            if student.status is True:
-                data.append({
-                    'id': student.id,
-                    'name': student.name,
-                    'enrollment': student.enrollment,
-                    'password': student.password
-                })
-        return {'data': data}, HTTPStatus.OK
+        return students_list_schema.dump(students), HTTPStatus.OK
 
     def post(self):
         json_data = request.get_json()
-
-        name = json_data.get('name')
-        enrollment = json_data.get('enrollment')
-        passwordNoHasheada = json_data.get('password')
-        degree = json_data.get('degree')
-        status = True
-        rol = json_data.get('rol')
+        try:
+            data = student_schema.load(data=json_data)
+        except ValidationError as exc:
+            return {'message': "Validation errors", 'errors': exc.messages}, HTTPStatus.BAD_REQUEST      
+        enrollment = json_data.get('enrollment')       
         if Student.get_by_enrollment(enrollment):
             return {'message': 'Estudiante ya registrado'}, HTTPStatus.BAD_REQUEST
-
-        password = hash_password(passwordNoHasheada)
-
-        student = Student(
-            name=name,
-            enrollment=enrollment,
-            password=password,
-            degree=degree,
-            status=status,
-            rol=rol
-        )
-        lista_students.append(student.name)
+        student = Student(**data)
+        lista_students.append(student.enrollment)
         student.save()
-
-        data = {
-            'id': student.id,
-            'name': student.name,
-            'enrollment': student.enrollment
-        }
-
-        return data, HTTPStatus.CREATED
+        return student_schema.dump(student), HTTPStatus.CREATED
 
 """
 class Login(Resource):
@@ -72,20 +49,14 @@ class Login(Resource):
         return data, HTTPStatus.OK
 """
     
-
 class ResourceStudent(Resource):
 
     def get(self, enrollment):
         student = Student.get_by_enrollment(enrollment)
         if student is None:
             return {'message': 'Estudiante no encontrado'}, HTTPStatus.NOT_FOUND
-        data = {
-            'id': student.id,
-            'name': student.name,
-            'enrollment': student.enrollment,
-            'degree': student.degree,
-        }
-        return data, HTTPStatus.OK
+        
+        return student_schema.dump(student), HTTPStatus.OK
 
     def patch(self, enrollment):
         student = Student.get_by_enrollment(enrollment)
@@ -95,32 +66,9 @@ class ResourceStudent(Resource):
             student.status = False
         else:
             student.status = True
-        data = {
-            'id': student.id,
-            'name': student.name,
-            'enrollment': student.enrollment,
-            'new status': student.status
-        }
+    
         student.save()
-        return data, HTTPStatus.OK
+        return student_schema.dump(student), HTTPStatus.OK
 
 
-    def get(self, enrollment):
-        student = Student.get_by_enrollment(enrollment=enrollment)       
-        if enrollment is None:
-            return {'message': 'Student not found'}, HTTPStatus.NOT_FOUND
-        current_student = get_jwt_identity()
-        if current_student == student.enrollment:
-            data = {
-            'id': student.id,
-            'name': student.name,
-            'enrollment': student.enrollment,
-            'degree': student.degree
-            }
-        else:
-            data = {
-           'id': student.id,
-            'name': student.name,
-            'enrollment': student.enrollment
-        }
-        return data, HTTPStatus.OK
+

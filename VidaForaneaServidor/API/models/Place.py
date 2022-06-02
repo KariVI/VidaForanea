@@ -7,7 +7,7 @@ class Place(db.Model):
     __tablename__ = 'Place'
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80), nullable=False, unique=True)
+    name = db.Column(db.String(100), nullable=False, unique=True)
     address = db.Column(db.String(500), nullable=False)
     services = db.Column(db.String(500), nullable=False)
     schedule = db.Column(db.String(500), nullable=False)

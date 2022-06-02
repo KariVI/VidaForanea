@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: b6a2fa7aa205
+Revision ID: cdda28dacc20
 Revises: 
-Create Date: 2022-05-28 23:31:53.682294
+Create Date: 2022-06-02 19:22:25.720575
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'b6a2fa7aa205'
+revision = 'cdda28dacc20'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -25,7 +25,7 @@ def upgrade():
     )
     op.create_table('Place',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('name', sa.String(length=80), nullable=False),
+    sa.Column('name', sa.String(length=100), nullable=False),
     sa.Column('address', sa.String(length=500), nullable=False),
     sa.Column('services', sa.String(length=500), nullable=False),
     sa.Column('schedule', sa.String(length=500), nullable=False),
@@ -42,6 +42,7 @@ def upgrade():
     sa.Column('password', sa.String(length=200), nullable=False),
     sa.Column('status', sa.Boolean(), nullable=True),
     sa.Column('degree', sa.String(length=100), nullable=False),
+    sa.Column('rol', sa.String(length=200), nullable=False),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('enrollment')
     )
@@ -51,8 +52,8 @@ def upgrade():
     sa.Column('date', sa.String(length=200), nullable=False),
     sa.Column('hour', sa.String(length=5), nullable=False),
     sa.Column('description', sa.String(length=200), nullable=False),
-    sa.Column('id_forum', sa.Integer(), nullable=False),
-    sa.ForeignKeyConstraint(['id_forum'], ['Forum.id'], ),
+    sa.Column('forum_id', sa.Integer(), nullable=False),
+    sa.ForeignKeyConstraint(['forum_id'], ['Forum.id'], ),
     sa.ForeignKeyConstraint(['student'], ['Student.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

@@ -3,9 +3,14 @@ from flask import request
 from flask_restful import Resource
 from http import HTTPStatus
 from flask_jwt_extended import get_jwt_identity, jwt_required
+from marshmallow import ValidationError
 
 from models.Place import Place, lista_places
 from models.Student import Student
+from schemas.Place import PlaceSchema
+
+place_schema = PlaceSchema()
+places_list_schema = PlaceSchema(many=True)
 
 class ListPlaces(Resource):
 
@@ -25,49 +30,30 @@ class ListPlaces(Resource):
             })
         return {'data': data}, HTTPStatus.OK
 
-    @jwt_required
+    @jwt_required()
     def post(self):
         json_data = request.get_json()
 
         name = json_data.get('name')
-        address = json_data.get('address')
-        services = json_data.get('services')
-        schedule = json_data.get('schedule')
         if json_data.get('status') == 1:
             status = "aprobado"
         if json_data.get('status') == 0:
             status = "pendiente"
 
-        type_place=json_data.get('type_place')
         imageNotEncodedToBytes = json_data.get('image')
         image = bytes(imageNotEncodedToBytes, 'utf-8')
+        try:
+            data = place_schema.load(data=json_data)
+            data.image=image
+        except ValidationError as exc:
+            return {'message': "Validation errors", 'errors': exc.messages}, HTTPStatus.BAD_REQUEST
         if Place.get_by_name(name):
             return {'message': 'Place already registered'}, HTTPStatus.BAD_REQUEST
 
-        place = Place(
-            name= name,
-            address=address,
-            services=services,
-            schedule=schedule,
-            type_place=type_place,
-            image = image,
-            status = status
-        )
+        place = Place(**data)
         lista_places.append(place)
         place.save()
-
-        data = {
-            'id': place.id,
-            'name': place.name,
-            'address': place.address,
-            'services': place.services,
-            'schedule': place.schedule,
-            'status': place.status,
-            'type_place': place.type_place,
-            'image': place.image.decode("utf-8")
-        }
-
-        return data, HTTPStatus.CREATED
+        return  HTTPStatus.CREATED
 
 
 class ResourcePlace(Resource):
@@ -88,7 +74,7 @@ class ResourcePlace(Resource):
         }
         return data, HTTPStatus.OK
 
-    @jwt_required
+    @jwt_required()
     def delete(self, place_id):
         place = Place.get_by_id(place_id)
         if place is None:
@@ -100,7 +86,7 @@ class ResourcePlace(Resource):
         place.delete()
         return  HTTPStatus.NO_CONTENT
 
-    @jwt_required
+    @jwt_required()
     def put(self, place_id):
         data = request.get_json()
         place = Place.get_by_id(place_id)
@@ -122,8 +108,8 @@ class ResourcePlace(Resource):
         if current_student.rol == 'estudiante' or current_user=='moderador' :
             return {'message': 'Access is not allowed'}, HTTPStatus.FORBIDDEN
         place.save()
-        return data, HTTPStatus.OK
-
+        return HTTPStatus.OK
+"""
     def patch(self, place_id):
         place = next((place for place in lista_places if place.id == place_id ), None)
         if place is None:
@@ -159,7 +145,7 @@ class ResourcePlace(Resource):
         }
         place.save()
         return data, HTTPStatus.OK
-
+"""
 class ListPlacesStatus(Resource):
 
     def get(self,status):
