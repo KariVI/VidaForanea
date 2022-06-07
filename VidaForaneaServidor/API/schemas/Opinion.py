@@ -11,7 +11,7 @@ from models.Opinion import Opinion
 
 class OpinionSchema(Schema):
     class Meta:
-       model: Opinion
+       ordered = True
     id = fields.Int(dump_only=True)
     student = fields.String(require=True)
     date =fields.String(required=True)

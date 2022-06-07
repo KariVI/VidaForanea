@@ -10,7 +10,8 @@ from marshmallow import Schema, fields, validate
 
 class CommentSchema(Schema):
     class Meta:
-       model: Comment
+       ordered = True
+      
     id = fields.Int(dump_only=True)
     student = fields.String(require=True)
     date =fields.String(required=True)

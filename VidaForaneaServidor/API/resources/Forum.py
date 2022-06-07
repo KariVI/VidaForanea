@@ -20,7 +20,7 @@ class ListForums(Resource):
         forums = Forum.get_all_forums()  
         return forums_list_schema.dump(forums), HTTPStatus.OK
     
-    @jwt_required()
+    #@jwt_required()
     def post(self):
         json_data = request.get_json()
         degree = json_data.get('degree')
@@ -30,10 +30,12 @@ class ListForums(Resource):
             return {'message': "Validation errors", 'errors': exc.messages}, HTTPStatus.BAD_REQUEST
         if Forum.get_by_degree(degree):
             return {'message': 'Foro ya registrado'}, HTTPStatus.BAD_REQUEST
+        """
         current_user = get_jwt_identity()
         current_student = Student.get_by_enrollment(current_user)
         if current_student.rol == 'estudiante'  :
             return {'message': 'Access is not allowed'}, HTTPStatus.FORBIDDEN      
+        """
         forum = Forum(**data)
         lista_forums.append(forum.degree)
         forum.save()
