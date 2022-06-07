@@ -8,6 +8,7 @@ from marshmallow import ValidationError
 from models.Opinion import Opinion, lista_opinions
 from models.Student import Student
 from schemas.Opinion import OpinionSchema
+from flask import jsonify
 
 opinion_schema = OpinionSchema()
 opinion_list_schema = OpinionSchema(many=True)
@@ -39,7 +40,9 @@ class ListOpinions(Resource):
         lista_opinions.append(opinion)
         opinion.save()
 
-        return  HTTPStatus.CREATED
+        response=opinion_schema.dump(opinion)
+        response.status_code=201
+        return  response
 
 
 
@@ -60,7 +63,9 @@ class ResourceOpinion(Resource):
             return {'message': 'Opinion no encontrado'}, HTTPStatus.NOT_FOUND
         current_user = get_jwt_identity()
         current_student = Student.get_by_enrollment(current_user)
-        if current_student.rol == 'estudiante'  :
-            return {'message': 'Access is not allowed'}, HTTPStatus.FORBIDDEN
+        if current_student.rol == 'estudiante'  and current_student.id != opinion.id:
+            response=jsonify({'message': 'Access is not allowed'})
+            response.status_code=403
+            return response
         opinion.delete()
         return  HTTPStatus.NO_CONTENT

@@ -5,10 +5,11 @@ from flask_restful import Resource
 from http import HTTPStatus
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from marshmallow import ValidationError
-from flask import jsonify
 from models.Forum import Forum, lista_forums
 from models.Student import Student
 from schemas.Forum import ForumSchema
+
+
 
 forum_schema = ForumSchema()
 forums_list_schema = ForumSchema(many=True)
@@ -36,7 +37,9 @@ class ListForums(Resource):
         forum = Forum(**data)
         lista_forums.append(forum.degree)
         forum.save()
-        return  HTTPStatus.CREATED
+        response=forum_schema.dump(forum)
+        response.status_code=201
+        return  response
 
 
 

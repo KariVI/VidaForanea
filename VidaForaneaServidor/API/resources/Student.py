@@ -32,22 +32,7 @@ class ListStudents(Resource):
         student.save()
         return student_schema.dump(student), HTTPStatus.CREATED
 
-"""
-class Login(Resource):
-    def post(self, enrollment):
-        json_data = request.get_json()
-        student = Student.get_by_enrollment(enrollment)
-        passwordNoHasheada = json_data.get('password')
-        if student == None or check_password(passwordNoHasheada, student.password) is False:
-            return {'message': 'Error en las credenciales'}, HTTPStatus.NOT_FOUND
-        data = {
-            'id': student.id,
-            'name': student.name,
-            'enrollment': student.enrollment,
-            'degree': student.degree
-        }
-        return data, HTTPStatus.OK
-"""
+
     
 class ResourceStudent(Resource):
 

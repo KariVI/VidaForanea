@@ -26,7 +26,6 @@ class TokenResource(Resource):
         password = json_data.get('password')
 
         student = Student.get_by_enrollment(enrollment)
-        print("Matricula" )
         if not student or not check_password(password, student.password):
             return {'message': 'enrollment or password is incorrect'}, HTTPStatus.UNAUTHORIZED
 

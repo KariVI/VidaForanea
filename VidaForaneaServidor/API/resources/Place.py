@@ -4,6 +4,7 @@ from flask_restful import Resource
 from http import HTTPStatus
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from marshmallow import ValidationError
+from flask import jsonify
 
 from models.Place import Place, lista_places
 from models.Student import Student
@@ -53,7 +54,9 @@ class ListPlaces(Resource):
         place = Place(**data)
         lista_places.append(place)
         place.save()
-        return  HTTPStatus.CREATED
+        response=place_schema.dump(place)
+        response.status_code=201
+        return  response
 
 
 class ResourcePlace(Resource):
@@ -82,7 +85,9 @@ class ResourcePlace(Resource):
         current_user = get_jwt_identity()
         current_student = Student.get_by_enrollment(current_user)
         if current_student.rol == 'estudiante' or current_user=='moderador' :
-            return {'message': 'Access is not allowed'}, HTTPStatus.FORBIDDEN
+            response=jsonify({'message': 'Access is not allowed'})
+            response.status_code=403
+            return response
         place.delete()
         return  HTTPStatus.NO_CONTENT
 
@@ -106,9 +111,13 @@ class ResourcePlace(Resource):
         current_user = get_jwt_identity()
         current_student = Student.get_by_enrollment(current_user)
         if current_student.rol == 'estudiante' or current_user=='moderador' :
-            return {'message': 'Access is not allowed'}, HTTPStatus.FORBIDDEN
+            response=jsonify({'message': 'Access is not allowed'})
+            response.status_code=403
+            return response
         place.save()
-        return HTTPStatus.OK
+        response=place_schema.dump(place)
+        response.status_code=200
+        return  response
 """
     def patch(self, place_id):
         place = next((place for place in lista_places if place.id == place_id ), None)

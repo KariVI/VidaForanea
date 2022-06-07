@@ -7,6 +7,7 @@ from marshmallow import ValidationError
 from models.Comment import Comment, lista_comments
 from models.Student import Student
 from schemas.Comment import CommentSchema
+from flask import jsonify
 
 comment_schema = CommentSchema()
 comments_list_schema = CommentSchema(many=True)
@@ -35,8 +36,9 @@ class ListComments(Resource):
         comment = Comment(**data)
         lista_comments.append(comment)
         comment.save()
-
-        return  HTTPStatus.CREATED
+        response=comment_schema.dump(comment)
+        response.status_code=201
+        return  response
 
 
 
@@ -57,8 +59,12 @@ class ResourceComments(Resource):
         current_student = Student.get_by_enrollment(current_user)
         if current_user==comment.student or current_student.rol != 'estudiante'  :
             comment.delete()
-            return  HTTPStatus.NO_CONTENT
+            response=jsonify({})
+            response.status_code=HTTPStatus.NO_CONTENT
+            return response
         else:
-            return {'message': 'Access is not allowed'}, HTTPStatus.FORBIDDEN
+            response=jsonify({'message': 'Access is not allowed'})
+            response.status_code=403
+            return response
         
   
