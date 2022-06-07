@@ -3,13 +3,13 @@ from flask_migrate import Migrate
 from flask_restful import Api
 
 from config import Config
-from extensions import db
+from extensions import db,jwt
 from resources.Comment import ListComments, ResourceComments
 from resources.Forum import ListForums, ResourceForum
-from resources.Student import ListStudents, ResourceStudent, Login
+from resources.Student import ListStudents, ResourceStudent
 from resources.Place import ListPlaces, ListPlacesStatus, ListPlacesType, ResourcePlace
 from resources.Opinion import ListOpinions, ResourceOpinion
-from resources.Administrador import ListaAdministradores, RecursoAdministrador, LoginAdmin
+from resources.Token import TokenResource, RefreshResource, RevokeResource, block_list
 
 def create_app():
     app = Flask(__name__)
@@ -24,6 +24,12 @@ def create_app():
 def register_extensions(app):
     db.init_app(app)
     migrate = Migrate(app, db)
+    jwt.init_app(app)
+
+    @jwt.token_in_blocklist_loader
+    def check_if_token_in_blocklist(jwt_header, jwt_payload):
+        jti = jwt_payload["jti"]
+        return jti in block_list
 
 
 def register_resources(app):
@@ -31,7 +37,6 @@ def register_resources(app):
 
     api.add_resource(ListStudents, '/estudiantes')
     api.add_resource(ResourceStudent, '/estudiantes/<string:enrollment>')
-    api.add_resource(Login, '/login/<string:enrollment>'),
     api.add_resource(ListPlaces, '/lugares'),
     api.add_resource(ResourcePlace, '/lugares/<int:place_id>')
     api.add_resource(ListOpinions, '/lugares/<int:id_place>/opiniones')
@@ -42,9 +47,9 @@ def register_resources(app):
     api.add_resource(ResourceComments, '/foros/<int:forum_id>/comentarios/<int:comment_id>'),
     api.add_resource(ListPlacesStatus, '/lugares/<string:status>'),
     api.add_resource(ListPlacesType, '/lugares/<string:status>/<string:type_place>')
-    api.add_resource(ListaAdministradores, '/administradores')
-    api.add_resource(RecursoAdministrador, '/administradores/<string:usuario>')
-    api.add_resource(LoginAdmin, '/loginAdmin/<string:usuario>')
+    api.add_resource(TokenResource, '/token')
+    api.add_resource(RefreshResource, '/refresh')
+    api.add_resource(RevokeResource, '/revoke')
 
 if __name__ == '__main__':
     app = create_app()
