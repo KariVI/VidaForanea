@@ -22,14 +22,14 @@ namespace VidaForaneaCliente.Views
     /// </summary>
     public partial class ModifyPlace : Window
     {
-        Admin loggedAdmin;
+        Student loggedStudent;
         Place place;
         string category;
         string imageSource = "NO";
-        public ModifyPlace(Admin loggedAdmin, Place place, string category)
+        public ModifyPlace(Student loggedStudent, Place place, string category)
         {
             InitializeComponent();
-            this.loggedAdmin = loggedAdmin;
+            this.loggedStudent = loggedStudent;
             this.place = place;
             this.category = category;
             InitializePlace();
@@ -63,7 +63,7 @@ namespace VidaForaneaCliente.Views
 
         private void btBack_Click(object sender, RoutedEventArgs e)
         {
-            PlaceList placeList = new PlaceList(category, loggedAdmin);
+            PlaceList placeList = new PlaceList(category, loggedStudent);
             placeList.Show();
             this.Close();
         }

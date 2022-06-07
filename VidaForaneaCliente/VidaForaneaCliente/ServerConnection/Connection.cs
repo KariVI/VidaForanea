@@ -19,7 +19,7 @@ namespace VidaForaneaCliente.ServerConnection
         public static void initializeConnection()
         {
 
-            client.BaseAddress = new Uri("http://10.50.14.13:9090");
+            client.BaseAddress = new Uri("http://192.168.100.68:9090");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
@@ -31,18 +31,21 @@ namespace VidaForaneaCliente.ServerConnection
             MessageBox.Show("Error en la conexión con el servidor", "Error de conexión", MessageBoxButton.OK);
         }
 
-        public static async Task<Student> Login(string matricula, string password)
+        public static async Task<Token> Login(string matricula, string password)
         {
-            Student student = new Student() { password = password };
+            Student student = new Student() {enrollment = matricula, password = password };
+            Token token = new Token() { accessToken = "null", refreshToken = "null"};
             try
             {
-                string url = "login/" + matricula;
-                var json = Newtonsoft.Json.JsonConvert.SerializeObject(student);
+                string url = "/token";
+                var json = JsonConvert.SerializeObject(student);
                 var data = new StringContent(json, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await client.PostAsync(url, data);
                 if (response.IsSuccessStatusCode)
                 {
-                    student = await response.Content.ReadAsAsync<Student>();
+                    var stringData = response.Content.ReadAsStringAsync().Result;
+                    var preToken = JsonConvert.DeserializeObject<RootToken>(stringData);
+                    token = preToken.makeToken();
                 }
                 latestStatusCode = response.StatusCode;
             }
@@ -51,32 +54,11 @@ namespace VidaForaneaCliente.ServerConnection
                 showConnectionError();
                 Console.WriteLine(e.Message);
             }
-            return student;
+            return token;
         }
 
         
-        public static async Task<Admin> LoginAdmin(string usuario, string password)
-        {
-            Admin admin = new Admin() { contrasenia = password };
-            try
-            {
-                string url = "loginAdmin/" + usuario;
-                var json = Newtonsoft.Json.JsonConvert.SerializeObject(admin);
-                var data = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await client.PostAsync(url, data);
-                if (response.IsSuccessStatusCode)
-                {
-                    admin = await response.Content.ReadAsAsync<Admin>();
-                }
-                latestStatusCode = response.StatusCode;
-            }
-            catch (Exception e)
-            {
-                showConnectionError();
-                Console.WriteLine(e.Message);
-            }
-            return admin;
-        }
+       
         public static async Task<List<Place>> GetPlacesByCategory(string estado, string category)
         {
             List <Place> places = new List<Place> ();
@@ -227,15 +209,14 @@ namespace VidaForaneaCliente.ServerConnection
             bool value = true;
             try
             {
-                 Console.WriteLine(student.name);
                 HttpResponseMessage response = await client.PostAsJsonAsync("/estudiantes",student);
-                Console.WriteLine("Post");
                 if (response.IsSuccessStatusCode)
                 {
                     student = await response.Content.ReadAsAsync<Student>();
 
                 }
                 latestStatusCode = response.StatusCode;
+                Console.WriteLine(latestStatusCode);
             }
             catch (Exception e)
             {
@@ -422,6 +403,20 @@ class RootComment
             comments.Add(comment);
         }
         return comments;
+    }
+}
+
+class RootToken
+{
+    public string access_token { get; set; }
+    public string refresh_token { get; set; }
+
+    public Token makeToken()
+    {
+        Token token = new Token();
+        token.accessToken = access_token;
+        token.refreshToken = refresh_token;
+        return token;
     }
 }
 

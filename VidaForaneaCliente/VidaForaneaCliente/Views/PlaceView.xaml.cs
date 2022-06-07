@@ -28,8 +28,6 @@ namespace VidaForaneaCliente.Views
     public partial class PlaceView : Window
     {
         Student loggedStudent;
-        Admin loggedAdmin;
-        bool isAdmin = false;
         String category;
         Place place;
         public TextBox ContenedorDelMensaje
@@ -37,17 +35,7 @@ namespace VidaForaneaCliente.Views
             get { return ContenidoDelMensaje; }
             set { ContenidoDelMensaje = value; }
         }
-        public PlaceView(Place place, Admin loggedAdmin,String category)
-        {
-            InitializeComponent();
-            this.loggedAdmin = loggedAdmin;
-            lbUser.Content = loggedAdmin.nombre;
-            this.category = category;
-            this.place = place;
-            isAdmin = true;
-            intializePlace();
-            
-        }
+       
         public PlaceView(Place place, Student loggedStudent,String category)
         {
             InitializeComponent();
@@ -97,17 +85,12 @@ namespace VidaForaneaCliente.Views
                     name = "Administrador";
                 }
                 string user;
-                if (isAdmin)
-                {
-                    user = loggedAdmin.usuario;
-                }
-                else
-                {
+               
                     user = loggedStudent.enrollment;
 
                     
-                }
-                if (isAdmin || opinion.user == user) {
+                
+                if (loggedStudent.rol == "administrador" || opinion.user == user) {
                     PlantillaMensaje.Items.Add(new { Posicion = "Right", FondoElemento = "White", FondoCabecera = "#7f4ca5", Nombre = name, TiempoDeEnvio = opinion.date, MensajeEnviado = opinion.description, Puntuacion = "Puntuacion: " + puntuacion, idOpinion = opinion.Id });
                 }
                 else
@@ -131,19 +114,10 @@ namespace VidaForaneaCliente.Views
         }
         private void btReturn_Click(object sender, RoutedEventArgs e)
         {
-            if (isAdmin)
-            {
-                PlaceList placeList = new PlaceList(category, loggedAdmin);
-               
-                placeList.Show();
-                this.Close();
-            }
-            else
-            {
                 PlaceList placeList = new PlaceList(category, loggedStudent);
                 placeList.Show();
                 this.Close();
-            }
+            
             
 
         }
@@ -173,14 +147,9 @@ namespace VidaForaneaCliente.Views
                     string puntuacion = comboItem.Content.ToString();
                     Opinion opinion = new Opinion();
                     opinion.id_place = place.id; 
-                    if (isAdmin)
-                    {
-                        opinion.user = loggedAdmin.usuario;
-                    }
-                    else
-                    {
+                   
                         opinion.user = loggedStudent.enrollment;
-                    }
+                    
                         
                     opinion.date = DateTime.Now.Date.ToString();
                     opinion.hour = DateTime.Now.Hour.ToString();

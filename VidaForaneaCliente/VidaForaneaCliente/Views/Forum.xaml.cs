@@ -24,7 +24,6 @@ namespace VidaForaneaCliente.Views
     public partial class ForumView : Window
     {
         Student loggedStudent;
-        Admin admin;
         MainWindow menu;
         int idDegree;
         bool isAdmin;
@@ -47,15 +46,15 @@ namespace VidaForaneaCliente.Views
             InitializeComments();
         }
 
-        public ForumView(Admin admin, MainWindow menu, int idDegree)
+        public ForumView(Student student, MainWindow menu, int idDegree)
         {
             InitializeComponent();
             this.idDegree = idDegree;
             isAdmin = true;
-            this.admin = admin;
-            lblForum.Content = this.admin.nombre;
+            this.loggedStudent = student;
+            lblForum.Content = this.loggedStudent.name;
             this.menu = menu;
-            lblUser.Content = admin.nombre;
+            lblUser.Content = student.name;
             btSend.IsEnabled = false;
             ContenidoDelMensaje.IsEnabled = false;
             InitializeComments();

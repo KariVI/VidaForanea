@@ -20,14 +20,14 @@ namespace VidaForaneaCliente.Views
     /// </summary>
     public partial class ForumAdmin : Window
     {
-        Admin admin;
+        Student loggedStudent;
         MainWindow menu;
-        public ForumAdmin(Admin admin, MainWindow menu)
+        public ForumAdmin(Student student, MainWindow menu)
         {
             InitializeComponent();
-            this.admin = admin;
+            this.loggedStudent = student;
             this.menu = menu;
-            lblUser.Content = admin.nombre;
+            lblUser.Content = student.name;
         }
 
         private void btExit_Click(object sender, RoutedEventArgs e)
@@ -38,28 +38,28 @@ namespace VidaForaneaCliente.Views
 
         private void btStatistics_Click(object sender, RoutedEventArgs e)
         {
-            ForumView forum = new ForumView(admin, menu, 1);
+            ForumView forum = new ForumView(loggedStudent, menu, 1);
             forum.Show();
             this.Close();
         }
 
         private void btNetwork_Click(object sender, RoutedEventArgs e)
         {
-            ForumView forum = new ForumView(admin, menu, 3);
+            ForumView forum = new ForumView(loggedStudent, menu, 3);
             forum.Show();
             this.Close();
         }
 
         private void btTec_Click(object sender, RoutedEventArgs e)
         {
-            ForumView forum = new ForumView(admin, menu, 2);
+            ForumView forum = new ForumView(loggedStudent, menu, 2);
             forum.Show();
             this.Close();
         }
 
         private void btSoftware_Click(object sender, RoutedEventArgs e)
         {
-            ForumView forum = new ForumView(admin, menu, 4);
+            ForumView forum = new ForumView(loggedStudent, menu, 4);
             forum.Show();
             this.Close();
         }

@@ -14,7 +14,6 @@ namespace VidaForaneaCliente.Views
     {
         Menu menu;
         Student loggedStudent;
-        Admin loggedAdmin ;
         string imageSource;
         bool isAdmin = false;
         public AddPlace(Menu menu, Student loggedStudent)
@@ -24,16 +23,12 @@ namespace VidaForaneaCliente.Views
             imageSource = "";
             this.loggedStudent = loggedStudent;
             lbUser.Content = loggedStudent.name;
+            if (loggedStudent.rol == "administrador")
+            {
+                isAdmin = true;
+            }
         }
-        public AddPlace(Menu menu,  Admin loggedAdmin)
-        {
-            InitializeComponent();
-            this.menu = menu;
-            imageSource = "";
-            this.loggedAdmin = loggedAdmin;
-            lbUser.Content = loggedAdmin.nombre;
-            isAdmin = true;
-        }
+     
 
         private void btCancel_Click(object sender, RoutedEventArgs e)
         {

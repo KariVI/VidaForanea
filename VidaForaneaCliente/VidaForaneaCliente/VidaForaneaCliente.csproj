@@ -96,12 +96,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Forum.cs" />
     <Compile Include="Models\Opinion.cs" />
     <Compile Include="Models\Place.cs" />
     <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\Token.cs" />
     <Compile Include="Models\Utils.cs" />
     <Compile Include="ServerConnection\Connection.cs" />
     <Compile Include="Views\Forum.xaml.cs">
