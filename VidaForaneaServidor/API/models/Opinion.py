@@ -1,3 +1,4 @@
+
 from sqlalchemy import null
 from extensions import db
 

@@ -4,3 +4,6 @@ httpie==3.0.1
 Flask-SQLAlchemy==2.5.1
 Flask-Migrate==3.1.0
 passlib==1.7.4
+Flask-JWT-Extended==4.3.1
+marshmallow==3.15.0
+webargs==8.1.0

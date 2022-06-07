@@ -1,3 +1,4 @@
+from email.policy import default
 from sqlalchemy import null
 from extensions import db
 
@@ -12,8 +13,7 @@ class Student(db.Model):
     password = db.Column(db.String(200), nullable=False)
     status = db.Column(db.Boolean(), default=True)
     degree = db.Column(db.String(100), nullable=False)
-
-    #recipes = db.relationship('Recipe', backref='user')
+    rol = db.Column(db.String(200), nullable=False, default="estudiante")
 
     @classmethod
     def get_by_name(cls, name):
