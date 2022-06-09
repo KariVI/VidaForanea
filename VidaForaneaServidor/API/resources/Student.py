@@ -39,6 +39,7 @@ class ResourceStudent(Resource):
     def get(self, enrollment):
         student = Student.get_by_enrollment(enrollment)
         if student is None:
+            
             return {'message': 'Estudiante no encontrado'}, HTTPStatus.NOT_FOUND
         
         return student_schema.dump(student), HTTPStatus.OK

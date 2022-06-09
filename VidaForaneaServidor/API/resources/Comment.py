@@ -19,7 +19,7 @@ class ListComments(Resource):
         comments = Comment.get_by_forum_id(forum_id)
         return comments_list_schema.dump(comments), HTTPStatus.OK
 
-    #@jwt_required()
+    @jwt_required()
     def post(self, forum_id):
         json_data = request.get_json()
 
