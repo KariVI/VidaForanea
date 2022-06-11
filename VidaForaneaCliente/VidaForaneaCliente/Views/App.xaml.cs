@@ -16,7 +16,7 @@ namespace VidaForaneaCliente.Views
     {
         public App()
         {
-            Connection.initializeConnection();
+            Connection.InitializeConnection();
         }
         
     }

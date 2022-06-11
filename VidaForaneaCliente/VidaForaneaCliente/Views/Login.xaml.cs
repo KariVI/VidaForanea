@@ -25,6 +25,7 @@ namespace VidaForaneaCliente.Views
         bool connected = true;
         public Login()
         {
+            Connection.token = null;
             InitializeComponent();
         }
 
@@ -36,15 +37,19 @@ namespace VidaForaneaCliente.Views
                 String usuario = txtUsuario.Text;
                 Token token = new Token();
                 token = await Connection.Login(txtUsuario.Text, txtPassword.Password);
-                    if (Connection.latestStatusCode == HttpStatusCode.OK)
+                    if (Connection.latestStatusCode == HttpStatusCode.OK && token.accessToken != "null")
                     {
-                        /*MainWindow mainWindow;
+                        Student student;
+                        Connection.token = token;
+                        Connection.AutheticateWithToken();
+                        student = await Connection.GetStudentByMatricula(txtUsuario.Text);
+                        MainWindow mainWindow;
                         mainWindow = new MainWindow(student);
                         mainWindow.Show();
                         this.Close();
-                        */
+                       
                     }
-                    else if (Connection.latestStatusCode == HttpStatusCode.NotFound)
+                    else if (Connection.latestStatusCode == HttpStatusCode.Unauthorized)
                     {
                         MessageBox.Show("No se ha encontrado el estudiante con la matrícula y contraseña ingresada", "Estudiante no encontrado", MessageBoxButton.OK);
                     }

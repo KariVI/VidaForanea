@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace VidaForaneaCliente.Models
 {
     public class Opinion
     {
+        [JsonIgnore]
         public int Id { get; set; }
         public string date { get; set; }
         public string hour { get; set; }

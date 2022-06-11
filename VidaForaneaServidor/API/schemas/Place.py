@@ -24,4 +24,5 @@ class PlaceSchema(Schema):
     schedule = fields.String(required=True)
     type_place = fields.String(required=True)
     image = BytesField()
+    status = fields.String(required=True)
 

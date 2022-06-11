@@ -15,20 +15,57 @@ namespace VidaForaneaCliente.ServerConnection
     {
         static HttpClient client = new HttpClient();
         public static HttpStatusCode latestStatusCode;
+        public static Token token;
 
-        public static void initializeConnection()
+        public static void InitializeConnection()
         {
 
-            client.BaseAddress = new Uri("http://192.168.100.68:9090");
+            client.BaseAddress = new Uri("http://10.81.188.100:9090");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
    
         }
 
+        public static void AutheticateWithToken()
+        {
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.accessToken);
+        }
+
+        public static void AutheticateWithRefresh()
+        {
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.refreshToken);
+        }
+
         private static void showConnectionError()
         {
             MessageBox.Show("Error en la conexión con el servidor", "Error de conexión", MessageBoxButton.OK);
+        }
+
+        public static async void RefreshToken()
+        {
+            try
+            {
+                string url = "/refresh";
+                var json = JsonConvert.SerializeObject("test");
+                var data = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(url, data);
+                if (response.IsSuccessStatusCode)
+                {
+                    AutheticateWithRefresh();
+                    var stringData = response.Content.ReadAsStringAsync().Result;
+                    var preToken = JsonConvert.DeserializeObject<RootTokenRefresh>(stringData);
+                    token.accessToken = preToken.token;
+                    Console.WriteLine(token.refreshToken);
+                    AutheticateWithToken();
+                }
+                latestStatusCode = response.StatusCode;
+            }
+            catch (Exception e)
+            {
+                showConnectionError();
+                Console.WriteLine(e.Message);
+            }
         }
 
         public static async Task<Token> Login(string matricula, string password)
@@ -57,7 +94,6 @@ namespace VidaForaneaCliente.ServerConnection
             return token;
         }
 
-        
        
         public static async Task<List<Place>> GetPlacesByCategory(string estado, string category)
         {
@@ -82,6 +118,7 @@ namespace VidaForaneaCliente.ServerConnection
                     places = places2.makeAList();
                 }
                 latestStatusCode = response.StatusCode;
+                //RefreshToken();
             } 
             catch (Exception e)
             {
@@ -105,6 +142,7 @@ namespace VidaForaneaCliente.ServerConnection
                 {
                     value = false;
                 }
+                //RefreshToken();
             }
             catch (Exception e)
             {
@@ -128,6 +166,7 @@ namespace VidaForaneaCliente.ServerConnection
                 {
                     value = false;
                 }
+                //RefreshToken();
             }
             catch (Exception e)
             {
@@ -152,6 +191,7 @@ namespace VidaForaneaCliente.ServerConnection
                     opinions = opinions2.makeAList();
                 }
                 latestStatusCode = response.StatusCode;
+                //RefreshToken();
             }
             catch (Exception e)
             {
@@ -175,6 +215,7 @@ namespace VidaForaneaCliente.ServerConnection
                     comments = comments2.makeAList();
                 }
                 latestStatusCode = response.StatusCode;
+                //RefreshToken();
             }
             catch (Exception e)
             {
@@ -195,6 +236,8 @@ namespace VidaForaneaCliente.ServerConnection
                     student = await response.Content.ReadAsAsync<Student>();
                 }
                 latestStatusCode = response.StatusCode;
+                //RefreshToken();
+
             }
             catch (Exception e)
             {
@@ -217,6 +260,8 @@ namespace VidaForaneaCliente.ServerConnection
                 }
                 latestStatusCode = response.StatusCode;
                 Console.WriteLine(latestStatusCode);
+                //RefreshToken();
+
             }
             catch (Exception e)
             {
@@ -246,6 +291,8 @@ namespace VidaForaneaCliente.ServerConnection
                 {
                     value = false;
                 }
+                //RefreshToken();
+
             }
             catch (Exception e)
             {
@@ -270,6 +317,8 @@ namespace VidaForaneaCliente.ServerConnection
                 {
                     value = false;
                 }
+                //RefreshToken();
+
             }
             catch (Exception e)
             {
@@ -293,6 +342,8 @@ namespace VidaForaneaCliente.ServerConnection
                 {
                     value = false;
                 }
+                //RefreshToken();
+
             }
             catch (Exception e)
             {
@@ -317,6 +368,8 @@ namespace VidaForaneaCliente.ServerConnection
                 {
                     value = false;
                 }
+                //RefreshToken();
+
             }
             catch (Exception e)
             {
@@ -404,6 +457,12 @@ class RootComment
         }
         return comments;
     }
+}
+
+class RootTokenRefresh
+{
+    public string token { get; set; }
+
 }
 
 class RootToken

@@ -38,7 +38,7 @@ namespace VidaForaneaCliente.Views
 
         private async void btSend_Click(object sender, RoutedEventArgs e)
         {
-            string time = "";
+            string time = "ok";
             if (String.IsNullOrWhiteSpace(imageSource) || String.IsNullOrWhiteSpace(cbType.Text) || String.IsNullOrWhiteSpace(tbName.Text) || String.IsNullOrWhiteSpace(tbLocation.Text) || String.IsNullOrWhiteSpace(time))
             {
                 MessageBox.Show("Existen campos vacíos, por favor revise los campos", "Campos vacíos", MessageBoxButton.OK);
@@ -57,7 +57,8 @@ namespace VidaForaneaCliente.Views
 
                 };
                 bool respuesta = await Connection.PostPlace(place,isAdmin);
-                if (Connection.latestStatusCode == HttpStatusCode.Created)
+                Console.WriteLine(Connection.latestStatusCode);
+                if (Connection.latestStatusCode == HttpStatusCode.OK)
                 {
                     MessageBox.Show("Se ha registrado la solicitud del lugar", "Solicitud registrada", MessageBoxButton.OK);
                     menu.Show();

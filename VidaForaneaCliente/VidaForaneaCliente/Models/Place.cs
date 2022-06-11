@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace VidaForaneaCliente.Models
    
     public class Place
     {
-
+        [JsonIgnore]
         public int id { get; set; }
         public string name { get; set; }
        
