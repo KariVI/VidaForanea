@@ -15,6 +15,10 @@ using VidaForaneaCliente.Models;
 using VidaForaneaCliente.ServerConnection;
 using System.Net;
 using System.Collections.ObjectModel;
+using System.Windows.Forms;
+using TextBox = System.Windows.Controls.TextBox;
+using MessageBox = System.Windows.Forms.MessageBox;
+using Label = System.Windows.Controls.Label;
 
 namespace VidaForaneaCliente.Views
 {
@@ -24,8 +28,6 @@ namespace VidaForaneaCliente.Views
     public partial class PlaceView : Window
     {
         Student loggedStudent;
-        Admin loggedAdmin;
-        bool isAdmin = false;
         String category;
         Place place;
         public TextBox ContenedorDelMensaje
@@ -33,17 +35,7 @@ namespace VidaForaneaCliente.Views
             get { return ContenidoDelMensaje; }
             set { ContenidoDelMensaje = value; }
         }
-        public PlaceView(Place place, Admin loggedAdmin,String category)
-        {
-            InitializeComponent();
-            this.loggedAdmin = loggedAdmin;
-            lbUser.Content = loggedAdmin.nombre;
-            this.category = category;
-            this.place = place;
-            isAdmin = true;
-            intializePlace();
-            
-        }
+       
         public PlaceView(Place place, Student loggedStudent,String category)
         {
             InitializeComponent();
@@ -56,12 +48,33 @@ namespace VidaForaneaCliente.Views
             intializePlace();
         }
         
-        private async void intializePlace( )
+        private async void intializeOpinions( )
         {
-            lbSchedule.Text = place.schedule;
+          
             List<Opinion> opinions = await Connection.GetOpinionsByPlace(place);
-            foreach(var opinion in opinions){
+            foreach (var opinion in opinions) {
                 string name;
+                string puntuacion = "";
+                if (opinion.score == 5)
+                {
+                    puntuacion = "✪✪✪✪✪";
+                }
+                if (opinion.score == 4)
+                {
+                    puntuacion = " ✪✪✪✪";
+                }
+                if (opinion.score == 3)
+                {
+                    puntuacion = "  ✪✪✪";
+                }
+                if (opinion.score == 2)
+                {
+                    puntuacion = "   ✪✪";
+                }
+                if (opinion.score == 1)
+                {
+                    puntuacion = "     ✪";
+                }
                 if (((opinion.user).Substring(0, 2).ToUpper() == "ZS"))
                 {
                     Student student = await Connection.GetStudentByMatricula(opinion.user);
@@ -71,32 +84,40 @@ namespace VidaForaneaCliente.Views
                 {
                     name = "Administrador";
                 }
+                string user;
+               
+                    user = loggedStudent.enrollment;
 
-                PlantillaMensaje.Items.Add(new { Posicion = "Right", FondoElemento = "White", FondoCabecera = "#7f4ca5", Nombre = name, TiempoDeEnvio = opinion.date, MensajeEnviado = opinion.description, Puntuacion = "Puntuacion: " + opinion.score });
+                    
+                
+                if (loggedStudent.rol == "administrador" || opinion.user == user) {
+                    PlantillaMensaje.Items.Add(new { Posicion = "Right", FondoElemento = "White", FondoCabecera = "#7f4ca5", Nombre = name, TiempoDeEnvio = opinion.date, MensajeEnviado = opinion.description, Puntuacion = "Puntuacion: " + puntuacion, idOpinion = opinion.Id });
+                }
+                else
+                {
+                    PlantillaMensaje.Items.Add(new { Posicion = "Right", FondoElemento = "White", FondoCabecera = "#7f4ca5", Nombre = name, TiempoDeEnvio = opinion.date, MensajeEnviado = opinion.description, Puntuacion = "Puntuacion: " + puntuacion });
+                }
                 ContenidoDelMensaje.Clear();
             }
+            
+        }
+
+        private async void intializePlace()
+        {
+            lbSchedule.Text = place.schedule;
             cbStar.SelectedIndex = 0;
             lbName.Content = place.name;
             lbLocate.Text = place.address;
             lbServices.Text = place.services;
             imgPlace.Source = Utils.ConvertBytesToImage(Convert.FromBase64String(place.image));
+            intializeOpinions();
         }
-
         private void btReturn_Click(object sender, RoutedEventArgs e)
         {
-            if (isAdmin)
-            {
-                PlaceList placeList = new PlaceList(category, loggedAdmin);
-               
-                placeList.Show();
-                this.Close();
-            }
-            else
-            {
                 PlaceList placeList = new PlaceList(category, loggedStudent);
                 placeList.Show();
                 this.Close();
-            }
+            
             
 
         }
@@ -126,19 +147,35 @@ namespace VidaForaneaCliente.Views
                     string puntuacion = comboItem.Content.ToString();
                     Opinion opinion = new Opinion();
                     opinion.id_place = place.id; 
-                    if (isAdmin)
-                    {
-                        opinion.user = loggedAdmin.usuario;
-                    }
-                    else
-                    {
+                   
                         opinion.user = loggedStudent.enrollment;
-                    }
+                    
                         
                     opinion.date = DateTime.Now.Date.ToString();
                     opinion.hour = DateTime.Now.Hour.ToString();
                     opinion.description = mensajeFinal;
-                    opinion.score = Convert.ToInt32(puntuacion);
+                    int puntuacionNum = 0;
+                    if (puntuacion.Length == 5)
+                    {
+                        puntuacionNum = 5;
+                    }
+                    if (puntuacion.Length == 4)
+                    {
+                        puntuacionNum = 4;
+                    }
+                    if (puntuacion.Length == 3)
+                    {
+                        puntuacionNum = 3;
+                    }
+                    if (puntuacion.Length == 2)
+                    {
+                        puntuacionNum = 2;
+                    }
+                    if (puntuacion.Length == 1)
+                    {
+                        puntuacionNum = 1;
+                    }
+                    opinion.score = puntuacionNum;
                     bool correcto = await Connection.PostOpinion(place,opinion);
                     if (Connection.latestStatusCode == HttpStatusCode.Created)
                     {
@@ -147,7 +184,7 @@ namespace VidaForaneaCliente.Views
                     }
                     else if (Connection.latestStatusCode == HttpStatusCode.BadRequest)
                     {
-                        MessageBox.Show("Ya existe una opinion", "Ya existe una opinionn", MessageBoxButton.OK);
+                        MessageBox.Show("Ya existe una opinion", "Ya existe una opinionn", MessageBoxButtons.OK);
                     }
 
                     
@@ -160,6 +197,41 @@ namespace VidaForaneaCliente.Views
                     this.Close();
                 }
             }
+        }
+
+        private async void Label_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            Label label = (Label)sender;
+            if(label.Content != null)
+            {
+
+                try
+                {
+                    Opinion opinion = new Opinion();
+                    String id = label.Content.ToString();
+                    opinion.Id = Int32.Parse(id);
+
+
+                    var result = MessageBox.Show("Eliminar opinion", "Eliminar opinion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (result == System.Windows.Forms.DialogResult.Yes)
+                    {
+                        bool correcto = await Connection.DeleteOpinion(place, opinion);
+                        if (Connection.latestStatusCode == HttpStatusCode.OK)
+                        {
+                            PlantillaMensaje.Items.Clear();
+
+                            intializeOpinions();
+                        }
+                    }
+
+                }
+                catch (Exception exception) when (exception is TimeoutException)
+                {
+
+                    this.Close();
+                }
+            }
+
         }
     }
 }

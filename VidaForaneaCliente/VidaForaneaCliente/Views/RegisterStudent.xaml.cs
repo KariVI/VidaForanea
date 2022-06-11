@@ -41,14 +41,17 @@ namespace VidaForaneaCliente.Views
                 Student student = new Student();
                 student.name = tbName.Text;
                 student.enrollment = tbEnrollment.Text;
-                student.degree = cbDegree.SelectedItem.ToString();
+                ComboBoxItem comboItem = (ComboBoxItem)cbDegree.SelectedItem;
+                string degreeString = comboItem.Content.ToString();
+                student.degree = degreeString;
                 student.password = pbPassword.Password;
+                student.status = true;
                 bool correcto = await Connection.PostStudent(student);
                 if (Connection.latestStatusCode == HttpStatusCode.Created)
                 {
                     MessageBox.Show("Se ha registrado el estudiante correctamente", "Estudiante registrado", MessageBoxButton.OK);
-                    MainWindow mainWindow = new MainWindow(student);
-                    mainWindow.Show();
+                    Login login = new Login();
+                    login.Show();
                     this.Close();
                 }
                 else if (Connection.latestStatusCode == HttpStatusCode.BadRequest)

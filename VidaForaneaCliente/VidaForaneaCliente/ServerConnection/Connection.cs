@@ -15,62 +15,86 @@ namespace VidaForaneaCliente.ServerConnection
     {
         static HttpClient client = new HttpClient();
         public static HttpStatusCode latestStatusCode;
+        public static Token token;
 
-        public static void initializeConnection()
+        public static void InitializeConnection()
         {
 
-            client.BaseAddress = new Uri("http://192.168.0.25:9090");
-
+            client.BaseAddress = new Uri("http://10.81.188.100:9090");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
    
         }
 
-        public static async Task<Student> Login(string matricula, string password)
+        public static void AutheticateWithToken()
         {
-            Student student = new Student() { password = password };
-            try
-            {
-                string url = "login/" + matricula;
-                var json = Newtonsoft.Json.JsonConvert.SerializeObject(student);
-                var data = new StringContent(json, Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await client.PostAsync(url, data);
-                if (response.IsSuccessStatusCode)
-                {
-                    student = await response.Content.ReadAsAsync<Student>();
-                }
-                latestStatusCode = response.StatusCode;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-            return student;
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.accessToken);
         }
 
-        
-        public static async Task<Admin> LoginAdmin(string usuario, string password)
+        public static void AutheticateWithRefresh()
         {
-            Admin admin = new Admin() { contrasenia = password };
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.refreshToken);
+        }
+
+        private static void showConnectionError()
+        {
+            MessageBox.Show("Error en la conexión con el servidor", "Error de conexión", MessageBoxButton.OK);
+        }
+
+        public static async void RefreshToken()
+        {
             try
             {
-                string url = "loginAdmin/" + usuario;
-                var json = Newtonsoft.Json.JsonConvert.SerializeObject(admin);
+                string url = "/refresh";
+                var json = JsonConvert.SerializeObject("test");
                 var data = new StringContent(json, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await client.PostAsync(url, data);
                 if (response.IsSuccessStatusCode)
                 {
-                    admin = await response.Content.ReadAsAsync<Admin>();
+                    AutheticateWithRefresh();
+                    var stringData = response.Content.ReadAsStringAsync().Result;
+                    var preToken = JsonConvert.DeserializeObject<RootTokenRefresh>(stringData);
+                    token.accessToken = preToken.token;
+                    Console.WriteLine(token.refreshToken);
+                    AutheticateWithToken();
                 }
                 latestStatusCode = response.StatusCode;
             }
             catch (Exception e)
             {
+                showConnectionError();
                 Console.WriteLine(e.Message);
             }
-            return admin;
         }
+
+        public static async Task<Token> Login(string matricula, string password)
+        {
+            Student student = new Student() {enrollment = matricula, password = password };
+            Token token = new Token() { accessToken = "null", refreshToken = "null"};
+            try
+            {
+                string url = "/token";
+                var json = JsonConvert.SerializeObject(student);
+                var data = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PostAsync(url, data);
+                if (response.IsSuccessStatusCode)
+                {
+                    var stringData = response.Content.ReadAsStringAsync().Result;
+                    var preToken = JsonConvert.DeserializeObject<RootToken>(stringData);
+                    token = preToken.makeToken();
+                }
+                latestStatusCode = response.StatusCode;
+            }
+            catch (Exception e)
+            {
+                showConnectionError();
+                Console.WriteLine(e.Message);
+            }
+            return token;
+        }
+
+       
         public static async Task<List<Place>> GetPlacesByCategory(string estado, string category)
         {
             List <Place> places = new List<Place> ();
@@ -94,13 +118,65 @@ namespace VidaForaneaCliente.ServerConnection
                     places = places2.makeAList();
                 }
                 latestStatusCode = response.StatusCode;
+                //RefreshToken();
             } 
             catch (Exception e)
             {
+                showConnectionError();
                 Console.WriteLine(e.Message);
             }
             return places;
         }
+
+        internal static async Task<bool> DeleteOpinion(Place place, Opinion opinion)
+        {
+            bool value = true;
+            try
+            {
+                String idPlace = place.id.ToString();
+                String rute = "/lugares/" + idPlace + "/opiniones/" + opinion.Id;
+                HttpResponseMessage response = await client.DeleteAsync(rute);
+                latestStatusCode = response.StatusCode;
+                Console.WriteLine(latestStatusCode);
+                if (latestStatusCode != HttpStatusCode.OK)
+                {
+                    value = false;
+                }
+                //RefreshToken();
+            }
+            catch (Exception e)
+            {
+                value = false;
+                Console.WriteLine(e.Message);
+            }
+            return value;
+
+        }
+        public async static Task<bool> PutPlace(Place place, int id)
+        {
+            bool value = true;
+            try
+            {
+                string url = "/lugares/" + id;
+                var json = Newtonsoft.Json.JsonConvert.SerializeObject(place);
+                var data = new StringContent(json, Encoding.UTF8, "application/json");
+                HttpResponseMessage response = await client.PutAsync(url,data);
+                latestStatusCode = response.StatusCode;
+                if (latestStatusCode != HttpStatusCode.OK)
+                {
+                    value = false;
+                }
+                //RefreshToken();
+            }
+            catch (Exception e)
+            {
+                showConnectionError();
+                value = false;
+                Console.WriteLine(e.Message);
+            }
+            return value;
+    }
+
         public static async Task<List<Opinion>> GetOpinionsByPlace(Place place)
         {
             List<Opinion> opinions = new List<Opinion>();
@@ -115,13 +191,40 @@ namespace VidaForaneaCliente.ServerConnection
                     opinions = opinions2.makeAList();
                 }
                 latestStatusCode = response.StatusCode;
+                //RefreshToken();
             }
             catch (Exception e)
             {
+                showConnectionError();
                 Console.WriteLine(e.Message);
             }
             return opinions;
         }
+
+        public static async Task<List<Comment>> GetCommentsByForum(Forum forum)
+        {
+            List<Comment> comments = new List<Comment>();
+            try
+            {
+                HttpResponseMessage response = await client.GetAsync("foros/" + forum.Id + "/comentarios");
+                if (response.IsSuccessStatusCode)
+                {
+
+                    var stringData = response.Content.ReadAsStringAsync().Result;
+                    var comments2 = JsonConvert.DeserializeObject<RootComment>(stringData);
+                    comments = comments2.makeAList();
+                }
+                latestStatusCode = response.StatusCode;
+                //RefreshToken();
+            }
+            catch (Exception e)
+            {
+                showConnectionError();
+                Console.WriteLine(e.Message);
+            }
+            return comments;
+        }
+
         public static async Task<Student> GetStudentByMatricula(string matricula)
         {
             Student student = null;
@@ -133,9 +236,12 @@ namespace VidaForaneaCliente.ServerConnection
                     student = await response.Content.ReadAsAsync<Student>();
                 }
                 latestStatusCode = response.StatusCode;
+                //RefreshToken();
+
             }
             catch (Exception e)
             {
+                showConnectionError();
                 Console.WriteLine(e.Message);
             }
             return student;
@@ -146,19 +252,21 @@ namespace VidaForaneaCliente.ServerConnection
             bool value = true;
             try
             {
-                 Console.WriteLine(student.name);
                 HttpResponseMessage response = await client.PostAsJsonAsync("/estudiantes",student);
-                Console.WriteLine("Post");
                 if (response.IsSuccessStatusCode)
                 {
                     student = await response.Content.ReadAsAsync<Student>();
 
                 }
                 latestStatusCode = response.StatusCode;
+                Console.WriteLine(latestStatusCode);
+                //RefreshToken();
+
             }
             catch (Exception e)
             {
                 value = false;
+                showConnectionError();
                 Console.WriteLine(e.Message);
             }
             return value;
@@ -183,9 +291,12 @@ namespace VidaForaneaCliente.ServerConnection
                 {
                     value = false;
                 }
+                //RefreshToken();
+
             }
             catch (Exception e)
             {
+                showConnectionError();
                 value = false;
                 Console.WriteLine(e.Message);
             }
@@ -206,15 +317,71 @@ namespace VidaForaneaCliente.ServerConnection
                 {
                     value = false;
                 }
+                //RefreshToken();
+
             }
             catch (Exception e)
             {
+                showConnectionError();
+                value = false;
+                Console.WriteLine(e.Message);
+            }
+            return value;
+        }
+        public static async Task<bool> PostComment(Forum forum, Comment comment)
+        {
+            bool value = true;
+            try
+            {
+
+                String idForum = forum.Id.ToString();
+                String rute = "/foros/" + idForum + "/comentarios";
+                HttpResponseMessage response = await client.PostAsJsonAsync(rute, comment);
+                latestStatusCode = response.StatusCode;
+                if (latestStatusCode != HttpStatusCode.Created)
+                {
+                    value = false;
+                }
+                //RefreshToken();
+
+            }
+            catch (Exception e)
+            {
+                showConnectionError();
+                value = false;
+                Console.WriteLine(e.Message);
+            }
+            return value;
+        }
+
+        public static async Task<bool> DeleteComment(Forum forum, Comment comment)
+        {
+            bool value = true;
+            try
+            {
+                String idForum = forum.Id.ToString();
+                String rute = "/foros/" + idForum + "/comentarios/" + comment.Id;
+                HttpResponseMessage response = await client.DeleteAsync(rute);
+                latestStatusCode = response.StatusCode;
+                Console.WriteLine(latestStatusCode);
+                if (latestStatusCode != HttpStatusCode.OK)
+                {
+                    value = false;
+                }
+                //RefreshToken();
+
+            }
+            catch (Exception e)
+            {
+                showConnectionError();
                 value = false;
                 Console.WriteLine(e.Message);
             }
             return value;
         }
     }
+
+    
 
   
 }
@@ -272,4 +439,44 @@ class Root
             return opinions;
         }
     }
+
+class RootComment
+{
+    public List<Dictionary<string, object>> Data { get; set; }
+    public List<Comment> makeAList()
+    {
+        List<Comment> comments = new List<Comment>();
+        foreach (var dict in Data)
+        {
+            Comment comment = new Comment();
+            comment.Id = Convert.ToInt32(dict["id"]);
+            comment.description = (string)dict["description"];
+            comment.date = (string)dict["date"];
+            comment.student = (string)dict["student"];
+            comments.Add(comment);
+        }
+        return comments;
+    }
+}
+
+class RootTokenRefresh
+{
+    public string token { get; set; }
+
+}
+
+class RootToken
+{
+    public string access_token { get; set; }
+    public string refresh_token { get; set; }
+
+    public Token makeToken()
+    {
+        Token token = new Token();
+        token.accessToken = access_token;
+        token.refreshToken = refresh_token;
+        return token;
+    }
+}
+
 

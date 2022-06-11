@@ -1,18 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using VidaForaneaCliente.Models;
 using VidaForaneaCliente.ServerConnection;
 
@@ -25,7 +14,6 @@ namespace VidaForaneaCliente.Views
     {
         Menu menu;
         Student loggedStudent;
-        Admin loggedAdmin ;
         string imageSource;
         bool isAdmin = false;
         public AddPlace(Menu menu, Student loggedStudent)
@@ -35,16 +23,12 @@ namespace VidaForaneaCliente.Views
             imageSource = "";
             this.loggedStudent = loggedStudent;
             lbUser.Content = loggedStudent.name;
+            if (loggedStudent.rol == "administrador")
+            {
+                isAdmin = true;
+            }
         }
-        public AddPlace(Menu menu,  Admin loggedAdmin)
-        {
-            InitializeComponent();
-            this.menu = menu;
-            imageSource = "";
-            this.loggedAdmin = loggedAdmin;
-            lbUser.Content = loggedAdmin.nombre;
-            isAdmin = true;
-        }
+     
 
         private void btCancel_Click(object sender, RoutedEventArgs e)
         {
@@ -73,7 +57,8 @@ namespace VidaForaneaCliente.Views
 
                 };
                 bool respuesta = await Connection.PostPlace(place,isAdmin);
-                if (Connection.latestStatusCode == HttpStatusCode.Created)
+                Console.WriteLine(Connection.latestStatusCode);
+                if (Connection.latestStatusCode == HttpStatusCode.OK)
                 {
                     MessageBox.Show("Se ha registrado la solicitud del lugar", "Solicitud registrada", MessageBoxButton.OK);
                     menu.Show();

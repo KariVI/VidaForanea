@@ -22,8 +22,6 @@ namespace VidaForaneaCliente.Views
     public partial class MainWindow : Window
     {
         Student loggedStudent;
-        Admin loggedAdmin;
-        bool isAdmin = false;
         public MainWindow(Student student)
         {
             this.loggedStudent = student;
@@ -31,29 +29,14 @@ namespace VidaForaneaCliente.Views
             lblUser.Content = loggedStudent.name;
         }
 
-        public MainWindow(Admin admin)
-        {
-            this.loggedAdmin = admin;
-            InitializeComponent();
-            lblUser.Content = loggedAdmin.nombre;
-            isAdmin = true;
-        }
-
 
         private void btPlace_Click(object sender, RoutedEventArgs e)
         {
-            if(isAdmin)
-            {
-                Menu menu =  new Menu(loggedAdmin);
-                menu.Show();
-                this.Close();
-            }
-            else
-            {
+           
                 Menu menu = new Menu(loggedStudent);
                 menu.Show();
                 this.Close();
-            }
+            
 
         }
 
@@ -64,6 +47,22 @@ namespace VidaForaneaCliente.Views
                 login.Show();
                 this.Close();
             
+        }
+
+        private void btForo_Click(object sender, RoutedEventArgs e)
+        {
+            if (loggedStudent.rol == "administrador")
+            {
+                ForumAdmin forum = new ForumAdmin(loggedStudent, this);
+                forum.Show();
+                this.Hide();
+            }
+            else
+            {
+                ForumView forum = new ForumView(loggedStudent, this);
+                forum.Show();
+                this.Hide();
+            }
         }
     }
 }

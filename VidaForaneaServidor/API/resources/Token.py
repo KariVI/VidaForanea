@@ -26,6 +26,8 @@ class TokenResource(Resource):
         password = json_data.get('password')
 
         student = Student.get_by_enrollment(enrollment)
+        print(student)
+        print("Hola")
         if not student or not check_password(password, student.password):
             return {'message': 'enrollment or password is incorrect'}, HTTPStatus.UNAUTHORIZED
 
@@ -42,6 +44,7 @@ class RefreshResource(Resource):
     @jwt_required(refresh=True)
     def post(self):
         current_user = get_jwt_identity()
+        json_data = request.get_json()
 
         token = create_access_token(identity=current_user, fresh=False)
 

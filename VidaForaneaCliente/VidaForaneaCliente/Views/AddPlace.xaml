@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:wpfx="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="AddPlace" Height="710" Width="950">
+        Title="AddPlace" Height="710" Width="950"
+        WindowStartupLocation="CenterScreen">
 
     <Window.Resources>
         <ResourceDictionary>

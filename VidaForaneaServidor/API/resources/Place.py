@@ -1,3 +1,4 @@
+import json
 from tabnanny import check
 from flask import request
 from flask_restful import Resource
@@ -36,27 +37,25 @@ class ListPlaces(Resource):
         json_data = request.get_json()
 
         name = json_data.get('name')
+        status = ""
         if json_data.get('status') == 1:
             status = "aprobado"
         if json_data.get('status') == 0:
             status = "pendiente"
-
         imageNotEncodedToBytes = json_data.get('image')
         image = bytes(imageNotEncodedToBytes, 'utf-8')
+        json_data["image"] = image
+        json_data["status"] = status
         try:
             data = place_schema.load(data=json_data)
-            data.image=image
         except ValidationError as exc:
             return {'message': "Validation errors", 'errors': exc.messages}, HTTPStatus.BAD_REQUEST
         if Place.get_by_name(name):
             return {'message': 'Place already registered'}, HTTPStatus.BAD_REQUEST
-
         place = Place(**data)
         lista_places.append(place)
         place.save()
-        response=place_schema.dump(place)
-        response.status_code=201
-        return  response
+        return HTTPStatus.CREATED
 
 
 class ResourcePlace(Resource):

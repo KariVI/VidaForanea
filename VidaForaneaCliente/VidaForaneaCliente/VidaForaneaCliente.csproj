@@ -63,6 +63,7 @@
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20505.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -95,18 +96,41 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\Comment.cs" />
+    <Compile Include="Models\Forum.cs" />
     <Compile Include="Models\Opinion.cs" />
     <Compile Include="Models\Place.cs" />
     <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\Token.cs" />
     <Compile Include="Models\Utils.cs" />
     <Compile Include="ServerConnection\Connection.cs" />
+    <Compile Include="Views\Forum.xaml.cs">
+      <DependentUpon>Forum.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ForumAdmin.xaml.cs">
+      <DependentUpon>ForumAdmin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ModifyPlace.xaml.cs">
+      <DependentUpon>ModifyPlace.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PlaceView.xaml.cs">
       <DependentUpon>PlaceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RegisterStudent.xaml.cs">
       <DependentUpon>RegisterStudent.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\Forum.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ForumAdmin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ModifyPlace.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Styles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -197,6 +221,9 @@
     <Resource Include="Images\food.png" />
     <Resource Include="Images\leisure.png" />
     <Resource Include="Images\stationary.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\forumLogo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

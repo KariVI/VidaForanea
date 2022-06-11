@@ -25,7 +25,6 @@ namespace VidaForaneaCliente.Views
     public partial class PlaceList : Window
     {
         Student loggedStudent;
-        Admin loggedAdmin;
         bool isAdmin = false;
         string category;
         public ObservableCollection<String> PlacesCollection{ get; set; }
@@ -35,17 +34,22 @@ namespace VidaForaneaCliente.Views
         {
             InitializeComponent();
             this.loggedStudent = loggedStudent;
+            if (loggedStudent.rol == "administrador")
+            {
+                isAdmin = true;
+            }
             lbCategory.Content = category;
             lbUser.Content = loggedStudent.name;
             this.category = category;
             InitializePlaces(category);
 
         }
+       
         public async void InitializePlaces(String category)
         {
             if (category.Equals("Papeleria"))
             {
-                category = "Herramientas";
+                category = "Papelería";
                 imgPlace.Source = new BitmapImage(new Uri(System.IO.Path.GetFullPath("..\\..\\Images\\stationary.png"), UriKind.Absolute));
 
             }
@@ -79,30 +83,14 @@ namespace VidaForaneaCliente.Views
            
         }
     
-        public PlaceList(String category, Admin loggedAdmin)
-        {
-            InitializeComponent();
-            isAdmin = true;
-            this.loggedAdmin = loggedAdmin;
-            lbCategory.Content = category;
-            this.category = category;
-            lbUser.Content = loggedAdmin.nombre;
-            InitializePlaces(category);
-        }
+       
         private void btReturn_Click(object sender, RoutedEventArgs e)
         {
-            if (isAdmin)
-            {
-                Menu menu = new Menu(loggedAdmin);
-                menu.Show();
-                this.Close();
-            }
-            else
-            {
+            
                 Menu menu = new Menu(loggedStudent);
                 menu.Show();
                 this.Close();
-            }
+            
         }
 
         private void lstbCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -112,8 +100,8 @@ namespace VidaForaneaCliente.Views
 
             if (isAdmin)
             {
-                PlaceView placeview = new PlaceView(place,loggedAdmin, category);
-                placeview.Show();
+                ModifyPlace modifyPlace = new ModifyPlace(loggedStudent, place,category);
+                modifyPlace.Show();
                 this.Close();
             }
             else
