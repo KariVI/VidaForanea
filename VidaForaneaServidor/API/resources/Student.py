@@ -15,7 +15,6 @@ students_list_schema = StudentSchema(many=True)
 class ListStudents(Resource):
 
     def get(self):
-        data = []
         students = Student.get_all_students()
         return students_list_schema.dump(students), HTTPStatus.OK
 
@@ -45,17 +44,6 @@ class ResourceStudent(Resource):
         
         return student_schema.dump(student), HTTPStatus.OK
 
-    def patch(self, enrollment):
-        student = Student.get_by_enrollment(enrollment)
-        if student is None:
-            return {'message': 'Estudiante no encontrado'}, HTTPStatus.NOT_FOUND
-        if student.status is True:
-            student.status = False
-        else:
-            student.status = True
-    
-        student.save()
-        return student_schema.dump(student), HTTPStatus.OK
 
 
 

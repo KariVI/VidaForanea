@@ -25,17 +25,15 @@ class ListOpinions(Resource):
     def post(self, id_place):
         json_data = request.get_json()
 
-        user = json_data.get('user')       
+        student = json_data.get('student')       
         id_place = json_data.get('id_place')
 
         try:
             data = opinion_schema.load(data=json_data)
         except ValidationError as exc:
             return {'message': "Validation errors", 'errors': exc.messages}, HTTPStatus.BAD_REQUEST
-        if Opinion.get_by_id_place_user(id_place,user):
+        if Opinion.get_by_id_place_student(id_place,student):
             return {'message': 'Opinion ya registrada'}, HTTPStatus.BAD_REQUEST
-
-
         opinion = Opinion(**data)
         lista_opinions.append(opinion)
         opinion.save()
@@ -61,11 +59,13 @@ class ResourceOpinion(Resource):
 
         if opinion is None:
             return {'message': 'Opinion no encontrado'}, HTTPStatus.NOT_FOUND
-        current_user = get_jwt_identity()
-        current_student = Student.get_by_enrollment(current_user)
+        current_student = get_jwt_identity()
+        current_student = Student.get_by_enrollment(current_student)
         if current_student.rol == 'estudiante'  and current_student.id != opinion.id:
             response=jsonify({'message': 'Access is not allowed'})
             response.status_code=403
             return response
         opinion.delete()
-        return  HTTPStatus.NO_CONTENT
+        response=jsonify({})
+        response.status_code=204
+        return  response

@@ -17,4 +17,5 @@ class OpinionSchema(Schema):
     date =fields.String(required=True)
     hour =fields.String(required=True, validate=[validate.Length(max=5)])
     description = fields.String(required=True)
+    score=fields.Int(required=True)
     id_place = fields.Int(require=True)

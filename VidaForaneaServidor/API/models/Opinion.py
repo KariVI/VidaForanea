@@ -8,7 +8,7 @@ class Opinion(db.Model):
     __tablename__ = 'Opinion'
 
     id = db.Column(db.Integer, primary_key=True)
-    user=db.Column(db.String(200),
+    student=db.Column(db.String(200),
         nullable=False)
     date = db.Column(db.String(200), nullable=False)
     hour = db.Column(db.String(5), nullable=False)
@@ -28,8 +28,8 @@ class Opinion(db.Model):
         return cls.query.filter_by(id_place=id_place).all()
 
     @classmethod
-    def get_by_id_place_user(cls, id_place, id_user):
-        return cls.query.filter_by(id_place=id_place, user=id_user).all()
+    def get_by_id_place_student(cls, id_place, id_student):
+        return cls.query.filter_by(id_place=id_place, student=id_student).all()
     @classmethod
     def get_all_opinions(cls):
         return cls.query.all()

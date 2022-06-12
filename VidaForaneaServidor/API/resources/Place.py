@@ -55,7 +55,15 @@ class ListPlaces(Resource):
         place = Place(**data)
         lista_places.append(place)
         place.save()
-        return HTTPStatus.CREATED
+        response=jsonify({'id': place.id,
+            'name': place.name,
+            'address': place.address,
+            'services': place.services,
+            'schedule': place.schedule,
+            'status': place.status,
+            'type_place': place.type_place})
+        response.status_code=201
+        return  response
 
 
 class ResourcePlace(Resource):
@@ -88,7 +96,9 @@ class ResourcePlace(Resource):
             response.status_code=403
             return response
         place.delete()
-        return  HTTPStatus.NO_CONTENT
+        response=jsonify({})
+        response.status_code=204
+        return  response
 
     @jwt_required()
     def put(self, place_id):
@@ -114,46 +124,16 @@ class ResourcePlace(Resource):
             response.status_code=403
             return response
         place.save()
-        response=place_schema.dump(place)
-        response.status_code=200
-        return  response
-"""
-    def patch(self, place_id):
-        place = next((place for place in lista_places if place.id == place_id ), None)
-        if place is None:
-            return {'message': 'Lugar no encontrado'}, HTTPStatus.NOT_FOUND
-        json_data = request.get_json()
-        name = json_data.get('name')
-        address = json_data.get('address')
-        services = json_data.get('services')
-        schedule = json_data.get('schedule')
-        type_place=json_data.get('type_place')
-        imageNotEncodedToBytes = json_data.get('image')
-        image = bytes(imageNotEncodedToBytes, 'utf-8')
-        place.name = name
-        place.address = address
-        place.services = services
-        place.schedule = schedule
-        if json_data.get('status') == 1:
-            status = "aprobado"
-        if json_data.get('status') == 0:
-            status = "pendiente"
-        place.type_place = type_place
-        place.image = image
-
-        data = {
-            'id': place.id,
+        response=jsonify({'id': place.id,
             'name': place.name,
             'address': place.address,
             'services': place.services,
             'schedule': place.schedule,
-            'new status': place.status,
-            'type_place': place.type_place,
-            'image': place.image.decode("utf-8")
-        }
-        place.save()
-        return data, HTTPStatus.OK
-"""
+            'status': place.status,
+            'type_place': place.type_place})
+        response.status_code=200
+        return  response
+
 class ListPlacesStatus(Resource):
 
     def get(self,status):
