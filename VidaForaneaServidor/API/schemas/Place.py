@@ -16,7 +16,7 @@ class BytesField(fields.Field):
 
 class PlaceSchema(Schema):
     class Meta:
-       model: Comment
+       ordered = True
     id = fields.Int(dump_only=True)
     name = fields.String(require=True)
     address =fields.String(required=True)

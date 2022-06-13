@@ -11,10 +11,11 @@ from models.Opinion import Opinion
 
 class OpinionSchema(Schema):
     class Meta:
-       model: Opinion
+       ordered = True
     id = fields.Int(dump_only=True)
     student = fields.String(require=True)
     date =fields.String(required=True)
     hour =fields.String(required=True, validate=[validate.Length(max=5)])
     description = fields.String(required=True)
+    score=fields.Int(required=True)
     id_place = fields.Int(require=True)
