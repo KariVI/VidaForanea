@@ -10,12 +10,19 @@ namespace VidaForaneaCliente.Models
     public class Comment
     {
         [JsonIgnore]
-        public int Id { get; set; }
+        public int id { get; set; }
+
+        [JsonProperty("id")]
+        private int IntAlternativeSetter
+        {
+            // get is intentionally omitted here
+            set { id = value; }
+        }
         public string student { get; set; }
         public string date { get; set; }
         public string hour { get; set; }
         public string description { get; set; }
-        public int id_forum { get; set; }
+        public int forum_id { get; set; }
 
 
 

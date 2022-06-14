@@ -89,10 +89,10 @@ namespace VidaForaneaCliente.Views
                 string name;
                 Student student = await Connection.GetStudentByMatricula(comment.student);
                 name = student.name;
-               
+                
                 if (isAdmin || loggedStudent.enrollment == comment.student)
                 {
-                    PlantillaMensaje.Items.Add(new { Posicion = "Center", FondoElemento = "White", FondoCabecera = "#e6dded", Nombre = name, idComentario = comment.Id, TiempoDeEnvio = comment.date, MensajeEnviado = comment.description });
+                    PlantillaMensaje.Items.Add(new { Posicion = "Center", FondoElemento = "White", FondoCabecera = "#e6dded", Nombre = name, idComentario = comment.id, TiempoDeEnvio = comment.date, MensajeEnviado = comment.description });
 
                 } else
                 {
@@ -126,13 +126,13 @@ namespace VidaForaneaCliente.Views
                 {
                     string mensaje = mensajeFinal;
                     Comment comment = new Comment();
-                    comment.id_forum = idDegree;
+                    comment.forum_id = idDegree;
                     comment.student = loggedStudent.enrollment;
                     comment.date = DateTime.Now.Date.ToString();
                     comment.hour = DateTime.Now.Hour.ToString();
                     comment.description = mensajeFinal;
                     bool correcto = await Connection.PostComment(new Forum() { Id = idDegree }, comment); ;
-                    if (Connection.latestStatusCode == HttpStatusCode.Created)
+                    if (Connection.latestStatusCode == HttpStatusCode.OK)
                     {
                         PlantillaMensaje.Items.Add(new { Posicion = "Center", FondoElemento = "White", FondoCabecera = "#e6dded", Nombre = loggedStudent.name, TiempoDeEnvio = comment.date, MensajeEnviado = mensaje });
                         ContenidoDelMensaje.Clear();
@@ -166,11 +166,11 @@ namespace VidaForaneaCliente.Views
                 try
             {
                 Comment comment = new Comment();
-                comment.id_forum = idDegree;
+                comment.forum_id = idDegree;
                 String id = label.Content.ToString();
-                comment.Id = Int32.Parse(id);
+                comment.id = Int32.Parse(id);
                 bool correcto = await Connection.DeleteComment(new Forum() { Id = idDegree }, comment);
-                if (Connection.latestStatusCode == HttpStatusCode.OK)
+                if (Connection.latestStatusCode == HttpStatusCode.NoContent)
                 {
                     MessageBox.Show("Comentario del foro eliminado", "Comentario eliminado", MessageBoxButton.OK);
                     InitializeComments();

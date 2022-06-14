@@ -31,8 +31,6 @@ class ListComments(Resource):
             return {'message': "Validation errors", 'errors': exc.messages}, HTTPStatus.BAD_REQUEST
         if Comment.get_by_forum_id_student(forum_id,student):
             return {'message': 'Comentario ya registrado'}, HTTPStatus.BAD_REQUEST
-
-
         comment = Comment(**data)
         lista_comments.append(comment)
         comment.save()

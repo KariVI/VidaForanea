@@ -67,5 +67,5 @@ class ResourceOpinion(Resource):
             return response
         opinion.delete()
         response=jsonify({})
-        response.status_code=204
+        response.status_code=HTTPStatus.NO_CONTENT
         return  response

@@ -39,6 +39,8 @@ namespace VidaForaneaCliente.Views
                 token = await Connection.Login(txtUsuario.Text, txtPassword.Password);
                     if (Connection.latestStatusCode == HttpStatusCode.OK && token.accessToken != "null")
                     {
+                        Connection.matricula = txtUsuario.Text;
+                        Connection.password = txtPassword.Password;
                         Student student;
                         Connection.token = token;
                         Connection.AutheticateWithToken();

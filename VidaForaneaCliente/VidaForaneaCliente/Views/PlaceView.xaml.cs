@@ -75,9 +75,9 @@ namespace VidaForaneaCliente.Views
                 {
                     puntuacion = "     ✪";
                 }
-                if (((opinion.user).Substring(0, 2).ToUpper() == "ZS"))
+                if (((opinion.student).Substring(0, 2).ToUpper() == "ZS"))
                 {
-                    Student student = await Connection.GetStudentByMatricula(opinion.user);
+                    Student student = await Connection.GetStudentByMatricula(opinion.student);
                     name = student.name;
                 }
                 else
@@ -90,8 +90,8 @@ namespace VidaForaneaCliente.Views
 
                     
                 
-                if (loggedStudent.rol == "administrador" || opinion.user == user) {
-                    PlantillaMensaje.Items.Add(new { Posicion = "Right", FondoElemento = "White", FondoCabecera = "#7f4ca5", Nombre = name, TiempoDeEnvio = opinion.date, MensajeEnviado = opinion.description, Puntuacion = "Puntuacion: " + puntuacion, idOpinion = opinion.Id });
+                if (loggedStudent.rol == "administrador" || opinion.student == user) {
+                    PlantillaMensaje.Items.Add(new { Posicion = "Right", FondoElemento = "White", FondoCabecera = "#7f4ca5", Nombre = name, TiempoDeEnvio = opinion.date, MensajeEnviado = opinion.description, Puntuacion = "Puntuacion: " + puntuacion, idOpinion = opinion.id });
                 }
                 else
                 {
@@ -148,7 +148,7 @@ namespace VidaForaneaCliente.Views
                     Opinion opinion = new Opinion();
                     opinion.id_place = place.id; 
                    
-                        opinion.user = loggedStudent.enrollment;
+                        opinion.student = loggedStudent.enrollment;
                     
                         
                     opinion.date = DateTime.Now.Date.ToString();
@@ -177,9 +177,9 @@ namespace VidaForaneaCliente.Views
                     }
                     opinion.score = puntuacionNum;
                     bool correcto = await Connection.PostOpinion(place,opinion);
-                    if (Connection.latestStatusCode == HttpStatusCode.Created)
+                    if (Connection.latestStatusCode == HttpStatusCode.OK)
                     {
-                         PlantillaMensaje.Items.Add(new { Posicion = "Right", FondoElemento = "White", FondoCabecera = "#7f4ca5", Nombre = opinion.user, TiempoDeEnvio = DateTime.Now, MensajeEnviado = mensaje, Puntuacion = "Puntuacion: " + puntuacion });
+                         PlantillaMensaje.Items.Add(new { Posicion = "Right", FondoElemento = "White", FondoCabecera = "#7f4ca5", Nombre = opinion.student, TiempoDeEnvio = DateTime.Now, MensajeEnviado = mensaje, Puntuacion = "Puntuacion: " + puntuacion });
                         ContenidoDelMensaje.Clear();
                     }
                     else if (Connection.latestStatusCode == HttpStatusCode.BadRequest)
@@ -209,14 +209,14 @@ namespace VidaForaneaCliente.Views
                 {
                     Opinion opinion = new Opinion();
                     String id = label.Content.ToString();
-                    opinion.Id = Int32.Parse(id);
+                    opinion.id = Int32.Parse(id);
 
 
                     var result = MessageBox.Show("Eliminar opinion", "Eliminar opinion", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (result == System.Windows.Forms.DialogResult.Yes)
                     {
                         bool correcto = await Connection.DeleteOpinion(place, opinion);
-                        if (Connection.latestStatusCode == HttpStatusCode.OK)
+                        if (Connection.latestStatusCode == HttpStatusCode.NoContent)
                         {
                             PlantillaMensaje.Items.Clear();
 

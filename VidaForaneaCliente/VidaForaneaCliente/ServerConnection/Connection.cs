@@ -16,11 +16,13 @@ namespace VidaForaneaCliente.ServerConnection
         static HttpClient client = new HttpClient();
         public static HttpStatusCode latestStatusCode;
         public static Token token;
+        public static string matricula { get; set; }
+        public static string password { get; set; }
 
         public static void InitializeConnection()
         {
 
-            client.BaseAddress = new Uri("http://10.81.188.100:9090");
+            client.BaseAddress = new Uri("http://192.168.0.180:9090");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
@@ -34,6 +36,9 @@ namespace VidaForaneaCliente.ServerConnection
 
         public static void AutheticateWithRefresh()
         {
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+               new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.refreshToken);
         }
 
@@ -47,18 +52,19 @@ namespace VidaForaneaCliente.ServerConnection
             try
             {
                 string url = "/refresh";
-                var json = JsonConvert.SerializeObject("test");
+                AutheticateWithRefresh();
+                Student student = new Student() { enrollment = matricula, password = password };
+                var json = JsonConvert.SerializeObject(student);
                 var data = new StringContent(json, Encoding.UTF8, "application/json");
                 HttpResponseMessage response = await client.PostAsync(url, data);
                 if (response.IsSuccessStatusCode)
                 {
-                    AutheticateWithRefresh();
                     var stringData = response.Content.ReadAsStringAsync().Result;
                     var preToken = JsonConvert.DeserializeObject<RootTokenRefresh>(stringData);
                     token.accessToken = preToken.token;
                     Console.WriteLine(token.refreshToken);
-                    AutheticateWithToken();
                 }
+                AutheticateWithToken();
                 latestStatusCode = response.StatusCode;
             }
             catch (Exception e)
@@ -118,7 +124,7 @@ namespace VidaForaneaCliente.ServerConnection
                     places = places2.makeAList();
                 }
                 latestStatusCode = response.StatusCode;
-                //RefreshToken();
+                RefreshToken();
             } 
             catch (Exception e)
             {
@@ -134,15 +140,15 @@ namespace VidaForaneaCliente.ServerConnection
             try
             {
                 String idPlace = place.id.ToString();
-                String rute = "/lugares/" + idPlace + "/opiniones/" + opinion.Id;
+                String rute = "/lugares/" + idPlace + "/opiniones/" + opinion.id;
                 HttpResponseMessage response = await client.DeleteAsync(rute);
                 latestStatusCode = response.StatusCode;
                 Console.WriteLine(latestStatusCode);
-                if (latestStatusCode != HttpStatusCode.OK)
+                if (latestStatusCode != HttpStatusCode.NoContent)
                 {
                     value = false;
                 }
-                //RefreshToken();
+                RefreshToken();
             }
             catch (Exception e)
             {
@@ -166,7 +172,7 @@ namespace VidaForaneaCliente.ServerConnection
                 {
                     value = false;
                 }
-                //RefreshToken();
+                RefreshToken();
             }
             catch (Exception e)
             {
@@ -187,11 +193,11 @@ namespace VidaForaneaCliente.ServerConnection
                 {
 
                     var stringData = response.Content.ReadAsStringAsync().Result;
-                    var opinions2 = JsonConvert.DeserializeObject<RootOpinion>(stringData);
-                    opinions = opinions2.makeAList();
+                    var opinions2 = JsonConvert.DeserializeObject<List<Opinion>>(stringData);
+                    opinions = opinions2;
                 }
                 latestStatusCode = response.StatusCode;
-                //RefreshToken();
+                RefreshToken();
             }
             catch (Exception e)
             {
@@ -211,11 +217,15 @@ namespace VidaForaneaCliente.ServerConnection
                 {
 
                     var stringData = response.Content.ReadAsStringAsync().Result;
-                    var comments2 = JsonConvert.DeserializeObject<RootComment>(stringData);
-                    comments = comments2.makeAList();
+                    var comments2 = JsonConvert.DeserializeObject<List<Comment>>(stringData);
+                    comments = comments2;
+                    for (int i = 0; i < comments.Count; i++)
+                    {
+                        Console.WriteLine(comments[i].id);
+                    }
                 }
                 latestStatusCode = response.StatusCode;
-                //RefreshToken();
+                RefreshToken();
             }
             catch (Exception e)
             {
@@ -236,7 +246,7 @@ namespace VidaForaneaCliente.ServerConnection
                     student = await response.Content.ReadAsAsync<Student>();
                 }
                 latestStatusCode = response.StatusCode;
-                //RefreshToken();
+                RefreshToken();
 
             }
             catch (Exception e)
@@ -260,7 +270,7 @@ namespace VidaForaneaCliente.ServerConnection
                 }
                 latestStatusCode = response.StatusCode;
                 Console.WriteLine(latestStatusCode);
-                //RefreshToken();
+                RefreshToken();
 
             }
             catch (Exception e)
@@ -291,7 +301,7 @@ namespace VidaForaneaCliente.ServerConnection
                 {
                     value = false;
                 }
-                //RefreshToken();
+                RefreshToken();
 
             }
             catch (Exception e)
@@ -317,7 +327,7 @@ namespace VidaForaneaCliente.ServerConnection
                 {
                     value = false;
                 }
-                //RefreshToken();
+                RefreshToken();
 
             }
             catch (Exception e)
@@ -342,7 +352,7 @@ namespace VidaForaneaCliente.ServerConnection
                 {
                     value = false;
                 }
-                //RefreshToken();
+                RefreshToken();
 
             }
             catch (Exception e)
@@ -360,15 +370,15 @@ namespace VidaForaneaCliente.ServerConnection
             try
             {
                 String idForum = forum.Id.ToString();
-                String rute = "/foros/" + idForum + "/comentarios/" + comment.Id;
+                String rute = "/foros/" + idForum + "/comentarios/" + comment.id;
                 HttpResponseMessage response = await client.DeleteAsync(rute);
                 latestStatusCode = response.StatusCode;
                 Console.WriteLine(latestStatusCode);
-                if (latestStatusCode != HttpStatusCode.OK)
+                if (latestStatusCode != HttpStatusCode.NoContent)
                 {
                     value = false;
                 }
-                //RefreshToken();
+                RefreshToken();
 
             }
             catch (Exception e)
@@ -426,13 +436,13 @@ class Root
             foreach (var dict in Data)
             {
                 Opinion opinion = new Opinion();
-                opinion.Id = Convert.ToInt32(dict["id"]);
+                opinion.id = Convert.ToInt32(dict["id"]);
                 opinion.description = (string)dict["description"];
                 opinion.date = (string)dict["date"];
                 opinion.score = Convert.ToInt32(dict["score"]);
                 opinion.id_place = Convert.ToInt32(dict["score"]);
                 opinion.hour = (string)dict["hour"];
-                opinion.user = (string)dict["user"];
+                opinion.student = (string)dict["user"];
 
             opinions.Add(opinion);
             }
@@ -442,21 +452,8 @@ class Root
 
 class RootComment
 {
-    public List<Dictionary<string, object>> Data { get; set; }
-    public List<Comment> makeAList()
-    {
-        List<Comment> comments = new List<Comment>();
-        foreach (var dict in Data)
-        {
-            Comment comment = new Comment();
-            comment.Id = Convert.ToInt32(dict["id"]);
-            comment.description = (string)dict["description"];
-            comment.date = (string)dict["date"];
-            comment.student = (string)dict["student"];
-            comments.Add(comment);
-        }
-        return comments;
-    }
+    public Comment[] Data { get; set; }
+    
 }
 
 class RootTokenRefresh

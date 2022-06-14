@@ -57,8 +57,7 @@ namespace VidaForaneaCliente.Views
 
                 };
                 bool respuesta = await Connection.PostPlace(place,isAdmin);
-                Console.WriteLine(Connection.latestStatusCode);
-                if (Connection.latestStatusCode == HttpStatusCode.OK)
+                if (Connection.latestStatusCode == HttpStatusCode.Created)
                 {
                     MessageBox.Show("Se ha registrado la solicitud del lugar", "Solicitud registrada", MessageBoxButton.OK);
                     menu.Show();
