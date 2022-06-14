@@ -1,7 +1,7 @@
 import http.client as httpClient
 import json
 
-python3 ./VidaForaneaServidor/API/app.py
+
 
 def test_Login():
     global token
