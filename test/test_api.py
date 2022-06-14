@@ -1,15 +1,15 @@
 import http.client as httpClient
 import json
 
-
+python3 ./VidaForaneaServidor/API/app.py
 
 def test_Login():
     global token
     global refresh_token
-    connection = httpClient.HTTPConnection("127.0.0.1",9090)
+    connection = httpClient.HTTPConnection("10.1.0.128",9090)
     data = {
-        "enrollment": "zs19014017", 
-        "password": "12345", 
+        "enrollment": "zs19014017",
+        "password": "12345",
     }
     data2 = json.dumps(data)
     headers = {"Content-Type": "application/json"}
@@ -30,10 +30,10 @@ def test_Login():
 def test_Refresh():
     global token
     global refresh_token
-    connection = httpClient.HTTPConnection("127.0.0.1",9090)
+    connection = httpClient.HTTPConnection("10.1.0.128",9090)
     data = {
-        "enrollment": "zs19014017", 
-        "password": "12345", 
+        "enrollment": "zs19014017",
+        "password": "12345",
     }
     bear = "Bearer " + refresh_token
     data2 = json.dumps(data)
