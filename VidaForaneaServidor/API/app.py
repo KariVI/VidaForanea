@@ -37,19 +37,16 @@ def register_resources(app):
 
     api.add_resource(ListStudents, '/estudiantes')
     api.add_resource(ResourceStudent, '/estudiantes/<string:enrollment>')
-    
     api.add_resource(ListPlaces, '/lugares'),
     api.add_resource(ResourcePlace, '/lugares/<int:place_id>')
     api.add_resource(ListOpinions, '/lugares/<int:id_place>/opiniones')
     api.add_resource(ResourceOpinion, '/lugares/<int:id_place>/opiniones/<int:opinion_id>')
-    api.add_resource(ListPlacesStatus, '/lugares/<string:status>'),
-    api.add_resource(ListPlacesType, '/lugares/<string:status>/<string:type_place>')
-
     api.add_resource(ListForums, '/foros'),
     api.add_resource(ResourceForum, '/foros/<int:forum_id>')
     api.add_resource(ListComments, '/foros/<int:forum_id>/comentarios')
     api.add_resource(ResourceComments, '/foros/<int:forum_id>/comentarios/<int:comment_id>'),
-    
+    api.add_resource(ListPlacesStatus, '/lugares/<string:status>'),
+    api.add_resource(ListPlacesType, '/lugares/<string:status>/<string:type_place>')
     api.add_resource(TokenResource, '/token')
     api.add_resource(RefreshResource, '/refresh')
     api.add_resource(RevokeResource, '/revoke')

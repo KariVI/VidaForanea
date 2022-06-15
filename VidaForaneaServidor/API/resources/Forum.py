@@ -15,7 +15,7 @@ forum_schema = ForumSchema()
 forums_list_schema = ForumSchema(many=True)
 
 class ListForums(Resource):
-
+    @jwt_required()
     def get(self):
         forums = Forum.get_all_forums()  
         return forums_list_schema.dump(forums), HTTPStatus.OK
@@ -44,7 +44,7 @@ class ListForums(Resource):
 
 
 class ResourceForum(Resource):
-
+    @jwt_required()
     def get(self, forum_id):
         forum = Forum.get_by_id(forum_id)
         if forum is None:
