@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: ddocker build --file ./VidaForaneaServidor/API/Dockerfile --tag vidaforanea:$(date +%s) .
+      run: docker build --file ./VidaForaneaServidor/API/Dockerfile --tag vidaforanea:$(date +%s) .
