@@ -24,8 +24,8 @@ jobs:
           username: marivs
           password: 7cb9d36d-0e09-4d71-8c05-f8c6ecc2e291
       - name: Build the Docker image
+        working-directory: ./VidaForaneaServidor/API
         run: |
-         working-directory: ./VidaForaneaServidor/API
          docker build --file ./Dockerfile.txt --tag marivs/vidaforanea:latest .
       - name: push the Docker image
         run: docker push marivs/vidaforanea:latest
