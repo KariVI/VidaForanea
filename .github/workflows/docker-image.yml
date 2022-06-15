@@ -21,10 +21,10 @@ jobs:
         name: Login to DockerHub
         uses: docker/login-action@v2
         with:
+          path: ./VidaForaneaServidor/API
           username: marivs
           password: 7cb9d36d-0e09-4d71-8c05-f8c6ecc2e291
       - name: Build the Docker image
-        working-directory: .
         run: |
          docker build --file Dockerfile --tag marivs/vidaforanea:latest .
       - name: push the Docker image
