@@ -1,7 +1,29 @@
 
+from http import HTTPStatus
 import http.client as httpClient
 import json
 
+def test_PostStudent():
+    connection = httpClient.HTTPConnection("127.0.0.1",9090)
+    data = {
+        "name" : "Carlos Miguel Pérez Pérez",
+        "enrollment": "zs19014020",
+        "password": "12345",
+        "status": 1,
+        "rol" : "estudiante",
+        "degree" : "Lic. en Ingeniería de Software"
+    }
+    data2 = json.dumps(data)
+    headers = {"Content-Type": "application/json"}
+    response = connection.request(
+        "POST",
+        "/estudiantes",
+        data2,
+        headers,
+    )
+    generalResponse = connection.getresponse()
+    statusCode = generalResponse.status
+    assert HTTPStatus.CREATED == statusCode
 
 
 def test_Login():
@@ -26,7 +48,7 @@ def test_Login():
     statusCode = generalResponse.status
     token = json_format["access_token"]
     refresh_token = json_format["refresh_token"]
-    assert 200 == statusCode
+    assert HTTPStatus.OK == statusCode
 
 def test_Refresh():
     global token
@@ -50,6 +72,17 @@ def test_Refresh():
     json_format = json.loads(readResponse)
     statusCode = generalResponse.status
     token = json_format["token"]
-    assert 200 == statusCode
-def test_Test():
-    assert 1 == 2
+    assert HTTPStatus.OK == statusCode
+
+def test_GetStudent():
+    connection = httpClient.HTTPConnection("127.0.0.1",9090)
+    headers = {"Content-Type": "application/json"}
+    response = connection.request(
+        "GET",
+        "/estudiantes/zs19014017",
+        "",
+        headers
+    )
+    generalResponse = connection.getresponse()
+    statusCode = generalResponse.status
+    assert statusCode == HTTPStatus.OK

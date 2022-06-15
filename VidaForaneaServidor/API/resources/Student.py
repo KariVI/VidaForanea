@@ -41,7 +41,6 @@ class ResourceStudent(Resource):
         if student is None:
             
             return {'message': 'Estudiante no encontrado'}, HTTPStatus.NOT_FOUND
-        
         return student_schema.dump(student), HTTPStatus.OK
 
 
