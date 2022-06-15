@@ -51,3 +51,5 @@ def test_Refresh():
     statusCode = generalResponse.status
     token = json_format["token"]
     assert 200 == statusCode
+def test_Test():
+    assert 1 == 2
