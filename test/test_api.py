@@ -7,7 +7,7 @@ import json
 def test_Login():
     global token
     global refresh_token
-    connection = httpClient.HTTPConnection("http://localhost:",9090)
+    connection = httpClient.HTTPConnection("127.0.0.1",9090)
     data = {
         "enrollment": "zs19014017",
         "password": "12345",
@@ -31,7 +31,7 @@ def test_Login():
 def test_Refresh():
     global token
     global refresh_token
-    connection = httpClient.HTTPConnection("http://localhost",9090)
+    connection = httpClient.HTTPConnection("127.0.0.1",9090)
     data = {
         "enrollment": "zs19014017",
         "password": "12345",
