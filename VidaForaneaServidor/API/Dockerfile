@@ -3,7 +3,7 @@ FROM python:3.8-slim-buster
 EXPOSE 9000/tcp
 EXPOSE 9000/udp
 WORKDIR ./VidaForaneaServidor/API
-COPY requirements.txt requirements.txt
+COPY ./VidaForaneaServidor/API/requirements.txt ./VidaForaneaServidor/API/requirements.txt
 RUN pip3 install -r requirements.txt
 
 COPY . .
