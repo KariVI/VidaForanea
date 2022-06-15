@@ -1,0 +1,29 @@
+Gustavo Flores Romero
+zs19014017
+12345
+1
+estudiante
+Lic. en Ingeniería de Software
+Mariana Yazmín Vargas Segura
+zs19014013
+12345
+1
+estudiante
+Lic. en Ingeniería de Software
+Karina Valdés Iglesias
+zs19014012
+12345
+1
+estudiante
+Lic. en Ingeniería de Software
+Administrador 1
+admin
+12345
+1
+administrador
+Lic. en Ingeniería de Software
+zs19014020
+25/05/2022
+12:30
+Me parece que hay buenos maestros
+4
