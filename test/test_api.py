@@ -31,7 +31,7 @@ def test_Login():
     global refresh_token
     connection = httpClient.HTTPConnection("127.0.0.1",9090)
     data = {
-        "enrollment": "zs19014017",
+        "enrollment": "zs19014020",
         "password": "12345",
     }
     data2 = json.dumps(data)
@@ -79,7 +79,7 @@ def test_GetStudent():
     headers = {"Content-Type": "application/json"}
     response = connection.request(
         "GET",
-        "/estudiantes/zs19014017",
+        "/estudiantes/zs19014020",
         "",
         headers
     )
