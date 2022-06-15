@@ -17,7 +17,7 @@ class ListStudents(Resource):
     def get(self):
         students = Student.get_all_students()
         return students_list_schema.dump(students), HTTPStatus.OK
-    @jwt_required()
+
     def post(self):
         json_data = request.get_json()
         try:
