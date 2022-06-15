@@ -1,7 +1,6 @@
 import http.client as httpClient
 import json
-
-
+import Token from resources
 
 def test_Login():
     global token
