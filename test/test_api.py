@@ -97,6 +97,7 @@ def test_Refresh():
     assert HTTPStatus.OK == statusCode
 
 def test_GetStudent():
+    global token
     connection = httpClient.HTTPConnection("127.0.0.1",9090)
     bear = "Bearer " + token
     headers = {"Content-Type": "application/json", "Authorization" : bear}
@@ -136,6 +137,7 @@ def test_PostPlace():
     assert HTTPStatus.CREATED == statusCode
 
 def test_GetPlace():
+    global token
     connection = httpClient.HTTPConnection("127.0.0.1",9090)
     bear = "Bearer " + token
     headers = {"Content-Type": "application/json", "Authorization" : bear}
