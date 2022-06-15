@@ -5,7 +5,7 @@ import http.client as httpClient
 import json
 
 def test_PostStudent():
-    connection = httpClient.HTTPConnection("127.0.0.1",9000)
+    connection = httpClient.HTTPConnection("127.0.0.1",5000)
     data = {
         "name" : "Carlos Miguel Pérez Pérez",
         "enrollment": "zs19014020",
@@ -27,7 +27,7 @@ def test_PostStudent():
     assert HTTPStatus.CREATED == statusCode
 
 def test_PostAdmin():
-    connection = httpClient.HTTPConnection("127.0.0.1",9000)
+    connection = httpClient.HTTPConnection("127.0.0.1",5000)
     data = {
         "name" : "Admin",
         "enrollment": "admin",
@@ -51,7 +51,7 @@ def test_PostAdmin():
 def test_Login():
     global token
     global refresh_token
-    connection = httpClient.HTTPConnection("127.0.0.1",9000)
+    connection = httpClient.HTTPConnection("127.0.0.1",5000)
     data = {
         "enrollment": "admin",
         "password": "12345",
@@ -75,7 +75,7 @@ def test_Login():
 def test_Refresh():
     global token
     global refresh_token
-    connection = httpClient.HTTPConnection("127.0.0.1",9000)
+    connection = httpClient.HTTPConnection("127.0.0.1",5000)
     data = {
         "enrollment": "zs19014017",
         "password": "12345",
@@ -97,7 +97,7 @@ def test_Refresh():
     assert HTTPStatus.OK == statusCode
 
 def test_GetStudent():
-    connection = httpClient.HTTPConnection("127.0.0.1",9000)
+    connection = httpClient.HTTPConnection("127.0.0.1",5000)
     headers = {"Content-Type": "application/json"}
     response = connection.request(
         "GET",
@@ -111,7 +111,7 @@ def test_GetStudent():
 
 def test_PostPlace():
     global token
-    connection = httpClient.HTTPConnection("127.0.0.1",9000)
+    connection = httpClient.HTTPConnection("127.0.0.1",5000)
     data = {
         "name": "Bola de Oro",
         "address": "Calle Centro #25",
@@ -135,7 +135,7 @@ def test_PostPlace():
     assert HTTPStatus.CREATED == statusCode
 
 def test_GetPlace():
-    connection = httpClient.HTTPConnection("127.0.0.1",9000)
+    connection = httpClient.HTTPConnection("127.0.0.1",5000)
     headers = {"Content-Type": "application/json"}
     response = connection.request(
         "GET",
@@ -149,7 +149,7 @@ def test_GetPlace():
 
 def test_DeletePlace():
     global token
-    connection = httpClient.HTTPConnection("127.0.0.1",9000)
+    connection = httpClient.HTTPConnection("127.0.0.1",5000)
     bear = "Bearer " + token
     headers = {"Content-Type": "application/json","Authorization" : bear}
     response = connection.request(
@@ -164,7 +164,7 @@ def test_DeletePlace():
 
 def test_PostComment():
     global token
-    connection = httpClient.HTTPConnection("127.0.0.1",9000)
+    connection = httpClient.HTTPConnection("127.0.0.1",5000)
     data = {
         "student": "zs19014022",
         "date": "25/05/2022",
