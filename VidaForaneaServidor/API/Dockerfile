@@ -1,7 +1,7 @@
 FROM python:3.8-slim-buster
 
-EXPOSE 9090/tcp
-EXPOSE 9090/udp
+EXPOSE 9000/tcp
+EXPOSE 9000/udp
 WORKDIR ./VidaForaneaServidor/API
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
