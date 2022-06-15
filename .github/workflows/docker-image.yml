@@ -11,9 +11,6 @@ jobs:
   docker:
     runs-on: ubuntu-latest
     steps:
-      - name: Build the Docker image
-        run: |
-         docker build --file Dockerfile --tag marivs/vidaforanea:latest .
       -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v2
@@ -29,5 +26,9 @@ jobs:
 
       - name: push the Docker image
         run: docker push marivs/vidaforanea:latest
+      - name: Build the Docker image
+        working-directory: .
+        run: |
+         docker build --file Dockerfile --tag marivs/vidaforanea:latest .
            
            
