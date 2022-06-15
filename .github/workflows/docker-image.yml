@@ -15,7 +15,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
+      working-directory: ./VidaForaneaServidor/API
       run: |
-         working-directory: ./VidaForaneaServidor/API
          docker build --file Dockerfile --tag vidaforanea:$(date +%s) .
            
