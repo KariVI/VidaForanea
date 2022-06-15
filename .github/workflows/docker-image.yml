@@ -28,7 +28,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          file: ./src/VidaForaneaServidor/API/Dockerfile
+          file: ./VidaForanea/VidaForaneaServidor/API/Dockerfile
           push: true
           tags: marivs/vidaforanea:latest
            
