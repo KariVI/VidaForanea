@@ -14,7 +14,7 @@ opinion_schema = OpinionSchema()
 opinion_list_schema = OpinionSchema(many=True)
 
 class ListOpinions(Resource):
-
+    @jwt_required()
     def get(self, id_place):
         data = []
         opinions = Opinion.get_by_id_place(id_place)
@@ -37,7 +37,6 @@ class ListOpinions(Resource):
         opinion = Opinion(**data)
         lista_opinions.append(opinion)
         opinion.save()
-
         response=opinion_schema.dump(opinion)
         response.status_code=201
         return  response
@@ -45,7 +44,7 @@ class ListOpinions(Resource):
 
 
 class ResourceOpinion(Resource):
-
+    @jwt_required()
     def get(self, opinion_id, id_place):
         opinion = Opinion.get_by_id(opinion_id)
         if opinion is None:
@@ -59,13 +58,13 @@ class ResourceOpinion(Resource):
 
         if opinion is None:
             return {'message': 'Opinion no encontrado'}, HTTPStatus.NOT_FOUND
-        current_student = get_jwt_identity()
-        current_student = Student.get_by_enrollment(current_student)
-        if current_student.rol == 'estudiante'  and current_student.id != opinion.id:
+        current_user = get_jwt_identity()
+        current_student = Student.get_by_enrollment(current_user)
+        if current_student.rol == 'estudiante'  and current_user != opinion.student:
             response=jsonify({'message': 'Access is not allowed'})
             response.status_code=403
             return response
         opinion.delete()
         response=jsonify({})
-        response.status_code=HTTPStatus.NO_CONTENT
+        response.status_code=204
         return  response
