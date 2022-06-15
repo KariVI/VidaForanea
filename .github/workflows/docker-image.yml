@@ -20,14 +20,17 @@ jobs:
       -
         name: Login to DockerHub
         uses: docker/login-action@v2
-        with:
+        with:      
           username: marivs
           password: 7cb9d36d-0e09-4d71-8c05-f8c6ecc2e291
-      -
-        name: Build and push
-        uses: docker/build-push-action@v3
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Build and push       
+        uses: docker/build-push-action@v2
         with:
-          file: ./VidaForaneaServidor/API/Dockerfile
+          context: ./VidaForaneaServidor/API
           push: true
-          tags: user/app:latest
+          tags: marivs/vidaforanea:latest
+
+           
            
