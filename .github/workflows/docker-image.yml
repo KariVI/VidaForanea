@@ -26,7 +26,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
-          path: ./VidaForaneaServidor/API
+          context: ./VidaForaneaServidor/API
           push: true
           tags: marivs/vidaforanea:latest
 
