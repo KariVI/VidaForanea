@@ -5,7 +5,7 @@ import http.client as httpClient
 import json
 
 def test_PostStudent():
-    connection = httpClient.HTTPConnection("127.0.0.1",9090)
+    connection = httpClient.HTTPConnection("127.0.0.1",5000)
     data = {
         "name" : "Carlos Miguel Pérez Pérez",
         "enrollment": "zs19014020",
@@ -184,4 +184,3 @@ def test_PostComment():
     generalResponse = connection.getresponse()
     statusCode = generalResponse.status
     assert HTTPStatus.OK == statusCode
-    
