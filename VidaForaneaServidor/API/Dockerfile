@@ -2,8 +2,7 @@ FROM python:3.8-slim-buster
 
 EXPOSE 9000/tcp
 EXPOSE 9000/udp
-WORKDIR /api_vidaforanea:v2
-
+WORKDIR ./VidaForaneaServidor/API
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 

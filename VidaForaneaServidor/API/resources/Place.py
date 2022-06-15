@@ -15,7 +15,7 @@ place_schema = PlaceSchema()
 places_list_schema = PlaceSchema(many=True)
 
 class ListPlaces(Resource):
-    @jwt_required()
+
     def get(self):
         data = []
         places = Place.get_all_places()
@@ -67,7 +67,7 @@ class ListPlaces(Resource):
 
 
 class ResourcePlace(Resource):
-    @jwt_required()
+
     def get(self, place_id):
         place = next((place for place in lista_places if place.id == place_id ), None)
         if place is None:
@@ -135,7 +135,7 @@ class ResourcePlace(Resource):
         return  response
 
 class ListPlacesStatus(Resource):
-    @jwt_required()
+
     def get(self,status):
         data = []
         places = Place.get_by_status(status)
@@ -153,7 +153,6 @@ class ListPlacesStatus(Resource):
         return {'data': data}, HTTPStatus.OK
 
 class ListPlacesType(Resource):
-    @jwt_required()
     def get(self,status,type_place):
         data = []
         places = Place.get_by_type_place(status,type_place)
