@@ -4,7 +4,7 @@ EXPOSE 9000/tcp
 EXPOSE 9000/udp
 WORKDIR ./VidaForaneaServidor/API
 COPY ./VidaForaneaServidor/API/requirements.txt ./VidaForaneaServidor/API/requirements.txt
-RUN pip3 install -r requirements.txt
+RUN pip3 install -r ./VidaForaneaServidor/API/requirements.txt
 
 COPY . .
 
