@@ -13,11 +13,11 @@ from schemas.Student import StudentSchema
 student_schema = StudentSchema()
 students_list_schema = StudentSchema(many=True)
 class ListStudents(Resource):
-
+    @jwt_required()
     def get(self):
         students = Student.get_all_students()
         return students_list_schema.dump(students), HTTPStatus.OK
-
+    @jwt_required()
     def post(self):
         json_data = request.get_json()
         try:
@@ -35,12 +35,13 @@ class ListStudents(Resource):
 
     
 class ResourceStudent(Resource):
-
+    @jwt_required()
     def get(self, enrollment):
         student = Student.get_by_enrollment(enrollment)
         if student is None:
             
             return {'message': 'Estudiante no encontrado'}, HTTPStatus.NOT_FOUND
+        
         return student_schema.dump(student), HTTPStatus.OK
 
 

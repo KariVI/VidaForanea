@@ -98,7 +98,8 @@ def test_Refresh():
 
 def test_GetStudent():
     connection = httpClient.HTTPConnection("127.0.0.1",9090)
-    headers = {"Content-Type": "application/json"}
+    bear = "Bearer " + token
+    headers = {"Content-Type": "application/json", "Authorization" : bear}
     response = connection.request(
         "GET",
         "/estudiantes/zs19014020",
@@ -136,7 +137,8 @@ def test_PostPlace():
 
 def test_GetPlace():
     connection = httpClient.HTTPConnection("127.0.0.1",9090)
-    headers = {"Content-Type": "application/json"}
+    bear = "Bearer " + token
+    headers = {"Content-Type": "application/json", "Authorization" : bear}
     response = connection.request(
         "GET",
         "/lugares/1",
