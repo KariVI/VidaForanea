@@ -35,7 +35,7 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - run:  |
-       python3 ./VidaForaneaServidor/API/app.py
+       python3 ./VidaForaneaServidor/API/app.py &
        ping 127.0.0.1 -n 6 > nul
        pytest
 
