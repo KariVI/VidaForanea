@@ -27,7 +27,7 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: ./VidaForaneaServidor/API
+          file: ./VidaForaneaServidor/API/Dockerfile
           push: true
           tags: user/app:latest
            
