@@ -1,11 +1,11 @@
 FROM python:3.8-slim-buster
 
-EXPOSE 9000/tcp
-EXPOSE 9000/udp
+EXPOSE 9090/tcp
+EXPOSE 9090/udp
 WORKDIR ./VidaForaneaServidor/API
 COPY requirements.txt requirements.txt
 RUN pip3 install -r requirements.txt
 
 COPY . .
 
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0" "-p" "9090"]
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
