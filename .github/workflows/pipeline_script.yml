@@ -35,12 +35,13 @@ jobs:
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - run:  |
-       rm -r ./VidaForaneaServidor/API/migrations
-       rm ./VidaForaneaServidor/API/database.db
+      working-directory: /VidaForaneaServidor/API
+       rm -r ./migrations
+       rm ./database.db
        flask db init
        flask db migrate 
        flask db upgrade
-       python3 ./VidaForaneaServidor/API/app.py &
+       python3 ./app.py &
        sleep 10
        pytest
        
