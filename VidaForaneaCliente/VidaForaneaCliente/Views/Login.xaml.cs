@@ -26,6 +26,7 @@ namespace VidaForaneaCliente.Views
         public Login()
         {
             Connection.token = null;
+            Connection.CleanConnection();
             InitializeComponent();
         }
 

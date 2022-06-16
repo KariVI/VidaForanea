@@ -29,6 +29,13 @@ namespace VidaForaneaCliente.ServerConnection
    
         }
 
+        public static void CleanConnection()
+        {
+            client.DefaultRequestHeaders.Accept.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+                new MediaTypeWithQualityHeaderValue("application/json"));
+        }
+
         public static void AutheticateWithToken()
         {
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.accessToken);
@@ -62,7 +69,6 @@ namespace VidaForaneaCliente.ServerConnection
                     var stringData = response.Content.ReadAsStringAsync().Result;
                     var preToken = JsonConvert.DeserializeObject<RootTokenRefresh>(stringData);
                     token.accessToken = preToken.token;
-                    Console.WriteLine(token.refreshToken);
                 }
                 AutheticateWithToken();
                 latestStatusCode = response.StatusCode;

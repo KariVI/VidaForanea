@@ -9,29 +9,29 @@ connection = httpClient.HTTPConnection("127.0.0.1",9090)
 file = open("databaseData.txt", "r")
 lines = file.read().splitlines()
 
-def Login():
+def login():
     global token
     global refresh_token
     data = {
         "enrollment": "admin",
         "password": "12345",
     }
-    data2 = json.dumps(data)
     headers = {"Content-Type": "application/json"}
+    data2 = json.dumps(data)
     response = connection.request(
-        "POST",
-        "/token",
-        data2,
-        headers,
+            "POST",
+            "/token",
+            data2,
+            headers,
     )
-    generalResponse = connection.getresponse()
-    readResponse = generalResponse.read()
-    json_format = json.loads(readResponse)
-    statusCode = generalResponse.status
+
+    general_response = connection.getresponse()
+    read_response = general_response.read()
+    json_format = json.loads(read_response)
     token = json_format["access_token"]
     refresh_token = json_format["refresh_token"]
 
-def addStudents():
+def add_students():
     print(lines)
     data = {
         "name" : "",
@@ -50,7 +50,6 @@ def addStudents():
         data["rol"] = lines[4 + j]
         data["degree"] = lines[5 + j]
         j += 6
-        print(data)
         data2 = json.dumps(data)
         headers = {"Content-Type": "application/json"}
         response = connection.request(
@@ -59,9 +58,9 @@ def addStudents():
             data2,
             headers,
         )
-        generalResponse = connection.getresponse().read()
+        general_response = connection.getresponse().read()
 
-def addComments():
+def add_comments():
     global token
     data = {
         "student": "",
@@ -86,10 +85,10 @@ def addComments():
            data2,
            headers,
         )
-        generalResponse = connection.getresponse().read()
+        general_response = connection.getresponse().read()
         
 
-addStudents()
-Login()
-addComments()
+add_students()
+login()
+add_comments()
     
