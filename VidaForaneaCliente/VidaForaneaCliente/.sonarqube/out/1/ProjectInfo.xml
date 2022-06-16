@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProjectInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.sonarsource.com/msbuild/integration/2015/1">
+  <ProjectName>VidaForaneaCliente</ProjectName>
+  <ProjectLanguage>C#</ProjectLanguage>
+  <ProjectType>Product</ProjectType>
+  <ProjectGuid>ffa6e1fe-2171-4ebe-a4e6-341d6b32c271</ProjectGuid>
+  <FullPath>C:\Users\jack-\Documents\GitHub\VidaForanea\VidaForaneaCliente\VidaForaneaCliente\VidaForaneaCliente.csproj</FullPath>
+  <IsExcluded>false</IsExcluded>
+  <AnalysisResults>
+    <AnalysisResult Id="FilesToAnalyze" Location="C:\Users\jack-\Documents\GitHub\VidaForanea\VidaForaneaCliente\VidaForaneaCliente\.sonarqube\conf\1\FilesToAnalyze.txt" />
+  </AnalysisResults>
+  <AnalysisSettings>
+    <Property Name="sonar.cs.roslyn.reportFilePaths">C:\Users\jack-\Documents\GitHub\VidaForanea\VidaForaneaCliente\VidaForaneaCliente\.sonarqube\out\1\Issues.json</Property>
+    <Property Name="sonar.cs.analyzer.projectOutPaths">C:\Users\jack-\Documents\GitHub\VidaForanea\VidaForaneaCliente\VidaForaneaCliente\.sonarqube\out\1</Property>
+  </AnalysisSettings>
+  <Configuration>Debug</Configuration>
+  <Platform>AnyCPU</Platform>
+</ProjectInfo>

@@ -1,0 +1,6 @@
+projectKey=VidaForaneaCliente
+serverUrl=http://localhost:9090
+serverVersion=9.5.0.56709
+dashboardUrl=http://localhost:9090/dashboard?id=VidaForaneaCliente
+ceTaskId=AYFqFo5jTikMBao5fFhU
+ceTaskUrl=http://localhost:9090/api/ce/task?id=AYFqFo5jTikMBao5fFhU
