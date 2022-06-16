@@ -22,7 +22,7 @@ namespace VidaForaneaCliente.ServerConnection
         public static void InitializeConnection()
         {
 
-            client.BaseAddress = new Uri("http://192.168.0.180:9090");
+            client.BaseAddress = new Uri("http://192.168.1.5:9090");
             client.DefaultRequestHeaders.Accept.Clear();
             client.DefaultRequestHeaders.Accept.Add(
                 new MediaTypeWithQualityHeaderValue("application/json"));
@@ -270,7 +270,6 @@ namespace VidaForaneaCliente.ServerConnection
                 }
                 latestStatusCode = response.StatusCode;
                 Console.WriteLine(latestStatusCode);
-                RefreshToken();
 
             }
             catch (Exception e)

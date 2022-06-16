@@ -113,11 +113,17 @@
     <Compile Include="Views\ModifyPlace.xaml.cs">
       <DependentUpon>ModifyPlace.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\GenerateReport.xaml.cs">
+      <DependentUpon>GenerateReport.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PlaceView.xaml.cs">
       <DependentUpon>PlaceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RegisterStudent.xaml.cs">
       <DependentUpon>RegisterStudent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Window1.xaml.cs">
+      <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\Forum.xaml">
       <SubType>Designer</SubType>
@@ -130,6 +136,10 @@
     <Page Include="Views\ModifyPlace.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\GenerateReport.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Styles.xaml">
       <SubType>Designer</SubType>
@@ -176,6 +186,10 @@
     <Page Include="Views\RegisterStudent.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Window1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

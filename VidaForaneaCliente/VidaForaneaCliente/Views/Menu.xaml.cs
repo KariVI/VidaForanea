@@ -36,6 +36,8 @@ namespace VidaForaneaCliente.Views
             {
                 btRequest.Opacity = 0;
                 btRequest.IsEnabled = false;
+                btReport.Opacity = 0;
+                btReport.IsEnabled = false;
             } 
         }
 
@@ -84,14 +86,20 @@ namespace VidaForaneaCliente.Views
                 addPlace.Show();
                 this.Hide();
 
-            
-
+           
         }
 
         private void btRequest_Click(object sender, RoutedEventArgs e)
         {
             PlaceList placeList = new PlaceList("", loggedStudent);
             placeList.Show();
+            this.Close();
+        }
+
+        private void btReport_Click(object sender, RoutedEventArgs e)
+        {
+            GenerateReport generateReport = new GenerateReport(loggedStudent);
+            generateReport.Show();
             this.Close();
         }
     }
