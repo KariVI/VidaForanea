@@ -122,9 +122,6 @@
     <Compile Include="Views\RegisterStudent.xaml.cs">
       <DependentUpon>RegisterStudent.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
-    </Compile>
     <Page Include="Views\Forum.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -186,10 +183,6 @@
     <Page Include="Views\RegisterStudent.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Window1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
