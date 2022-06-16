@@ -14,7 +14,6 @@ opinion_schema = OpinionSchema()
 opinion_list_schema = OpinionSchema(many=True)
 
 class ListOpinions(Resource):
-    @jwt_required()
     def get(self, id_place):
         opinions = Opinion.get_by_id_place(id_place)
 
@@ -23,7 +22,7 @@ class ListOpinions(Resource):
     @jwt_required()
     def post(self, id_place):
         json_data = request.get_json()
-        student = json_data.get('student')       
+        student = json_data.get('student')
         try:
             data = opinion_schema.load(data=json_data)
         except ValidationError as exc:
@@ -47,9 +46,9 @@ class ResourceOpinion(Resource):
             return {'message': 'Opinion no encontrado'}, HTTPStatus.NOT_FOUND
 
         return opinion_schema.dump(opinion), HTTPStatus.OK
-        
+
     @jwt_required()
-    def delete(self, opinion_id, id_place):       
+    def delete(self, opinion_id, id_place):
         opinion = Opinion.get_by_id(opinion_id)
 
         if opinion is None:
