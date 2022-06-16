@@ -16,7 +16,6 @@ opinion_list_schema = OpinionSchema(many=True)
 class ListOpinions(Resource):
     @jwt_required()
     def get(self, id_place):
-        data = []
         opinions = Opinion.get_by_id_place(id_place)
 
         return opinion_list_schema.dump(opinions), HTTPStatus.OK
@@ -24,10 +23,7 @@ class ListOpinions(Resource):
     @jwt_required()
     def post(self, id_place):
         json_data = request.get_json()
-
         student = json_data.get('student')       
-        id_place = json_data.get('id_place')
-
         try:
             data = opinion_schema.load(data=json_data)
         except ValidationError as exc:

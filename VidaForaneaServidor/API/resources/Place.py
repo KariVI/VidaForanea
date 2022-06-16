@@ -42,8 +42,8 @@ class ListPlaces(Resource):
             status = "aprobado"
         if json_data.get('status') == 0:
             status = "pendiente"
-        imageNotEncodedToBytes = json_data.get('image')
-        image = bytes(imageNotEncodedToBytes, 'utf-8')
+        image_not_encoded = json_data.get('image')
+        image = bytes(image_not_encoded, 'utf-8')
         json_data["image"] = image
         json_data["status"] = status
         try:

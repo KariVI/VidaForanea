@@ -15,7 +15,6 @@ comments_list_schema = CommentSchema(many=True)
 class ListComments(Resource):
     @jwt_required()
     def get(self, forum_id):
-        data = []
         comments = Comment.get_by_forum_id(forum_id)
         return comments_list_schema.dump(comments), HTTPStatus.OK
 
@@ -24,7 +23,7 @@ class ListComments(Resource):
         json_data = request.get_json()
 
         student = json_data.get('student')
-        forum_id = json_data.get('forum_id')
+
         try:
             data = comment_schema.load(data=json_data)
         except ValidationError as exc:
