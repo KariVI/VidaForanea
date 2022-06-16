@@ -27,7 +27,7 @@ class ListComments(Resource):
         try:
             data = comment_schema.load(data=json_data)
         except ValidationError as exc:
-            return {'message': "Validation errors", 'errors': exc.messages}, HTTPStatus.BAD_REQUEST
+            return {'message': "Validation errors", 'errors': exc.messages}, HTTPStatus.INTERNAL_SERVER_ERROR
         if Comment.get_by_forum_id_student(forum_id,student):
             return {'message': 'Comentario ya registrado'}, HTTPStatus.BAD_REQUEST
 

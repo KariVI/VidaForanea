@@ -38,6 +38,9 @@ namespace VidaForaneaCliente.ServerConnection
 
         public static void AutheticateWithToken()
         {
+            client.DefaultRequestHeaders.Clear();
+            client.DefaultRequestHeaders.Accept.Add(
+               new MediaTypeWithQualityHeaderValue("application/json"));
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.accessToken);
         }
 
@@ -75,8 +78,6 @@ namespace VidaForaneaCliente.ServerConnection
             }
             catch (Exception e)
             {
-                showConnectionError();
-                Console.WriteLine(e.Message);
             }
         }
 
@@ -142,6 +143,7 @@ namespace VidaForaneaCliente.ServerConnection
 
         internal static async Task<bool> DeleteOpinion(Place place, Opinion opinion)
         {
+            AutheticateWithToken();
             bool value = true;
             try
             {
@@ -191,6 +193,7 @@ namespace VidaForaneaCliente.ServerConnection
 
         public static async Task<List<Opinion>> GetOpinionsByPlace(Place place)
         {
+            AutheticateWithToken();
             List<Opinion> opinions = new List<Opinion>();
             try
             {
@@ -215,6 +218,7 @@ namespace VidaForaneaCliente.ServerConnection
 
         public static async Task<List<Comment>> GetCommentsByForum(Forum forum)
         {
+            AutheticateWithToken();
             List<Comment> comments = new List<Comment>();
             try
             {
@@ -243,6 +247,7 @@ namespace VidaForaneaCliente.ServerConnection
 
         public static async Task<Student> GetStudentByMatricula(string matricula)
         {
+            AutheticateWithToken();
             Student student = null;
             try
             {
@@ -371,6 +376,7 @@ namespace VidaForaneaCliente.ServerConnection
 
         public static async Task<bool> DeleteComment(Forum forum, Comment comment)
         {
+            AutheticateWithToken();
             bool value = true;
             try
             {
@@ -378,7 +384,6 @@ namespace VidaForaneaCliente.ServerConnection
                 String rute = "/foros/" + idForum + "/comentarios/" + comment.id;
                 HttpResponseMessage response = await client.DeleteAsync(rute);
                 latestStatusCode = response.StatusCode;
-                Console.WriteLine(latestStatusCode);
                 if (latestStatusCode != HttpStatusCode.NoContent)
                 {
                     value = false;
@@ -388,7 +393,6 @@ namespace VidaForaneaCliente.ServerConnection
             }
             catch (Exception e)
             {
-                showConnectionError();
                 value = false;
                 Console.WriteLine(e.Message);
             }

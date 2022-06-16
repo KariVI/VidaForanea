@@ -50,7 +50,7 @@ namespace VidaForaneaCliente.Views
         
         private async void intializeOpinions( )
         {
-          
+            PlantillaMensaje.Items.Clear();
             List<Opinion> opinions = await Connection.GetOpinionsByPlace(place);
             foreach (var opinion in opinions) {
                 string name;
@@ -179,7 +179,7 @@ namespace VidaForaneaCliente.Views
                     bool correcto = await Connection.PostOpinion(place,opinion);
                     if (Connection.latestStatusCode == HttpStatusCode.OK)
                     {
-                         PlantillaMensaje.Items.Add(new { Posicion = "Right", FondoElemento = "White", FondoCabecera = "#7f4ca5", Nombre = opinion.student, TiempoDeEnvio = DateTime.Now, MensajeEnviado = mensaje, Puntuacion = "Puntuacion: " + puntuacion });
+                        intializeOpinions();
                         ContenidoDelMensaje.Clear();
                     }
                     else if (Connection.latestStatusCode == HttpStatusCode.BadRequest)

@@ -137,6 +137,11 @@ namespace VidaForaneaCliente.Views
                         PlantillaMensaje.Items.Add(new { Posicion = "Center", FondoElemento = "White", FondoCabecera = "#e6dded", Nombre = loggedStudent.name, TiempoDeEnvio = comment.date, MensajeEnviado = mensaje });
                         ContenidoDelMensaje.Clear();
                     }
+                    else if (Connection.latestStatusCode == HttpStatusCode.BadRequest)
+                    {
+                        MessageBox.Show("Ya existe un comentario tuyo en el foro", "Comentario existente", MessageBoxButton.OK);
+
+                    }
                 }
                 catch (Exception exception) when (exception is TimeoutException)
                 {
@@ -174,8 +179,8 @@ namespace VidaForaneaCliente.Views
                 {
                     MessageBox.Show("Comentario del foro eliminado", "Comentario eliminado", MessageBoxButton.OK);
                     InitializeComments();
+                } 
                 }
-            }
             catch (Exception exception) when (exception is TimeoutException)
             {
 

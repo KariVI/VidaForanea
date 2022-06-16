@@ -35,7 +35,8 @@ class ListStudents(Resource):
 
     
 class ResourceStudent(Resource):
-
+    
+    @jwt_required()
     def get(self, enrollment):
         student = Student.get_by_enrollment(enrollment)
         if student is None:
