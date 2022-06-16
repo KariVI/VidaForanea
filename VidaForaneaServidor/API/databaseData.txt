@@ -18,7 +18,7 @@ estudiante
 Lic. en Ingeniería de Software
 Administrador 1
 admin
-12345
+123456
 1
 administrador
 Lic. en Ingeniería de Software
