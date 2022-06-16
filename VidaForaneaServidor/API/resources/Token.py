@@ -43,6 +43,7 @@ class RefreshResource(Resource):
     @jwt_required(refresh=True)
     def post(self):
         current_user = get_jwt_identity()
+        json_data = request.get_json()
         token = create_access_token(identity=current_user, fresh=False)
 
         return {'token': token}, HTTPStatus.OK
