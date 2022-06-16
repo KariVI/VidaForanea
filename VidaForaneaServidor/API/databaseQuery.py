@@ -17,10 +17,11 @@ def login():
         "password": "12345",
     }
     headers = {"Content-Type": "application/json"}
+    data2 = json.dumps(data)
     response = connection.request(
             "POST",
             "/token",
-            data,
+            data2,
             headers,
     )
 
@@ -41,7 +42,7 @@ def add_students():
         "degree" : ""
     }
     j = 0
-    for j in range(4):
+    for i in range(4):
         data["name"] = lines[0 + j]
         data["enrollment"] = lines[1 + j]
         data["password"] = lines[2 + j]
@@ -49,7 +50,6 @@ def add_students():
         data["rol"] = lines[4 + j]
         data["degree"] = lines[5 + j]
         j += 6
-        print(data)
         data2 = json.dumps(data)
         headers = {"Content-Type": "application/json"}
         response = connection.request(
