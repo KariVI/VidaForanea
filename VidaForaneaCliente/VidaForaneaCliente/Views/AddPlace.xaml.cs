@@ -30,13 +30,13 @@ namespace VidaForaneaCliente.Views
         }
      
 
-        private void btCancel_Click(object sender, RoutedEventArgs e)
+        private void BtCancel_Click(object sender, RoutedEventArgs e)
         {
             menu.Show();
             this.Close();
         }
 
-        private async void btSend_Click(object sender, RoutedEventArgs e)
+        private async void BtSend_Click(object sender, RoutedEventArgs e)
         {
             string time = GenerateScheduleString();
             if (String.IsNullOrWhiteSpace(imageSource) || String.IsNullOrWhiteSpace(cbType.Text) || String.IsNullOrWhiteSpace(tbName.Text) || String.IsNullOrWhiteSpace(tbLocation.Text) || String.IsNullOrWhiteSpace(time))
@@ -104,7 +104,7 @@ namespace VidaForaneaCliente.Views
             return time;
         }
 
-        private void btSelectImage_Click(object sender, RoutedEventArgs e)
+        private void BtSelectImage_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
             dialog.DefaultExt = ".jpg";

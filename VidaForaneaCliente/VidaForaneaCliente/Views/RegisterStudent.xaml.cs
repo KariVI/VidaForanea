@@ -29,7 +29,7 @@ namespace VidaForaneaCliente.Views
             cbDegree.SelectedIndex = 1;
         }
 
-        private async void btAdd_Click(object sender, RoutedEventArgs e)
+        private async void BtAdd_Click(object sender, RoutedEventArgs e)
         {
             if (String.IsNullOrWhiteSpace(tbName.Text) || String.IsNullOrWhiteSpace(tbEnrollment.Text)
                || String.IsNullOrWhiteSpace(pbPassword.Password))
@@ -62,7 +62,7 @@ namespace VidaForaneaCliente.Views
            
         }
 
-        private void btReturn_Click(object sender, RoutedEventArgs e)
+        private void BtReturn_Click(object sender, RoutedEventArgs e)
         {
             Login login = new Login();
             login.Show();

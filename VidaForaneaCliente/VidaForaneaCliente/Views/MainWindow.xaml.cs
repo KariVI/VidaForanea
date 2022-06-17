@@ -30,7 +30,7 @@ namespace VidaForaneaCliente.Views
         }
 
 
-        private void btPlace_Click(object sender, RoutedEventArgs e)
+        private void BtPlace_Click(object sender, RoutedEventArgs e)
         {
            
                 Menu menu = new Menu(loggedStudent);
@@ -40,7 +40,7 @@ namespace VidaForaneaCliente.Views
 
         }
 
-        private void btExit_Click(object sender, RoutedEventArgs e)
+        private void BtExit_Click(object sender, RoutedEventArgs e)
         {
            
                 Login login = new Login();
@@ -49,7 +49,7 @@ namespace VidaForaneaCliente.Views
             
         }
 
-        private void btForo_Click(object sender, RoutedEventArgs e)
+        private void BtForo_Click(object sender, RoutedEventArgs e)
         {
             if (loggedStudent.rol == "administrador")
             {

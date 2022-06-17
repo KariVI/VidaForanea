@@ -76,10 +76,10 @@
         </ScrollViewer>
 
         <TextBox Grid.Row="2" MaxLength="100" Name ="ContenidoDelMensaje" HorizontalAlignment="Left" Background="WhiteSmoke" Width="500" TextWrapping="Wrap" Margin =" 25 10 0 10"></TextBox>
-        <Button Grid.Row="2" Name="btSend" Style="{DynamicResource RoundCorner}" Content="Enviar"  VerticalAlignment="Center" HorizontalAlignment="Right" Width="100" Margin="0 0 140 0" Height="30"  Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="15"  Padding="0 0 0 0"  Click="btSend_Click" />
+        <Button Grid.Row="2" Name="btSend" Style="{DynamicResource RoundCorner}" Content="Enviar"  VerticalAlignment="Center" HorizontalAlignment="Right" Width="100" Margin="0 0 140 0" Height="30"  Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="15"  Padding="0 0 0 0"  Click="BtSend_Click" />
         <Rectangle Fill="#7f4ca5" HorizontalAlignment="Left" Height="36" Stroke="Black" VerticalAlignment="Top" Width="800"/>
         <Label Grid.Row="0" Content="User" Name="lblUser" HorizontalAlignment="Right" Foreground="white" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20" Width="83"/>
         <Label Grid.Row="0" Content="Foro" Name="lblForum" HorizontalAlignment="Center" Foreground="white" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20" Width="83"/>
-        <Button Grid.Row="2" Name="btBack" Style="{DynamicResource RoundCorner}" Content="Regresar"  VerticalAlignment="Center" HorizontalAlignment="Right" Width="100" Margin="0 0 10 0" Height="30"  Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="15"  Padding="0 0 0 0" Click="btBack_Click"/>
+        <Button Grid.Row="2" Name="btBack" Style="{DynamicResource RoundCorner}" Content="Regresar"  VerticalAlignment="Center" HorizontalAlignment="Right" Width="100" Margin="0 0 10 0" Height="30"  Background="#7f4ca5" BorderBrush="#7f4ca5" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="15"  Padding="0 0 0 0" Click="BtBack_Click"/>
     </Grid>
 </Window>

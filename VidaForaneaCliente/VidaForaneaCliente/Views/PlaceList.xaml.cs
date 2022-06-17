@@ -84,7 +84,7 @@ namespace VidaForaneaCliente.Views
         }
     
        
-        private void btReturn_Click(object sender, RoutedEventArgs e)
+        private void BtReturn_Click(object sender, RoutedEventArgs e)
         {
             
                 Menu menu = new Menu(loggedStudent);
@@ -93,10 +93,10 @@ namespace VidaForaneaCliente.Views
             
         }
 
-        private void lstbCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void LstbCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             String placeSelected= lstbCategory.SelectedValue.ToString();
-            Place place = searchPlace(placeSelected);
+            Place place = SearchPlace(placeSelected);
 
             if (isAdmin)
             {
@@ -113,7 +113,7 @@ namespace VidaForaneaCliente.Views
             
         }
 
-        private Place searchPlace(String name)
+        private Place SearchPlace(String name)
         {
             Place place = new Place();
             foreach (Place p in places)
@@ -126,7 +126,7 @@ namespace VidaForaneaCliente.Views
             return place;
         }
 
-        public static BitmapImage ConvertirArrayAImagen(byte[] arrayDeImagen)
+        public static BitmapImage ConvertArrayToImage(byte[] arrayDeImagen)
         {
             BitmapImage imagen = new BitmapImage();
             using (MemoryStream memStream = new MemoryStream(arrayDeImagen))

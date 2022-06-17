@@ -30,7 +30,7 @@ namespace VidaForaneaCliente.Views
             InitializeComponent();
         }
 
-        private async void btLogin_Click(object sender, RoutedEventArgs e)
+        private async void BtLogin_Click(object sender, RoutedEventArgs e)
         {
             if (String.IsNullOrEmpty(txtUsuario.Text)) {
                 MessageBox.Show("Existen campos vacíos", "Campos vacíos", MessageBoxButton.OK);
@@ -58,7 +58,7 @@ namespace VidaForaneaCliente.Views
                     }
             }
         }
-        private void btRegister_Click(object sender, RoutedEventArgs e)
+        private void BtRegister_Click(object sender, RoutedEventArgs e)
         {
               RegisterStudent registerStudent = new RegisterStudent();
               registerStudent.Show();

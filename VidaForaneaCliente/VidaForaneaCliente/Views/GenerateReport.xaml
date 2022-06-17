@@ -22,7 +22,7 @@
         <Rectangle Fill="#7f4ca5" HorizontalAlignment="Left" Height="36"  VerticalAlignment="Top" Width="792"/>
         <Label Name="lbUser" Content="User" HorizontalAlignment="Left" Margin="475,0,0,0" Foreground="white" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20" Width="208"/>
         <Label Name="lbReport" Content="Reporte de los lugares" HorizontalAlignment="Left" Margin="48,60,0,0" Foreground="#7f4ca5" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="30" Width="268"/>
-        <Button Name="btReturn" Content="Regresar" HorizontalAlignment="Left" Style="{DynamicResource RoundCorner}" Margin="542,420,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" Click="btReturn_Click" />
+        <Button Name="btReturn" Content="Regresar" HorizontalAlignment="Left" Style="{DynamicResource RoundCorner}" Margin="542,420,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" Click="BtReturn_Click" />
         <ListBox Name="lstbPlaces" Margin="69,131,179,111" />
         <Grid Background="#c0aee0"  Margin="48,108,99,60">
             <Grid.ColumnDefinitions>
@@ -64,6 +64,6 @@
             </Grid>
 
         </Grid>
-        <Button x:Name="btPrint" Content="Imprimir" HorizontalAlignment="Left" Style="{DynamicResource RoundCorner}" Margin="413,420,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" Click="btPrint_Click" />
+        <Button x:Name="btPrint" Content="Imprimir" HorizontalAlignment="Left" Style="{DynamicResource RoundCorner}" Margin="413,420,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20"  Padding="0 0 0 0" Click="BtPrint_Click" />
     </Grid>
 </Window>

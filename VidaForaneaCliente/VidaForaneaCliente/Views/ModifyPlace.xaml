@@ -114,9 +114,9 @@
                 <wpfx:TimePicker Name="tpSundayEnd" Margin="95,10,0,2" Grid.Row="1" HorizontalAlignment="Left" Width="86" Grid.RowSpan="2"/>
             </Grid>
         </Grid>
-        <Button Name="btBack" Content="Regresar" Style="{DynamicResource RoundCorner}" HorizontalAlignment="Left" Margin="194,649,0,0" VerticalAlignment="Top" Width="80" Height="25" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="16"  Padding="0 0 0 0" Click="btBack_Click" Grid.Column="1"/>
-        <Button Name="btSave" Content="Guardar" Style="{DynamicResource RoundCorner}" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="78" Height="25" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="16"  Padding="0 0 0 0" RenderTransformOrigin="1.38,0.52" Click="btSave_Click" Margin="316,649,0,0" Grid.Column="1"/>
-        <Button Name="btSelectImage" Content="Subir archivos" HorizontalAlignment="Left" Margin="378,319,0,0" VerticalAlignment="Top" Width="88" Click="btSelectImage_Click" Grid.Column="1"/>
+        <Button Name="btBack" Content="Regresar" Style="{DynamicResource RoundCorner}" HorizontalAlignment="Left" Margin="194,649,0,0" VerticalAlignment="Top" Width="80" Height="25" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="16"  Padding="0 0 0 0" Click="BtBack_Click" Grid.Column="1"/>
+        <Button Name="btSave" Content="Guardar" Style="{DynamicResource RoundCorner}" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="78" Height="25" Background="#FFE5AF50" BorderBrush="#FFE5AF50" Foreground="#FFF9F2F2" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="16"  Padding="0 0 0 0" RenderTransformOrigin="1.38,0.52" Click="BtSave_Click" Margin="316,649,0,0" Grid.Column="1"/>
+        <Button Name="btSelectImage" Content="Subir archivos" HorizontalAlignment="Left" Margin="378,319,0,0" VerticalAlignment="Top" Width="88" Click="BtSelectImage_Click" Grid.Column="1"/>
         <Image Name="image" Width="200" Height="200" Source="/Images/placeLogo.png" Margin="322,85,36,415" Grid.Column="1"></Image>
 
 

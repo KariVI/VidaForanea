@@ -74,11 +74,11 @@ namespace VidaForaneaCliente.Views
                     score = score / numOpinion;
                     placeScores.Add(place.name, score);
                 }
-                initializeColection();
+                InitializeColection();
             }          
         }
 
-        private void initializeColection()
+        private void InitializeColection()
         {
             placeScores = placeScores.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
             foreach (var placescore in placeScores)
@@ -91,7 +91,7 @@ namespace VidaForaneaCliente.Views
             Scores.ItemsSource = ScoresCollection;
         }
 
-        private void btReturn_Click(object sender, RoutedEventArgs e)
+        private void BtReturn_Click(object sender, RoutedEventArgs e)
         {
             
                 Menu menu = new Menu(loggedStudent);
@@ -100,7 +100,7 @@ namespace VidaForaneaCliente.Views
             
         }
 
-        private void btPrint_Click(object sender, RoutedEventArgs e)
+        private void BtPrint_Click(object sender, RoutedEventArgs e)
         {
             try
             {

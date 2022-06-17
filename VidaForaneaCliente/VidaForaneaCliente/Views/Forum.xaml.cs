@@ -104,7 +104,7 @@ namespace VidaForaneaCliente.Views
             }
         }
 
-        private async void btSend_Click(object sender, RoutedEventArgs e)
+        private async void BtSend_Click(object sender, RoutedEventArgs e)
         {
             ScrollerContenido.ScrollToBottom();
             if (!string.IsNullOrWhiteSpace(ContenidoDelMensaje.Text))
@@ -152,7 +152,7 @@ namespace VidaForaneaCliente.Views
 
         }
 
-        private void btBack_Click(object sender, RoutedEventArgs e)
+        private void BtBack_Click(object sender, RoutedEventArgs e)
         {
             menu.Show();
             this.Close();
@@ -160,7 +160,7 @@ namespace VidaForaneaCliente.Views
 
         private void Window_Closed(object sender, EventArgs e)
         {
-            btBack_Click(new object(), new RoutedEventArgs());
+            BtBack_Click(new object(), new RoutedEventArgs());
         }
 
         private async void Label_MouseDoubleClick(object sender, MouseButtonEventArgs e)

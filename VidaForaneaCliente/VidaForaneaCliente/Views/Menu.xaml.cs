@@ -43,7 +43,7 @@ namespace VidaForaneaCliente.Views
 
        
 
-        private void btExit_Click(object sender, RoutedEventArgs e)
+        private void BtExit_Click(object sender, RoutedEventArgs e)
         {
             
                 MainWindow mainWindow = new MainWindow(loggedStudent);
@@ -54,7 +54,7 @@ namespace VidaForaneaCliente.Views
         }
 
 
-        private void btLeisure_Click(object sender, RoutedEventArgs e)
+        private void BtLeisure_Click(object sender, RoutedEventArgs e)
         {
             
                 PlaceList placeList = new PlaceList("Ocio", loggedStudent);
@@ -63,7 +63,7 @@ namespace VidaForaneaCliente.Views
             
         }
 
-        private void btFood_Click(object sender, RoutedEventArgs e)
+        private void BtFood_Click(object sender, RoutedEventArgs e)
         {
                 PlaceList placeList = new PlaceList("Comida", loggedStudent);
                 placeList.Show();
@@ -71,7 +71,7 @@ namespace VidaForaneaCliente.Views
             
         }
 
-        private void btStationary_Click(object sender, RoutedEventArgs e)
+        private void BtStationary_Click(object sender, RoutedEventArgs e)
         {
           
                 PlaceList placeList = new PlaceList("Papeleria", loggedStudent);
@@ -79,7 +79,7 @@ namespace VidaForaneaCliente.Views
                 this.Close();
             
         }
-        private void btAddPlace_Click(object sender, RoutedEventArgs e)
+        private void BtAddPlace_Click(object sender, RoutedEventArgs e)
         {
            
                 AddPlace addPlace = new AddPlace(this, loggedStudent);
@@ -89,14 +89,14 @@ namespace VidaForaneaCliente.Views
            
         }
 
-        private void btRequest_Click(object sender, RoutedEventArgs e)
+        private void BtRequest_Click(object sender, RoutedEventArgs e)
         {
             PlaceList placeList = new PlaceList("", loggedStudent);
             placeList.Show();
             this.Close();
         }
 
-        private void btReport_Click(object sender, RoutedEventArgs e)
+        private void BtReport_Click(object sender, RoutedEventArgs e)
         {
             GenerateReport generateReport = new GenerateReport(loggedStudent);
             generateReport.Show();

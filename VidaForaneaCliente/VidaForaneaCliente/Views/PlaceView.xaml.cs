@@ -46,10 +46,10 @@ namespace VidaForaneaCliente.Views
             btUpdate.Opacity = 0;
             lbSchedule.Text = place.schedule;
             this.place = place;
-            intializePlace();
+            IntializePlace();
         }
         
-        private async void intializeOpinions( )
+        private async void IntializeOpinions( )
         {
             PlantillaMensaje.Items.Clear();
             List<Opinion> opinions = await Connection.GetOpinionsByPlace(place);
@@ -76,15 +76,11 @@ namespace VidaForaneaCliente.Views
                 {
                     puntuacion = "     ✪";
                 }
-                if (((opinion.student).Substring(0, 2).ToUpper() == "ZS"))
-                {
+             
                     Student student = await Connection.GetStudentByMatricula(opinion.student);
                     name = student.name;
-                }
-                else
-                {
-                    name = "Administrador";
-                }
+                
+               
                 string user;
                
                     user = loggedStudent.enrollment;
@@ -103,7 +99,7 @@ namespace VidaForaneaCliente.Views
             
         }
 
-        private async void intializePlace()
+        private async void IntializePlace()
         {
             lbSchedule.Text = place.schedule;
             cbStar.SelectedIndex = 0;
@@ -111,9 +107,9 @@ namespace VidaForaneaCliente.Views
             lbLocate.Text = place.address;
             lbServices.Text = place.services;
             imgPlace.Source = Utils.ConvertBytesToImage(Convert.FromBase64String(place.image));
-            intializeOpinions();
+            IntializeOpinions();
         }
-        private void btReturn_Click(object sender, RoutedEventArgs e)
+        private void BtReturn_Click(object sender, RoutedEventArgs e)
         {
                 PlaceList placeList = new PlaceList(category, loggedStudent);
                 placeList.Show();
@@ -180,7 +176,7 @@ namespace VidaForaneaCliente.Views
                     bool correcto = await Connection.PostOpinion(place,opinion);
                     if (Connection.latestStatusCode == HttpStatusCode.OK)
                     {
-                        intializeOpinions();
+                        IntializeOpinions();
                         ContenidoDelMensaje.Clear();
                     }
                     else if (Connection.latestStatusCode == HttpStatusCode.BadRequest)
@@ -221,7 +217,7 @@ namespace VidaForaneaCliente.Views
                         {
                             PlantillaMensaje.Items.Clear();
 
-                            intializeOpinions();
+                            IntializeOpinions();
                         }
                     }
 

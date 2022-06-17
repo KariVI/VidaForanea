@@ -61,16 +61,16 @@ namespace VidaForaneaCliente.Views
             } 
         }
 
-        private void btBack_Click(object sender, RoutedEventArgs e)
+        private void BtBack_Click(object sender, RoutedEventArgs e)
         {
             PlaceList placeList = new PlaceList(category, loggedStudent);
             placeList.Show();
             this.Close();
         }
 
-        private async void btSave_Click(object sender, RoutedEventArgs e)
+        private async void BtSave_Click(object sender, RoutedEventArgs e)
         {
-            string time = "ok";
+            string time = GenerateScheduleString();
             if (String.IsNullOrWhiteSpace(cbType.Text) || String.IsNullOrWhiteSpace(tbName.Text) || String.IsNullOrWhiteSpace(tbLocation.Text) || String.IsNullOrWhiteSpace(time))
             {
                 MessageBox.Show("Existen campos vacíos, por favor revise los campos", "Campos vacíos", MessageBoxButton.OK);
@@ -110,7 +110,7 @@ namespace VidaForaneaCliente.Views
                 if (Connection.latestStatusCode == HttpStatusCode.OK)
                 {
                     MessageBox.Show("Se ha modificado la solicitud del lugar", "Solicitud regismodificadatrada", MessageBoxButton.OK);
-                    btBack_Click(new object(), new RoutedEventArgs());
+                    BtBack_Click(new object(), new RoutedEventArgs());
                 }
                 else if (Connection.latestStatusCode == HttpStatusCode.BadRequest)
                 {
@@ -155,7 +155,7 @@ namespace VidaForaneaCliente.Views
             return time;
         }
 
-        private void btSelectImage_Click(object sender, RoutedEventArgs e)
+        private void BtSelectImage_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
             dialog.DefaultExt = ".jpg";

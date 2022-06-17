@@ -30,34 +30,34 @@ namespace VidaForaneaCliente.Views
             lblUser.Content = student.name;
         }
 
-        private void btExit_Click(object sender, RoutedEventArgs e)
+        private void BtExit_Click(object sender, RoutedEventArgs e)
         {
             menu.Show();
             this.Close();
         }
 
-        private void btStatistics_Click(object sender, RoutedEventArgs e)
+        private void BtStatistics_Click(object sender, RoutedEventArgs e)
         {
             ForumView forum = new ForumView(loggedStudent, menu, 1);
             forum.Show();
             this.Close();
         }
 
-        private void btNetwork_Click(object sender, RoutedEventArgs e)
+        private void BtNetwork_Click(object sender, RoutedEventArgs e)
         {
             ForumView forum = new ForumView(loggedStudent, menu, 3);
             forum.Show();
             this.Close();
         }
 
-        private void btTec_Click(object sender, RoutedEventArgs e)
+        private void BtTec_Click(object sender, RoutedEventArgs e)
         {
             ForumView forum = new ForumView(loggedStudent, menu, 2);
             forum.Show();
             this.Close();
         }
 
-        private void btSoftware_Click(object sender, RoutedEventArgs e)
+        private void BtSoftware_Click(object sender, RoutedEventArgs e)
         {
             ForumView forum = new ForumView(loggedStudent, menu, 4);
             forum.Show();
