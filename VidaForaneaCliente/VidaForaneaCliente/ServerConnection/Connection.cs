@@ -418,7 +418,7 @@ class Root
             place.name = (string)dict["name"];
             place.address = (string)dict["address"];
             place.services = (string)dict["services"];
-
+            place.schedule = (string)dict["schedule"];
             place.image = dict["image"].ToString();
 
             string statusRetrieved = (string)dict["status"];

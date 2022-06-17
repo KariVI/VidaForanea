@@ -23,7 +23,7 @@
 
 
             <Rectangle Fill="#7f4ca5" HorizontalAlignment="Left" Height="34"  VerticalAlignment="Top" Width="838" Grid.ColumnSpan="2" Margin="-38,0,0,0"/>
-            <Label Name="lbUser" Content="User" HorizontalAlignment="Left" Margin="690,0,0,0" Foreground="white" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20" Width="83"/>
+            <Label Name="lbUser" Content="User" HorizontalAlignment="Left" Margin="562,0,0,0" Foreground="white" VerticalAlignment="Top" FontFamily="Tw Cen MT Condensed Extra Bold" FontSize="20" Width="211"/>
 
             <Rectangle Fill="LightGray" HorizontalAlignment="Left" Height="330" VerticalAlignment="Top" Width="743" Margin="30,66,0,0" Grid.ColumnSpan="2" />
             <Image Name="imgPlace"  HorizontalAlignment="Left" Height="162" VerticalAlignment="Top" Width="202" Margin="57,102,0,0"/>

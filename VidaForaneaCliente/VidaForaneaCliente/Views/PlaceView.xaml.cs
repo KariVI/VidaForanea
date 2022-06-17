@@ -44,6 +44,7 @@ namespace VidaForaneaCliente.Views
             lbUser.Content = loggedStudent.name;
             btUpdate.IsEnabled = false;
             btUpdate.Opacity = 0;
+            lbSchedule.Text = place.schedule;
             this.place = place;
             intializePlace();
         }
