@@ -123,36 +123,7 @@ namespace VidaForaneaCliente.Views
 
         private string GenerateScheduleString()
         {
-            string time = "";
-            if (cbMonday.IsChecked == true && !String.IsNullOrWhiteSpace(tpMondayStart.Value.ToString()) && !String.IsNullOrWhiteSpace(tpMondayEnd.Value.ToString()))
-            {
-                time += "Lunes: " + tpMondayStart.Value.ToString().Substring(11, 14) + " - " + tpMondayEnd.Value.ToString().Substring(11, 14) + Environment.NewLine;
-            }
-            if (cbTuesday.IsChecked == true && !String.IsNullOrWhiteSpace(tpTuesdayStart.Value.ToString()) && !String.IsNullOrWhiteSpace(tpTuesdayEnd.Value.ToString()))
-            {
-                time += "Martes: " + tpTuesdayStart.Value.ToString().Substring(11, 14) + " - " + tpTuesdayEnd.Value.ToString().Substring(11, 14) + Environment.NewLine;
-            }
-            if (cbWednesday.IsChecked == true && !String.IsNullOrWhiteSpace(tpWednesdayStart.Value.ToString()) && !String.IsNullOrWhiteSpace(tpWednesdayEnd.Value.ToString()))
-            {
-                time += "Miércoles: " + tpWednesdayStart.Value.ToString().Substring(11, 14) + " - " + tpWednesdayEnd.Value.ToString().Substring(11, 14) + Environment.NewLine;
-            }
-            if (cbThursday.IsChecked == true && !String.IsNullOrWhiteSpace(tpThursdayStart.Value.ToString()) && !String.IsNullOrWhiteSpace(tpThursdayEnd.Value.ToString()))
-            {
-                time += "Jueves: " + tpThursdayStart.Value.ToString().Substring(11, 14) + " - " + tpThursdayEnd.Value.ToString().Substring(11, 14) + Environment.NewLine;
-            }
-            if (cbFriday.IsChecked == true && !String.IsNullOrWhiteSpace(tpFridayEnd.Value.ToString()) && !String.IsNullOrWhiteSpace(tpFridayStart.Value.ToString()))
-            {
-                time += "Viernes: " + tpFridayStart.Value.ToString().Substring(11, 14) + " - " + tpFridayEnd.Value.ToString().Substring(11, 14) + Environment.NewLine;
-            }
-            if (cbSaturday.IsChecked == true && !String.IsNullOrWhiteSpace(tpSaturdayStart.Value.ToString()) && !String.IsNullOrWhiteSpace(tpSaturdayEnd.Value.ToString()))
-            {
-                time += "Sábado: " + tpSaturdayStart.Value.ToString().Substring(11, 14) + " - " + tpSaturdayEnd.Value.ToString().Substring(11, 14) + Environment.NewLine;
-            }
-            if (cbSunday.IsChecked == true && !String.IsNullOrWhiteSpace(tpSundayStart.Value.ToString()) && !String.IsNullOrWhiteSpace(tpSundayEnd.Value.ToString()))
-            {
-                time += "Domingo: " + tpSundayStart.Value.ToString().Substring(11, 14) + " - " + tpSundayEnd.Value.ToString().Substring(11, 14) + Environment.NewLine;
-            }
-            return time;
+            return place.schedule;
         }
 
         private void BtSelectImage_Click(object sender, RoutedEventArgs e)
